@@ -7,6 +7,8 @@ import JournalModal from './components/modals/JournalModal';
 import AiModal from './components/modals/AiModal';
 import FavoritesModal from './components/modals/FavoritesModal';
 import StatisticsModal from './components/modals/StatisticsModal';
+import KeyboardShortcutsModal from './components/modals/KeyboardShortcutsModal';
+import { useNavigationShortcuts, useModalShortcuts, useThemeCycleShortcut, useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 
 function App() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -17,6 +19,7 @@ function App() {
   const [isAiOpen, setIsAiOpen] = useState(false);
   const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
   const [isStatsOpen, setIsStatsOpen] = useState(false);
+  const [isShortcutsOpen, setIsShortcutsOpen] = useState(false);
 
   // Data states
   const [favorites, setFavorites] = useState([]);
@@ -129,6 +132,59 @@ function App() {
   // Get journal entry for current date
   const currentJournalEntry = journalEntries[currentDate.toDateString()] || '';
 
+  // Navigation handlers for keyboard shortcuts
+  const handlePreviousDay = () => {
+    const newDate = new Date(currentDate);
+    newDate.setDate(newDate.getDate() - 1);
+    setCurrentDate(newDate);
+  };
+
+  const handleNextDay = () => {
+    const today = new Date();
+    if (currentDate < today) {
+      const newDate = new Date(currentDate);
+      newDate.setDate(newDate.getDate() + 1);
+      setCurrentDate(newDate);
+    }
+  };
+
+  const handleToday = () => {
+    setCurrentDate(new Date());
+  };
+
+  // Theme cycle handler
+  const handleCycleTheme = () => {
+    const currentIndex = themes.findIndex(t => t.name === theme);
+    const nextIndex = (currentIndex + 1) % themes.length;
+    setTheme(themes[nextIndex].name);
+  };
+
+  // Keyboard shortcuts (only active when no modal is open)
+  const anyModalOpen = isJournalOpen || isAiOpen || isFavoritesOpen || isStatsOpen || isShortcutsOpen;
+
+  useNavigationShortcuts({
+    onPrevious: handlePreviousDay,
+    onNext: handleNextDay,
+    onToday: handleToday,
+    enabled: !anyModalOpen
+  });
+
+  useModalShortcuts({
+    onJournal: () => setIsJournalOpen(true),
+    onAi: () => setIsAiOpen(true),
+    onFavorites: () => setIsFavoritesOpen(true),
+    onStats: () => setIsStatsOpen(true),
+    enabled: !anyModalOpen
+  });
+
+  useThemeCycleShortcut(handleCycleTheme, !anyModalOpen);
+
+  // Help shortcut (always active except when typing)
+  useKeyboardShortcuts({
+    '?': () => setIsShortcutsOpen(true),
+    'shift+/': () => setIsShortcutsOpen(true),
+  }, !anyModalOpen);
+
   return (
     <ErrorBoundary>
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-4">
@@ -137,14 +193,24 @@ function App() {
             <h1 className="text-4xl font-bold text-center text-gray-800">
               DogTale Daily
             </h1>
-            <button
-              onClick={() => setIsStatsOpen(true)}
-              className="absolute right-0 top-1/2 -translate-y-1/2 p-2 bg-white/50 hover:bg-white/70 rounded-lg transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              aria-label="View statistics"
-              title="View your statistics"
-            >
-              <span className="text-2xl">📊</span>
-            </button>
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 flex gap-2">
+              <button
+                onClick={() => setIsShortcutsOpen(true)}
+                className="p-2 bg-white/50 hover:bg-white/70 rounded-lg transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label="Keyboard shortcuts"
+                title="Keyboard shortcuts (?)"
+              >
+                <span className="text-xl">⌨️</span>
+              </button>
+              <button
+                onClick={() => setIsStatsOpen(true)}
+                className="p-2 bg-white/50 hover:bg-white/70 rounded-lg transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label="View statistics"
+                title="View your statistics (S)"
+              >
+                <span className="text-2xl">📊</span>
+              </button>
+            </div>
           </div>
 
           <p className="text-center text-gray-600 mb-6">
@@ -204,6 +270,11 @@ function App() {
         onClose={() => setIsStatsOpen(false)}
         favorites={favorites}
         journalEntries={journalEntries}
+      />
+
+      <KeyboardShortcutsModal
+        isOpen={isShortcutsOpen}
+        onClose={() => setIsShortcutsOpen(false)}
       />
     </ErrorBoundary>
   );
