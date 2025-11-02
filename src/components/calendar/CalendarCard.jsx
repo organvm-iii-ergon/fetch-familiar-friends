@@ -8,6 +8,9 @@ const CalendarCard = ({
   onJournalClick,
   onAiClick,
   onFavoritesClick,
+  onImageLoad,
+  onFavoriteToggle,
+  isFavorited = false,
   journalEntry = null,
   favoriteCount = 0
 }) => {
@@ -65,6 +68,14 @@ const CalendarCard = ({
 
         setTodayImage(imageUrl);
         setRetryCount(0); // Reset retry count on success
+
+        // Notify parent about the loaded image
+        if (onImageLoad) {
+          onImageLoad({
+            url: imageUrl,
+            type: isDog ? 'dog' : 'cat'
+          });
+        }
       } catch (err) {
         clearTimeout(timeoutId);
         console.error('Error fetching image:', err);
@@ -87,11 +98,17 @@ const CalendarCard = ({
     };
 
     fetchDailyImage();
-  }, [isFlipped, date, retryCount]);
+  }, [isFlipped, date, retryCount, onImageLoad]);
 
   const formatDate = () => {
     const options = { weekday: 'long', month: 'long', day: 'numeric' };
     return date.toLocaleDateString('en-US', options);
+  };
+
+  const handleFavoriteClick = () => {
+    if (todayImage && onFavoriteToggle) {
+      onFavoriteToggle(todayImage, isFlipped ? 'cat' : 'dog');
+    }
   };
 
   return (
@@ -169,6 +186,20 @@ const CalendarCard = ({
                 {isFlipped ? '🐱 Cat Mode' : '🐕 Dog Mode'}
               </span>
             </div>
+
+            {/* Favorite Button */}
+            {!loading && !error && (
+              <button
+                onClick={handleFavoriteClick}
+                className="absolute top-2 right-2 p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/40 transition-all focus:outline-none focus:ring-2 focus:ring-white/50"
+                aria-label={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
+                title={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
+              >
+                <span className={`text-2xl transition-transform ${isFavorited ? 'scale-110' : ''}`}>
+                  {isFavorited ? '⭐' : '☆'}
+                </span>
+              </button>
+            )}
           </div>
 
           {/* Action Buttons */}
@@ -227,6 +258,9 @@ CalendarCard.propTypes = {
   onJournalClick: PropTypes.func,
   onAiClick: PropTypes.func,
   onFavoritesClick: PropTypes.func,
+  onImageLoad: PropTypes.func,
+  onFavoriteToggle: PropTypes.func,
+  isFavorited: PropTypes.bool,
   journalEntry: PropTypes.string,
   favoriteCount: PropTypes.number
 };
@@ -236,6 +270,9 @@ CalendarCard.defaultProps = {
   onJournalClick: () => {},
   onAiClick: () => {},
   onFavoritesClick: () => {},
+  onImageLoad: null,
+  onFavoriteToggle: null,
+  isFavorited: false,
   journalEntry: null,
   favoriteCount: 0
 };
