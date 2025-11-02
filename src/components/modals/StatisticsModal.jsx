@@ -1,8 +1,11 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import Modal from './Modal';
+import { getCacheStats, clearCache } from '../../utils/imageCache';
 
 const StatisticsModal = ({ isOpen, onClose, favorites, journalEntries }) => {
+  const [cacheCleared, setCacheCleared] = useState(false);
+
   // Calculate statistics
   const stats = useMemo(() => {
     // Total favorites
@@ -229,6 +232,88 @@ const StatisticsModal = ({ isOpen, onClose, favorites, journalEntries }) => {
             subtext="Unique days with activity"
             color="blue"
           />
+        </div>
+
+        {/* Image Cache Management */}
+        <div>
+          <h4 className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+            <span>💾</span> Image Cache
+          </h4>
+          <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+            {(() => {
+              const cacheStats = getCacheStats();
+              return (
+                <>
+                  <div className="grid grid-cols-3 gap-3 mb-3">
+                    <div className="text-center">
+                      <p className="text-2xl font-bold text-gray-800">{cacheStats.total}</p>
+                      <p className="text-xs text-gray-600">Cached Images</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-2xl font-bold text-blue-600">{cacheStats.dogs}</p>
+                      <p className="text-xs text-gray-600">Dogs 🐕</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-2xl font-bold text-purple-600">{cacheStats.cats}</p>
+                      <p className="text-xs text-gray-600">Cats 🐱</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex-1">
+                      <div className="bg-gray-200 rounded-full h-2 overflow-hidden">
+                        <div
+                          className="bg-green-500 h-full transition-all"
+                          style={{ width: `${(cacheStats.total / cacheStats.maxSize) * 100}%` }}
+                        />
+                      </div>
+                      <p className="text-xs text-gray-600 mt-1">
+                        {cacheStats.total} / {cacheStats.maxSize} images ({Math.round((cacheStats.total / cacheStats.maxSize) * 100)}%)
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-xs text-gray-600 mb-3">
+                    <p>• Cache expiry: {cacheStats.expiryDays} days</p>
+                    {cacheStats.total > 0 && (
+                      <>
+                        <p>• Oldest cached: {cacheStats.oldestAge} day{cacheStats.oldestAge !== 1 ? 's' : ''} ago</p>
+                        <p>• Newest cached: {cacheStats.newestAge} day{cacheStats.newestAge !== 1 ? 's' : ''} ago</p>
+                      </>
+                    )}
+                  </div>
+                  {cacheStats.total > 0 && (
+                    <>
+                      {cacheCleared ? (
+                        <div className="text-center p-2 bg-green-100 text-green-800 rounded text-sm">
+                          ✓ Cache cleared successfully! Refresh to rebuild.
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => {
+                            if (confirm('Clear all cached images? They will be re-downloaded when needed.')) {
+                              clearCache();
+                              setCacheCleared(true);
+                              setTimeout(() => setCacheCleared(false), 3000);
+                            }
+                          }}
+                          className="w-full px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                        >
+                          Clear Cache
+                        </button>
+                      )}
+                    </>
+                  )}
+                  {cacheStats.total === 0 && (
+                    <p className="text-center text-gray-500 text-sm">
+                      No images cached yet. Navigate through different dates to build cache.
+                    </p>
+                  )}
+                </>
+              );
+            })()}
+          </div>
+          <p className="text-xs text-gray-500 mt-2">
+            ℹ️ Caching reduces API calls and speeds up loading times for previously viewed dates.
+          </p>
         </div>
 
         {/* Achievements */}

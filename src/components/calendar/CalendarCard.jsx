@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getAllDailyContent } from '../../utils/dailyContent';
+import { getCachedImage, cacheImage } from '../../utils/imageCache';
 
 const CalendarCard = ({
   date,
@@ -39,28 +40,51 @@ const CalendarCard = ({
     autumn: 'from-yellow-600 to-red-700'
   };
 
-  // Fetch daily image
+  // Fetch daily image with caching
   useEffect(() => {
     const fetchDailyImage = async () => {
       setLoading(true);
       setError(null);
-      
+
+      const isDog = !isFlipped;
+      const imageType = isDog ? 'dog' : 'cat';
+
+      // Check cache first
+      const cached = getCachedImage(date);
+      if (cached && cached.type === imageType) {
+        // Use cached image
+        setTodayImage(cached.url);
+        setBreedInfo(cached.breed || null);
+        setLoading(false);
+        setRetryCount(0);
+
+        // Notify parent about the loaded image
+        if (onImageLoad) {
+          onImageLoad({
+            url: cached.url,
+            type: cached.type,
+            breed: cached.breed
+          });
+        }
+        return;
+      }
+
+      // No cache or wrong type - fetch from API
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
-      
+
       try {
-        const isDog = !isFlipped;
         const endpoint = isDog
           ? 'https://dog.ceo/api/breeds/image/random'
           : 'https://api.thecatapi.com/v1/images/search';
 
-        const response = await fetch(endpoint, { 
+        const response = await fetch(endpoint, {
           signal: controller.signal,
           headers: {
             'Accept': 'application/json'
           }
         });
-        
+
         clearTimeout(timeoutId);
 
         if (!response.ok) {
@@ -96,24 +120,27 @@ const CalendarCard = ({
           setBreedInfo(null);
         }
 
+        // Cache the image for future use
+        cacheImage(date, imageUrl, imageType, extractedBreed);
+
         // Notify parent about the loaded image
         if (onImageLoad) {
           onImageLoad({
             url: imageUrl,
-            type: isDog ? 'dog' : 'cat',
+            type: imageType,
             breed: extractedBreed
           });
         }
       } catch (err) {
         clearTimeout(timeoutId);
         console.error('Error fetching image:', err);
-        
+
         if (err.name === 'AbortError') {
           setError('Request timed out. Please try again.');
         } else {
           setError('Failed to load image. Please try again.');
         }
-        
+
         // Auto-retry logic
         if (retryCount < MAX_RETRIES) {
           setTimeout(() => {
