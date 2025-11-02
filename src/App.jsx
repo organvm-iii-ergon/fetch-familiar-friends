@@ -255,6 +255,7 @@ function App() {
       <AiModal
         isOpen={isAiOpen}
         onClose={() => setIsAiOpen(false)}
+        currentBreed={currentImage?.breed || null}
       />
 
       <FavoritesModal

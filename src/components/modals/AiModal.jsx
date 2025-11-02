@@ -1,12 +1,21 @@
 import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Modal from './Modal';
+import { getBreedSpecificResponse } from '../../utils/breedKnowledge';
 
-const AiModal = ({ isOpen, onClose }) => {
+const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
+  // Initial welcome message mentions breed if available
+  const getWelcomeMessage = () => {
+    if (currentBreed) {
+      return `Hi! I'm your DogTale AI assistant. I see you're looking at a ${currentBreed}! I can help you with breed-specific tips, training advice, care information, and answer questions about your furry friend! What would you like to know?`;
+    }
+    return 'Hi! I\'m your DogTale AI assistant. I can help you with dog care tips, training advice, breed information, and answer questions about your furry friend! What would you like to know?';
+  };
+
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: 'Hi! I\'m your DogTale AI assistant. I can help you with dog care tips, training advice, breed information, and answer questions about your furry friend! What would you like to know?'
+      content: getWelcomeMessage()
     }
   ]);
   const [inputMessage, setInputMessage] = useState('');
@@ -29,9 +38,32 @@ const AiModal = ({ isOpen, onClose }) => {
   };
 
   const generateAiResponse = (userMessage) => {
-    // Simple rule-based responses for demo purposes
     const lowerMessage = userMessage.toLowerCase();
 
+    // Check for breed-specific questions first
+    if (currentBreed) {
+      // Determine topic from user message
+      let breedResponse = null;
+
+      if (lowerMessage.includes('train') || lowerMessage.includes('training')) {
+        breedResponse = getBreedSpecificResponse(currentBreed, 'training');
+      } else if (lowerMessage.includes('exercise') || lowerMessage.includes('walk') || lowerMessage.includes('activity')) {
+        breedResponse = getBreedSpecificResponse(currentBreed, 'exercise');
+      } else if (lowerMessage.includes('groom') || lowerMessage.includes('brush') || lowerMessage.includes('bath')) {
+        breedResponse = getBreedSpecificResponse(currentBreed, 'grooming');
+      } else if (lowerMessage.includes('temperament') || lowerMessage.includes('personality') || lowerMessage.includes('behavior')) {
+        breedResponse = getBreedSpecificResponse(currentBreed, 'temperament');
+      } else if (lowerMessage.includes('breed') || lowerMessage.includes('about') || lowerMessage.includes('info') || lowerMessage.includes('this dog')) {
+        breedResponse = getBreedSpecificResponse(currentBreed, 'info');
+      }
+
+      // If we got a breed-specific response, use it
+      if (breedResponse) {
+        return breedResponse;
+      }
+    }
+
+    // Fall back to general responses
     if (lowerMessage.includes('train') || lowerMessage.includes('training')) {
       return 'Training tips: Use positive reinforcement, keep sessions short (5-15 minutes), be consistent with commands, reward good behavior immediately, and make it fun! Start with basic commands like sit, stay, and come. Remember, patience is key!';
     } else if (lowerMessage.includes('food') || lowerMessage.includes('feed') || lowerMessage.includes('diet')) {
@@ -39,6 +71,9 @@ const AiModal = ({ isOpen, onClose }) => {
     } else if (lowerMessage.includes('walk') || lowerMessage.includes('exercise')) {
       return 'Exercise needs vary by breed: Small breeds need 30-60 minutes daily, medium breeds need 60-120 minutes, and large/high-energy breeds may need 2+ hours. Include mental stimulation like puzzle toys and training games!';
     } else if (lowerMessage.includes('breed')) {
+      if (currentBreed) {
+        return getBreedSpecificResponse(currentBreed, 'info') || 'Let me know what you\'d like to know about this breed!';
+      }
       return 'Different breeds have unique characteristics! What specific breed are you curious about? I can share information about temperament, size, exercise needs, grooming requirements, and common health considerations.';
     } else if (lowerMessage.includes('health') || lowerMessage.includes('vet')) {
       return 'Regular vet check-ups are important! Annual visits for healthy adult dogs, more frequent for puppies and seniors. Watch for signs of illness: changes in appetite, energy, bathroom habits, or behavior. Always consult a vet for medical concerns!';
@@ -47,10 +82,16 @@ const AiModal = ({ isOpen, onClose }) => {
     } else if (lowerMessage.includes('play') || lowerMessage.includes('toy')) {
       return 'Playtime is essential for bonding and exercise! Try fetch, tug-of-war, hide-and-seek, puzzle toys, or interactive games. Rotate toys to keep things interesting. Always supervise play and choose size-appropriate toys!';
     } else if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
+      if (currentBreed) {
+        return `Hello! I'd love to help you learn more about ${currentBreed}s or answer any questions about dog care. What would you like to know?`;
+      }
       return 'Hello! How can I help you with your dog today? Feel free to ask about training, nutrition, exercise, health, grooming, or any other dog-related topics!';
     } else if (lowerMessage.includes('thank')) {
       return 'You\'re welcome! I\'m always here to help. Feel free to ask anything else about caring for your furry friend! 🐾';
     } else {
+      if (currentBreed && (lowerMessage.includes('this') || lowerMessage.includes('these'))) {
+        return getBreedSpecificResponse(currentBreed, 'info') || `That's a great question! ${currentBreed}s are wonderful dogs. What specific aspect would you like to know more about?`;
+      }
       return 'That\'s a great question! For personalized advice about ' + userMessage + ', I recommend consulting with your veterinarian or a certified dog trainer. Is there anything else I can help you with regarding general dog care, training tips, or breed information?';
     }
   };
@@ -216,7 +257,8 @@ const AiModal = ({ isOpen, onClose }) => {
 
 AiModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
+  currentBreed: PropTypes.string
 };
 
 export default AiModal;
