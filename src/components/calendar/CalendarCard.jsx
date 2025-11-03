@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getAllDailyContent } from '../../utils/dailyContent';
-import { getCachedImage, cacheImage } from '../../utils/imageCache';
+import { getCachedImage, cacheImage, preloadNearbyDates } from '../../utils/imageCache';
 
 const CalendarCard = ({
   date,
@@ -14,7 +14,8 @@ const CalendarCard = ({
   onFavoriteToggle,
   isFavorited = false,
   journalEntry = null,
-  favoriteCount = 0
+  favoriteCount = 0,
+  settings = null
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [todayImage, setTodayImage] = useState(null);
@@ -160,6 +161,60 @@ const CalendarCard = ({
     const content = getAllDailyContent(date, isFlipped);
     setDailyContent(content);
   }, [date, isFlipped]);
+
+  // Preload nearby dates when settings allow
+  useEffect(() => {
+    // Only preload if settings are available and preloading is enabled
+    if (!settings || !settings.preloadImages || !settings.cacheEnabled) {
+      return;
+    }
+
+    const preloadDays = settings.preloadDays || 3;
+
+    // Create fetch function that mirrors the main fetchDailyImage logic
+    const fetchImageForDate = async (targetDate) => {
+      try {
+        const isDog = !isFlipped;
+        const endpoint = isDog
+          ? 'https://dog.ceo/api/breeds/image/random'
+          : 'https://api.thecatapi.com/v1/images/search';
+
+        const response = await fetch(endpoint, {
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+        const data = await response.json();
+        const imageUrl = isDog ? data.message : data[0]?.url;
+
+        if (!imageUrl) throw new Error('No image URL in response');
+
+        // Extract breed info for dogs
+        let breed = null;
+        if (isDog && imageUrl.includes('/breeds/')) {
+          const breedMatch = imageUrl.match(/\/breeds\/([^/]+)\//);
+          if (breedMatch) {
+            const breedSlug = breedMatch[1];
+            const breedParts = breedSlug.split('-');
+            breed = breedParts.map(part =>
+              part.charAt(0).toUpperCase() + part.slice(1)
+            ).join(' ');
+          }
+        }
+
+        return { url: imageUrl, type: isDog ? 'dog' : 'cat', breed };
+      } catch (error) {
+        console.warn(`Failed to preload image for date ${targetDate.toDateString()}:`, error);
+        return null;
+      }
+    };
+
+    // Trigger preloading
+    preloadNearbyDates(date, preloadDays, fetchImageForDate).catch(error => {
+      console.warn('Error during preloading:', error);
+    });
+  }, [date, isFlipped, settings]);
 
   const formatDate = () => {
     const options = { weekday: 'long', month: 'long', day: 'numeric' };
@@ -392,7 +447,8 @@ CalendarCard.propTypes = {
   onFavoriteToggle: PropTypes.func,
   isFavorited: PropTypes.bool,
   journalEntry: PropTypes.string,
-  favoriteCount: PropTypes.number
+  favoriteCount: PropTypes.number,
+  settings: PropTypes.object
 };
 
 CalendarCard.defaultProps = {
@@ -404,7 +460,8 @@ CalendarCard.defaultProps = {
   onFavoriteToggle: null,
   isFavorited: false,
   journalEntry: null,
-  favoriteCount: 0
+  favoriteCount: 0,
+  settings: null
 };
 
 export default CalendarCard;

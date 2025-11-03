@@ -317,6 +317,7 @@ function App() {
               isFavorited={isCurrentImageFavorited}
               journalEntry={currentJournalEntry}
               favoriteCount={favorites.length}
+              settings={settings}
             />
           )}
         </div>
