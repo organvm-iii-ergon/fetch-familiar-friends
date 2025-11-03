@@ -80,12 +80,12 @@ function App() {
     }
   }, []);
 
-  // Save favorites to localStorage whenever they change
   useEffect(() => {
     try {
       localStorage.setItem('dogtale-favorites', JSON.stringify(favorites));
     } catch (error) {
       console.error('Error saving favorites to localStorage:', error);
+      // Optionally, notify the user that storage is full
     }
   }, [favorites]);
 
