@@ -22,6 +22,7 @@ The table below maps each knowledge artifact to its core focus and recommended u
 | [The-Living-Document-System.md](ChatPRD/The-Living-Document-System.md) | Living document system overview and usage | Reference for feature planning and agent context. |
 | [dogcal-schedule.md](ChatPRD/dogcal-schedule.md) | Dog calendar scheduling details | Reference for feature planning and agent context. |
 | [dogcalv1.md](ChatPRD/dogcalv1.md) | Initial version of dog calendar app | Reference for feature planning and agent context. |
+| [docs/legacy/](docs/legacy/) | Archive of earlier application versions | Historical reference for features and architectural approaches. |
 
 ## Navigation Notes
 
