@@ -1,0 +1,48 @@
+# Code Owners for Fetch Familiar Friends
+# These owners will be automatically requested for review when someone opens a pull request
+
+# Default owners for everything in the repo
+* @ivi374forivi
+
+# Documentation
+*.md @ivi374forivi
+/docs/ @ivi374forivi
+/ChatPRD/ @ivi374forivi
+
+# Core Application
+/src/ @ivi374forivi
+
+# Components
+/src/components/calendar/ @ivi374forivi
+/src/components/social/ @ivi374forivi
+/src/components/modals/ @ivi374forivi
+
+# Utilities and Data
+/src/utils/ @ivi374forivi
+/src/hooks/ @ivi374forivi
+
+# Configuration Files
+*.config.js @ivi374forivi
+*.config.cjs @ivi374forivi
+package.json @ivi374forivi
+package-lock.json @ivi374forivi
+
+# GitHub Configuration
+/.github/ @ivi374forivi
+/.github/workflows/ @ivi374forivi
+
+# Build and Deployment
+/dist/ @ivi374forivi
+vite.config.js @ivi374forivi
+
+# Security
+SECURITY.md @ivi374forivi
+.env.example @ivi374forivi
+
+# CI/CD
+/.github/workflows/ @ivi374forivi
+
+# Styles
+/src/styles/ @ivi374forivi
+tailwind.config.js @ivi374forivi
+postcss.config.js @ivi374forivi

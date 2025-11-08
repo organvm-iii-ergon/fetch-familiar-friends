@@ -1,0 +1,46 @@
+# Auto-assign reviewers for pull requests
+
+# Add reviewers to pull requests
+addReviewers: true
+
+# Add assignees to pull requests
+addAssignees: false
+
+# A list of reviewers to be added to pull requests (GitHub user name)
+reviewers:
+  - ivi374forivi
+
+# A number of reviewers added to the pull request
+# Set 0 to add all the reviewers
+numberOfReviewers: 1
+
+# Assign reviewers based on files changed
+useReviewGroups: true
+
+# Review groups based on file patterns
+reviewGroups:
+  docs:
+    - '**/*.md'
+    - 'docs/**/*'
+
+  frontend:
+    - 'src/components/**/*'
+    - 'src/styles/**/*'
+
+  backend:
+    - 'src/utils/**/*'
+    - 'src/hooks/**/*'
+
+  config:
+    - '**/*.config.js'
+    - '.github/**/*'
+
+# Assign based on labels
+useAssigneeGroups: false
+
+# Skip keywords in PR title
+skipKeywords:
+  - wip
+  - WIP
+  - draft
+  - DRAFT

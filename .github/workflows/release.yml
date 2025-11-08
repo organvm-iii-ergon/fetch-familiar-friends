@@ -1,0 +1,133 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., 1.0.0)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  packages: write
+  pull-requests: write
+
+jobs:
+  build:
+    name: Build Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Create build archive
+        run: |
+          tar -czf dist.tar.gz dist/
+          zip -r dist.zip dist/
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            dist.tar.gz
+            dist.zip
+
+  release:
+    name: Create Release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+
+      - name: Generate changelog
+        id: changelog
+        uses: metcalfc/changelog-generator@v4.3.1
+        with:
+          myToken: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "dist.tar.gz,dist.zip"
+          body: |
+            ## What's Changed
+
+            ${{ steps.changelog.outputs.changelog }}
+
+            ## Installation
+
+            Download the appropriate build artifact for your platform:
+            - `dist.tar.gz` - Compressed tarball
+            - `dist.zip` - ZIP archive
+
+            ## Deployment
+
+            Extract the archive and deploy the `dist/` directory to your web server.
+
+            See [deployment documentation](https://github.com/ivi374forivi/fetch-familiar-friends/blob/main/docs/technical/deployment.md) for detailed instructions.
+
+            ## Full Changelog
+
+            **Full Changelog**: https://github.com/ivi374forivi/fetch-familiar-friends/compare/${{ github.event.before }}...${{ github.sha }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          draft: false
+          prerelease: false
+          generateReleaseNotes: true
+
+  notify:
+    name: Notify Release
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create discussion
+        uses: abirismyname/create-discussion@v1
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          title: "Release ${{ github.ref_name }} is now available! 🎉"
+          body: |
+            A new version has been released!
+
+            Check out the [release notes](${{ github.event.release.html_url }}) for details.
+
+            ## Highlights
+
+            - New features and improvements
+            - Bug fixes
+            - Performance enhancements
+
+            Let us know what you think! 🐾
+          repository-id: ${{ github.repository_id }}
+          category-id: announcements

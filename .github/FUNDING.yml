@@ -1,0 +1,22 @@
+# Funding configuration for GitHub Sponsors
+
+# These are supported funding model platforms
+
+github: # GitHub Sponsors username
+  - ivi374forivi
+
+# Other funding platforms (uncomment and add usernames as needed)
+# patreon: # Patreon username
+# open_collective: # Open Collective username
+# ko_fi: # Ko-fi username
+# tidelift: # Tidelift platform-name/package-name
+# community_bridge: # Community Bridge project name
+# liberapay: # Liberapay username
+# issuehunt: # IssueHunt username
+# otechie: # Otechie username
+# lfx_crowdfunding: # LFX Crowdfunding project name
+# polar: # Polar username
+
+# Custom sponsorship URLs (up to 4)
+custom:
+  - https://github.com/sponsors/ivi374forivi

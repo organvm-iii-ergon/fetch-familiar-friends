@@ -1,0 +1,58 @@
+title: "[Idea]: "
+labels: ["idea"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        💡 Thanks for sharing your idea with the community!
+
+  - type: textarea
+    id: idea
+    attributes:
+      label: Your Idea
+      description: What's your idea?
+      placeholder: Describe your idea in detail
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Which area does this idea relate to?
+      options:
+        - Social Features
+        - Gameplay & Gamification
+        - Pet Care & Health
+        - AR/VR Features
+        - Memorial Services
+        - Coaching & Training
+        - Telemedicine
+        - Subscription & Monetization
+        - Calendar & Scheduling
+        - User Experience
+        - Community & Engagement
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use Case
+      description: When would someone use this?
+      placeholder: Describe the use case and who would benefit
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Examples
+      description: Have you seen this implemented elsewhere?
+      placeholder: Share examples, mockups, or similar features from other apps
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Anything else you'd like to add?

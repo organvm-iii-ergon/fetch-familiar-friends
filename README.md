@@ -111,9 +111,41 @@ For detailed development guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
 3. Use `AGENT_ORCHESTRATION.md` to assign owners (@Gemini, @Copilot, @Codex, OS-Agents) and track cross-agent review loops
 4. Reference `ANNOTATED_BIBLIOGRAPHY.md` and `ECOSYSTEM_OVERVIEW.md` for best-practice alignment
 
+## 🤝 Contributing
+
+We welcome contributions from the community! Please see our:
+
+- **[Contributing Guidelines](CONTRIBUTING.md)** - How to contribute
+- **[Code of Conduct](.github/CODE_OF_CONDUCT.md)** - Community standards
+- **[Support Guide](.github/SUPPORT.md)** - Getting help
+- **[Governance](.github/GOVERNANCE.md)** - Project governance
+- **[Security Policy](SECURITY.md)** - Reporting vulnerabilities
+
+### Quick Contribution Links
+
+- 🐛 [Report a Bug](https://github.com/ivi374forivi/fetch-familiar-friends/issues/new?template=bug_report.yml)
+- ✨ [Request a Feature](https://github.com/ivi374forivi/fetch-familiar-friends/issues/new?template=feature_request.yml)
+- 💬 [Join Discussions](https://github.com/ivi374forivi/fetch-familiar-friends/discussions)
+- 🎯 [View Project Board](https://github.com/orgs/ivi374forivi/projects/1)
+
+## 🏗️ GitHub Organization Features
+
+This project leverages comprehensive GitHub organization features:
+
+- **Automated CI/CD** - GitHub Actions workflows for testing, building, and deployment
+- **Security Scanning** - CodeQL, Dependabot, and secret detection
+- **Project Boards** - Organized planning and tracking
+- **Issue Templates** - Structured bug reports and feature requests
+- **PR Automation** - Auto-labeling, size detection, and reviewer assignment
+- **Performance Testing** - Lighthouse CI and bundle analysis
+- **Release Automation** - Automated versioning and changelog generation
+- **Stale Management** - Automatic cleanup of inactive issues/PRs
+
+See [.github/README.md](.github/README.md) for complete details.
+
 ## 📜 License
 
-TBD
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 

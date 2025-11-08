@@ -1,0 +1,62 @@
+title: "Show & Tell: "
+labels: ["show-and-tell"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        🎉 We'd love to see what you've built!
+
+  - type: textarea
+    id: showcase
+    attributes:
+      label: What did you build?
+      description: Tell us about your project or contribution
+      placeholder: Describe what you've created
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or Demo
+      description: Show us what it looks like!
+      placeholder: Drag and drop screenshots, GIFs, or video links
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: What type of contribution is this?
+      options:
+        - New Feature
+        - Integration
+        - Custom Theme
+        - Plugin/Extension
+        - Documentation
+        - Tutorial
+        - Use Case
+        - Community Tool
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: link
+    attributes:
+      label: Link
+      description: Link to your project (GitHub, demo site, etc.)
+      placeholder: https://
+
+  - type: textarea
+    id: tech-stack
+    attributes:
+      label: Technologies Used
+      description: What did you use to build this?
+      placeholder: List technologies, frameworks, libraries, etc.
+
+  - type: textarea
+    id: lessons
+    attributes:
+      label: Lessons Learned
+      description: What did you learn while building this?
+      placeholder: Share insights that might help others

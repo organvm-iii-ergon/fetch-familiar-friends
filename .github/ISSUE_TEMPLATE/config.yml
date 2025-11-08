@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Discussions
+    url: https://github.com/ivi374forivi/fetch-familiar-friends/discussions
+    about: Ask questions and discuss with the community
+  - name: 📚 Documentation
+    url: https://github.com/ivi374forivi/fetch-familiar-friends/blob/main/docs/PROJECT.md
+    about: Read the full project documentation
+  - name: 🔒 Security Vulnerability
+    url: https://github.com/ivi374forivi/fetch-familiar-friends/security/advisories/new
+    about: Report a security vulnerability privately

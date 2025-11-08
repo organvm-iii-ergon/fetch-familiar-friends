@@ -1,0 +1,77 @@
+# Labeler configuration for auto-labeling PRs based on changed files
+
+# Documentation
+documentation:
+  - '**/*.md'
+  - 'docs/**/*'
+  - 'ChatPRD/**/*'
+
+# GitHub Configuration
+github:
+  - '.github/**/*'
+
+# CI/CD
+ci-cd:
+  - '.github/workflows/**/*'
+
+# Dependencies
+dependencies:
+  - 'package.json'
+  - 'package-lock.json'
+
+# Configuration
+config:
+  - '**/*.config.js'
+  - '**/*.config.cjs'
+  - '.eslintrc.cjs'
+  - 'tailwind.config.js'
+  - 'postcss.config.js'
+  - 'vite.config.js'
+
+# Components - Calendar
+component/calendar:
+  - 'src/components/calendar/**/*'
+
+# Components - Social
+component/social:
+  - 'src/components/social/**/*'
+
+# Components - Modals
+component/modals:
+  - 'src/components/modals/**/*'
+
+# Utilities
+utilities:
+  - 'src/utils/**/*'
+
+# Hooks
+hooks:
+  - 'src/hooks/**/*'
+
+# Styles
+styles:
+  - 'src/styles/**/*'
+  - '**/*.css'
+
+# Core App
+core:
+  - 'src/App.jsx'
+  - 'src/index.jsx'
+  - 'src/main.jsx'
+
+# Build
+build:
+  - 'dist/**/*'
+  - 'vite.config.js'
+
+# Testing
+tests:
+  - '**/*.test.js'
+  - '**/*.test.jsx'
+  - '**/*.spec.js'
+  - '**/*.spec.jsx'
+
+# Security
+security:
+  - 'SECURITY.md'
+  - '.env.example'
