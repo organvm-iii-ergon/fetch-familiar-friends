@@ -10,6 +10,7 @@ import FavoritesModal from './components/modals/FavoritesModal';
 import StatisticsModal from './components/modals/StatisticsModal';
 import KeyboardShortcutsModal from './components/modals/KeyboardShortcutsModal';
 import SettingsModal from './components/modals/SettingsModal';
+import SocialHub from './components/social/SocialHub';
 import { useNavigationShortcuts, useModalShortcuts, useThemeCycleShortcut, useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 import { useDarkMode } from './hooks/useDarkMode';
 
@@ -25,6 +26,7 @@ function App() {
   const [isStatsOpen, setIsStatsOpen] = useState(false);
   const [isShortcutsOpen, setIsShortcutsOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isSocialHubOpen, setIsSocialHubOpen] = useState(false);
   const [showMonthView, setShowMonthView] = useState(false);
 
   // Data states
@@ -196,7 +198,7 @@ function App() {
   };
 
   // Keyboard shortcuts (only active when no modal is open)
-  const anyModalOpen = isJournalOpen || isAiOpen || isFavoritesOpen || isStatsOpen || isShortcutsOpen || isSettingsOpen;
+  const anyModalOpen = isJournalOpen || isAiOpen || isFavoritesOpen || isStatsOpen || isShortcutsOpen || isSettingsOpen || isSocialHubOpen;
 
   useNavigationShortcuts({
     onPrevious: handlePreviousDay,
@@ -233,6 +235,14 @@ function App() {
               DogTale Daily
             </h1>
             <div className="absolute right-0 top-1/2 -translate-y-1/2 flex gap-2">
+              <button
+                onClick={() => setIsSocialHubOpen(true)}
+                className="p-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-lg transition-all shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                aria-label="Social Hub"
+                title="Pet Social Hub"
+              >
+                <span className="text-xl">🐾</span>
+              </button>
               <button
                 onClick={toggleDarkMode}
                 className="p-2 bg-white/50 dark:bg-gray-700/50 hover:bg-white/70 dark:hover:bg-gray-700/70 rounded-lg transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -365,6 +375,10 @@ function App() {
         settings={settings}
         onSettingsChange={handleSettingsChange}
       />
+
+      {isSocialHubOpen && (
+        <SocialHub onClose={() => setIsSocialHubOpen(false)} />
+      )}
     </ErrorBoundary>
   );
 }
