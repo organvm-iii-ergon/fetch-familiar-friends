@@ -11,6 +11,8 @@ import StatisticsModal from './components/modals/StatisticsModal';
 import KeyboardShortcutsModal from './components/modals/KeyboardShortcutsModal';
 import SettingsModal from './components/modals/SettingsModal';
 import SocialHub from './components/social/SocialHub';
+import VisualLanding from './components/VisualLanding';
+import ASCIIVisualizer from './components/ASCIIVisualizer';
 import { useNavigationShortcuts, useModalShortcuts, useThemeCycleShortcut, useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 import { useDarkMode } from './hooks/useDarkMode';
 
@@ -18,6 +20,10 @@ function App() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [theme, setTheme] = useState('park');
   const { isDarkMode, toggleDarkMode } = useDarkMode();
+
+  // Visual intro states
+  const [showVisualLanding, setShowVisualLanding] = useState(false);
+  const [showASCIIVisualizer, setShowASCIIVisualizer] = useState(false);
 
   // Modal states
   const [isJournalOpen, setIsJournalOpen] = useState(false);
@@ -56,6 +62,19 @@ function App() {
     { name: 'snow', label: 'Snow', icon: '🌨️', gradient: 'from-blue-100 to-cyan-300' },
     { name: 'autumn', label: 'Autumn', icon: '🍂', gradient: 'from-yellow-600 to-red-700' }
   ];
+
+  // Check if first visit and show visual landing
+  useEffect(() => {
+    const hasSeenLanding = localStorage.getItem('dogtale-seen-landing');
+    if (!hasSeenLanding) {
+      setShowVisualLanding(true);
+    }
+  }, []);
+
+  const handleEnterApp = () => {
+    setShowVisualLanding(false);
+    localStorage.setItem('dogtale-seen-landing', 'true');
+  };
 
   // Load data from localStorage on mount
   useEffect(() => {
@@ -228,6 +247,14 @@ function App() {
 
   return (
     <ErrorBoundary>
+      {/* Visual Landing - shown on first visit */}
+      {showVisualLanding && <VisualLanding onEnter={handleEnterApp} />}
+
+      {/* ASCII Visualizer - can be opened anytime */}
+      {showASCIIVisualizer && (
+        <ASCIIVisualizer onClose={() => setShowASCIIVisualizer(false)} />
+      )}
+
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-4 transition-colors duration-200">
         <div className="container mx-auto max-w-2xl">
           <div className="relative mb-4">
@@ -235,6 +262,14 @@ function App() {
               DogTale Daily
             </h1>
             <div className="absolute right-0 top-1/2 -translate-y-1/2 flex gap-2">
+              <button
+                onClick={() => setShowASCIIVisualizer(true)}
+                className="p-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white rounded-lg transition-all shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                aria-label="Visual Guide"
+                title="What is this? (Visual Guide)"
+              >
+                <span className="text-xl">💡</span>
+              </button>
               <button
                 onClick={() => setIsSocialHubOpen(true)}
                 className="p-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-lg transition-all shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500"
