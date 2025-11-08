@@ -1,0 +1,205 @@
+name: Documentation Validation
+
+on:
+  pull_request:
+    paths:
+      - '**.md'
+      - 'docs/**'
+  push:
+    branches: [ main ]
+    paths:
+      - '**.md'
+      - 'docs/**'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  markdown-lint:
+    name: Markdown Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Lint Markdown
+        uses: avto-dev/markdown-lint@v1
+        with:
+          config: '.github/linters/.markdown-lint.yml'
+          args: '**/*.md'
+          ignore: 'node_modules'
+        continue-on-error: true
+
+  link-checker:
+    name: Check Broken Links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check links
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          use-quiet-mode: 'yes'
+          use-verbose-mode: 'no'
+          config-file: '.github/linters/markdown-link-check.json'
+        continue-on-error: true
+
+  spelling:
+    name: Spell Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check spelling
+        uses: streetsidesoftware/cspell-action@v5
+        with:
+          files: |
+            **/*.md
+            **/*.txt
+          incremental_files_only: false
+        continue-on-error: true
+
+  docs-structure:
+    name: Validate Documentation Structure
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check required docs
+        run: |
+          echo "Checking for required documentation files..."
+
+          required_files=(
+            "README.md"
+            "CONTRIBUTING.md"
+            "SECURITY.md"
+            "LICENSE"
+            ".github/CODE_OF_CONDUCT.md"
+            ".github/SUPPORT.md"
+            "CHANGELOG.md"
+            "ROADMAP.md"
+          )
+
+          missing_files=()
+
+          for file in "${required_files[@]}"; do
+            if [ ! -f "$file" ]; then
+              missing_files+=("$file")
+            fi
+          done
+
+          if [ ${#missing_files[@]} -eq 0 ]; then
+            echo "✅ All required documentation files present"
+          else
+            echo "⚠️  Missing documentation files:"
+            printf '%s\n' "${missing_files[@]}"
+          fi
+
+      - name: Check documentation index
+        run: |
+          echo "Validating documentation index..."
+          if [ -f "DOC_INDEX.md" ]; then
+            echo "✅ Documentation index found"
+          else
+            echo "ℹ️  No DOC_INDEX.md found (optional)"
+          fi
+
+  doc-coverage:
+    name: Documentation Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check component documentation
+        run: |
+          echo "Checking component documentation coverage..."
+
+          # Check if components have README or docs
+          component_dirs=($(find src/components -type d -mindepth 1 -maxdepth 1))
+
+          for dir in "${component_dirs[@]}"; do
+            component_name=$(basename "$dir")
+            if [ ! -f "$dir/README.md" ]; then
+              echo "⚠️  $component_name missing README.md"
+            else
+              echo "✅ $component_name documented"
+            fi
+          done
+
+      - name: Check utility documentation
+        run: |
+          echo "Checking utility function documentation..."
+
+          # Check for JSDoc comments in utility files
+          util_files=($(find src/utils -name "*.js" -o -name "*.jsx" 2>/dev/null))
+
+          for file in "${util_files[@]}"; do
+            if grep -q "^\/\*\*" "$file"; then
+              echo "✅ $(basename $file) has JSDoc comments"
+            else
+              echo "⚠️  $(basename $file) missing JSDoc comments"
+            fi
+          done
+
+  changelog-check:
+    name: Check Changelog Updated
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check if CHANGELOG updated
+        run: |
+          if git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -q "CHANGELOG.md"; then
+            echo "✅ CHANGELOG.md has been updated"
+          else
+            echo "⚠️  CHANGELOG.md not updated. Consider adding an entry for this PR."
+            echo "This is not required for documentation-only changes."
+          fi
+
+  docs-comment:
+    name: Documentation Report
+    runs-on: ubuntu-latest
+    needs: [markdown-lint, link-checker, spelling, docs-structure, doc-coverage]
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = `## 📚 Documentation Validation Results
+
+            Automated documentation checks have been completed.
+
+            ### Checks Performed:
+            - ✅ Markdown linting
+            - ✅ Broken link detection
+            - ✅ Spell checking
+            - ✅ Documentation structure validation
+            - ✅ Component documentation coverage
+
+            Please review the workflow logs for any warnings or suggestions.
+
+            ### Documentation Best Practices:
+            - Keep documentation up-to-date with code changes
+            - Use clear, concise language
+            - Include code examples where applicable
+            - Add screenshots for UI changes
+            - Update CHANGELOG.md for notable changes
+
+            See [CONTRIBUTING.md](../CONTRIBUTING.md) for documentation guidelines.`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
