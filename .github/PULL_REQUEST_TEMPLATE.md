@@ -3,6 +3,7 @@
 Explain the change and why it's needed.
 
 ## Type of change
+
 - [ ] Bug fix
 - [ ] New feature
 - [ ] Docs update
