@@ -123,20 +123,23 @@ export default MyComponent;
 
 ### Commit Message Convention
 
-Use clear, descriptive commit messages:
+This project follows [Conventional Commits](https://www.conventionalcommits.org/) specification:
 
-- `Add:` for new features
-- `Fix:` for bug fixes
-- `Update:` for updates to existing features
-- `Refactor:` for code refactoring
-- `Docs:` for documentation changes
-- `Style:` for formatting changes
-- `Test:` for test additions or changes
+- `feat:` for new features
+- `fix:` for bug fixes
+- `docs:` for documentation changes
+- `style:` for formatting changes (not affecting code meaning)
+- `refactor:` for code refactoring
+- `test:` for test additions or changes
+- `chore:` for maintenance tasks and tooling
+
+Format: `<type>: <description>`
 
 Examples:
-- `Add: Theme selector component with accessibility support`
-- `Fix: Image loading timeout and retry logic`
-- `Update: Error boundary to use Vite environment variables`
+- `feat: add theme selector component with accessibility support`
+- `fix: resolve image loading timeout and retry logic`
+- `docs: update error boundary usage in README`
+- `chore: update dependencies to latest versions`
 
 ## Security Guidelines
 

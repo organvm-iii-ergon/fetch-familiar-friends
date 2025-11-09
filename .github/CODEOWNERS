@@ -1,0 +1,27 @@
+# CODEOWNERS file for fetch-familiar-friends
+#
+# This file defines individuals or teams that are responsible for code in this repository.
+# Code owners are automatically requested for review when someone opens a pull request
+# that modifies code that they own.
+#
+# For more information, see:
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for everything in the repo
+* @ivi374forivi
+
+# Workflow files
+/.github/workflows/ @ivi374forivi
+
+# Security and compliance files
+/.github/SECURITY.md @ivi374forivi
+/CODE_OF_CONDUCT.md @ivi374forivi
+
+# Documentation
+*.md @ivi374forivi
+/docs/ @ivi374forivi
+
+# Configuration files
+*.yml @ivi374forivi
+*.yaml @ivi374forivi
+*.json @ivi374forivi
