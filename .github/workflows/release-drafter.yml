@@ -17,7 +17,7 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - uses: release-drafter/release-drafter@<full-length-commit-SHA>
+      - uses: release-drafter/release-drafter@<actual-full-length-commit-SHA>
         with:
           config-name: release-drafter.yml
           disable-autolabeler: false
