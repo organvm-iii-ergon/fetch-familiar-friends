@@ -14,6 +14,7 @@ Before seeking help, please check our documentation:
 ### 🐛 Bug Reports
 
 If you've found a bug, please help us fix it by:
+
 1. **Searching existing issues** to see if it's already reported
 2. **Creating a new issue** with the bug report template
 3. **Including detailed information** about your environment and steps to reproduce
