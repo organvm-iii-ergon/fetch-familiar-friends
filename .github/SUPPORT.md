@@ -24,6 +24,7 @@ If you've found a bug, please help us fix it by:
 ### 💡 Feature Requests
 
 We welcome feature suggestions! To request a new feature:
+
 1. **Check existing feature requests** to avoid duplicates
 2. **Create a new issue** using the feature request template
 3. **Describe the problem** you're trying to solve and your proposed solution
