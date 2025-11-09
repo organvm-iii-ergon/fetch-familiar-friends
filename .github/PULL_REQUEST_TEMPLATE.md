@@ -9,6 +9,7 @@ Explain the change and why it's needed.
 - [ ] Chore
 
 ## Checklist
+
 - [ ] Tests added/updated (if applicable)
 - [ ] Docs updated
 - [ ] Code follows project conventions
