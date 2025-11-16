@@ -75,9 +75,12 @@ const CalendarCard = ({
       const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
 
       try {
+        const dogApiUrl = import.meta.env.VITE_DOG_API_URL || 'https://dog.ceo/api';
+        const catApiUrl = import.meta.env.VITE_CAT_API_URL || 'https://api.thecatapi.com/v1';
+
         const endpoint = isDog
-          ? 'https://dog.ceo/api/breeds/image/random'
-          : 'https://api.thecatapi.com/v1/images/search';
+          ? `${dogApiUrl}/breeds/image/random`
+          : `${catApiUrl}/images/search`;
 
         const response = await fetch(endpoint, {
           signal: controller.signal,

@@ -1,0 +1,20 @@
+{
+  "name": "DogTale Daily",
+  "short_name": "DogTale",
+  "description": "Your personalized daily dog calendar - tracking care, sharing moments, and celebrating your familiar friends",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4ECDC4",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "entertainment", "utilities"],
+  "screenshots": []
+}

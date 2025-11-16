@@ -38,7 +38,6 @@ node_modules/
 npm-debug.log
 .npm
 .npmrc
-package-lock.json
 
 # esbuild conventions
 #####################
@@ -48,8 +47,13 @@ package-lock.json
 ##################
 dist/
 .vite/
+.env
 .env.local
 .env.*.local
+
+# Test coverage
+###############
+coverage/
 
 # Zip archives
 *.zip
