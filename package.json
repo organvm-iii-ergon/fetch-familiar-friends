@@ -17,7 +17,8 @@
     "ingest:validate": "node scripts/ingestBreedData.js --validate",
     "ingest:stats": "node scripts/ingestBreedData.js --stats",
     "process:docs": "node scripts/processDocuments.js",
-    "watch:docs": "node scripts/watchDocuments.js"
+    "watch:docs": "node scripts/watchDocuments.js",
+    "history:parse": "node scripts/historyParser.js"
   },
   "dependencies": {
     "framer-motion": "^10.15.0",

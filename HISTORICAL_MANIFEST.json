@@ -1,0 +1,6053 @@
+{
+  "metadata": {
+    "generatedAt": "2025-11-19T04:40:38.865Z",
+    "repoInception": "2025-10-25",
+    "version": "1.0.0",
+    "description": "Complete historical manifest of all features and functions mentioned in repository history"
+  },
+  "documentsScanned": [
+    {
+      "path": ".github/*.instructions.md",
+      "size": 47,
+      "lines": 3,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "size": 329,
+      "lines": 20,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": ".github/SECURITY.md",
+      "size": 6545,
+      "lines": 214,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": ".github/SUPPORT.md",
+      "size": 2203,
+      "lines": 68,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "AGENT_ORCHESTRATION.md",
+      "size": 1979,
+      "lines": 37,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "ANNOTATED_BIBLIOGRAPHY.md",
+      "size": 1902,
+      "lines": 43,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "BRANCH_MERGE_SUMMARY.md",
+      "size": 6760,
+      "lines": 187,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "size": 2656,
+      "lines": 80,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md",
+      "size": 5665,
+      "lines": 133,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "COMPREHENSIVE_ANALYSIS.md",
+      "size": 37775,
+      "lines": 1275,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "COMPREHENSIVE_REPO_ANALYSIS.md",
+      "size": 15148,
+      "lines": 431,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "COMPREHENSIVE_ROADMAP.md",
+      "size": 13579,
+      "lines": 611,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "size": 5238,
+      "lines": 208,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "CRITICAL_ANALYSIS.md",
+      "size": 36630,
+      "lines": 1404,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "ChatPRD/AI-Powered Dog Care Schedule.md",
+      "size": 5957,
+      "lines": 247,
+      "type": "documentation",
+      "category": "ChatPRD"
+    },
+    {
+      "path": "ChatPRD/ChatPRD-AI-for-Product-Managers-AI-Product-Management-Support.md",
+      "size": 6069,
+      "lines": 204,
+      "type": "documentation",
+      "category": "ChatPRD"
+    },
+    {
+      "path": "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+      "size": 59310,
+      "lines": 1100,
+      "type": "documentation",
+      "category": "ChatPRD"
+    },
+    {
+      "path": "ChatPRD/Compiler-Design-Principles-and-Components.md",
+      "size": 24781,
+      "lines": 256,
+      "type": "documentation",
+      "category": "ChatPRD"
+    },
+    {
+      "path": "ChatPRD/Custom Animal Photo Calendars.md",
+      "size": 324822,
+      "lines": 4095,
+      "type": "documentation",
+      "category": "ChatPRD"
+    },
+    {
+      "path": "ChatPRD/Dog Calendar Fixing toggleFavorite and Invalid React Child Errors.md",
+      "size": 14220,
+      "lines": 151,
+      "type": "documentation",
+      "category": "ChatPRD"
+    },
+    {
+      "path": "ChatPRD/DogTale Daily Personalized Dog Calendar App.md",
+      "size": 9009,
+      "lines": 35,
+      "type": "documentation",
+      "category": "ChatPRD"
+    },
+    {
+      "path": "ChatPRD/DogTale-Daily-Web-App.md",
+      "size": 11022,
+      "lines": 269,
+      "type": "documentation",
+      "category": "ChatPRD"
+    },
+    {
+      "path": "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+      "size": 46214,
+      "lines": 895,
+      "type": "documentation",
+      "category": "ChatPRD"
+    },
+    {
+      "path": "ChatPRD/Grok-Development-Projects-Overview.md",
+      "size": 3065,
+      "lines": 34,
+      "type": "documentation",
+      "category": "ChatPRD"
+    },
+    {
+      "path": "ChatPRD/Interactive Dog Calendar v2.md",
+      "size": 9311,
+      "lines": 219,
+      "type": "documentation",
+      "category": "ChatPRD"
+    },
+    {
+      "path": "ChatPRD/README.md",
+      "size": 939,
+      "lines": 24,
+      "type": "documentation",
+      "category": "ChatPRD"
+    },
+    {
+      "path": "ChatPRD/The-Living-Document-System.md",
+      "size": 4876,
+      "lines": 130,
+      "type": "documentation",
+      "category": "ChatPRD"
+    },
+    {
+      "path": "ChatPRD/dogcal-schedule.md",
+      "size": 29836,
+      "lines": 622,
+      "type": "documentation",
+      "category": "ChatPRD"
+    },
+    {
+      "path": "ChatPRD/dogcalv1.md",
+      "size": 14827,
+      "lines": 99,
+      "type": "documentation",
+      "category": "ChatPRD"
+    },
+    {
+      "path": "DATA_INGESTION_README.md",
+      "size": 11484,
+      "lines": 516,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "DOC_INDEX.md",
+      "size": 3504,
+      "lines": 35,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "ECOSYSTEM_OVERVIEW.md",
+      "size": 1488,
+      "lines": 28,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "FEATURE_IMPLEMENTATION_SUMMARY.md",
+      "size": 11415,
+      "lines": 446,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "INBOX_AUDIT.md",
+      "size": 2775,
+      "lines": 36,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "MERGE_RESOLUTION.md",
+      "size": 3082,
+      "lines": 74,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "MISSING_FEATURES_ANALYSIS.md",
+      "size": 6803,
+      "lines": 240,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "PR_CONFLICT_STATUS.md",
+      "size": 7280,
+      "lines": 214,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "README.md",
+      "size": 3992,
+      "lines": 125,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "REALISTIC_PLAN.md",
+      "size": 10680,
+      "lines": 450,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "ROADMAP.md",
+      "size": 2441,
+      "lines": 41,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "SESSION_2_SUMMARY.md",
+      "size": 12630,
+      "lines": 519,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "docs/PROJECT.md",
+      "size": 5447,
+      "lines": 115,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "docs/TRANSFORMATION.md",
+      "size": 5063,
+      "lines": 147,
+      "type": "documentation",
+      "category": "Root"
+    },
+    {
+      "path": "docs/archive/AI-Powered Dog Care Schedule.md",
+      "size": 5572,
+      "lines": 238,
+      "type": "documentation",
+      "category": "Archive"
+    },
+    {
+      "path": "docs/archive/DISTILLED-AI-Powered-Dog-Care-Schedule.md",
+      "size": 6887,
+      "lines": 247,
+      "type": "documentation",
+      "category": "Archive"
+    },
+    {
+      "path": "docs/archive/DISTILLED-DogTale-Daily-Personalized-Dog-Calendar-App.md",
+      "size": 10172,
+      "lines": 407,
+      "type": "documentation",
+      "category": "Archive"
+    },
+    {
+      "path": "docs/archive/DISTILLED-Interactive-Dog-Calendar-v2.md",
+      "size": 5826,
+      "lines": 208,
+      "type": "documentation",
+      "category": "Archive"
+    },
+    {
+      "path": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "size": 14719,
+      "lines": 438,
+      "type": "documentation",
+      "category": "Archive"
+    },
+    {
+      "path": "docs/archive/DISTILLED-dogcalv1.md",
+      "size": 5581,
+      "lines": 148,
+      "type": "documentation",
+      "category": "Archive"
+    },
+    {
+      "path": "docs/archive/DogTale Daily Personalized Dog Calendar App.md",
+      "size": 8042,
+      "lines": 18,
+      "type": "documentation",
+      "category": "Archive"
+    },
+    {
+      "path": "docs/archive/Interactive Dog Calendar v2.md",
+      "size": 8926,
+      "lines": 210,
+      "type": "documentation",
+      "category": "Archive"
+    },
+    {
+      "path": "docs/archive/README.md",
+      "size": 7234,
+      "lines": 215,
+      "type": "documentation",
+      "category": "Archive"
+    },
+    {
+      "path": "docs/archive/SYNTHESIS.md",
+      "size": 18807,
+      "lines": 638,
+      "type": "documentation",
+      "category": "Archive"
+    },
+    {
+      "path": "docs/archive/dogcal-schedule.md",
+      "size": 29455,
+      "lines": 613,
+      "type": "documentation",
+      "category": "Archive"
+    },
+    {
+      "path": "docs/archive/dogcalv1.md",
+      "size": 14442,
+      "lines": 90,
+      "type": "documentation",
+      "category": "Archive"
+    },
+    {
+      "path": "docs/legacy/README.md",
+      "size": 2433,
+      "lines": 58,
+      "type": "documentation",
+      "category": "Legacy"
+    },
+    {
+      "path": "docs/legacy/ai-pawsitive-README.md",
+      "size": 869,
+      "lines": 27,
+      "type": "documentation",
+      "category": "Legacy"
+    },
+    {
+      "path": "docs/roadmap/ChatPRD-AI-for-Product-Managers-AI-Product-Management-Support.md",
+      "size": 5684,
+      "lines": 195,
+      "type": "documentation",
+      "category": "ChatPRD"
+    },
+    {
+      "path": "docs/roadmap/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+      "size": 58925,
+      "lines": 1091,
+      "type": "documentation",
+      "category": "ChatPRD"
+    },
+    {
+      "path": "docs/roadmap/DogTale-Daily-Web-App.md",
+      "size": 9818,
+      "lines": 250,
+      "type": "documentation",
+      "category": "Roadmap"
+    },
+    {
+      "path": "docs/roadmap/Grok-Development-Projects-Overview.md",
+      "size": 2680,
+      "lines": 25,
+      "type": "documentation",
+      "category": "Roadmap"
+    },
+    {
+      "path": "docs/roadmap/NEXTday-AI-phase-2-guide.md",
+      "size": 8763,
+      "lines": 288,
+      "type": "documentation",
+      "category": "Roadmap"
+    },
+    {
+      "path": "docs/roadmap/README.md",
+      "size": 1376,
+      "lines": 31,
+      "type": "documentation",
+      "category": "Roadmap"
+    },
+    {
+      "path": "docs/roadmap/The-Living-Document-System.md",
+      "size": 4491,
+      "lines": 121,
+      "type": "documentation",
+      "category": "Roadmap"
+    },
+    {
+      "path": "docs/technical/Compiler-Design-Principles-and-Components.md",
+      "size": 24398,
+      "lines": 248,
+      "type": "documentation",
+      "category": "Technical"
+    },
+    {
+      "path": "docs/technical/Custom Animal Photo Calendars.md",
+      "size": 324437,
+      "lines": 4086,
+      "type": "documentation",
+      "category": "Technical"
+    },
+    {
+      "path": "docs/technical/DATA_INGESTION_PIPELINE.md",
+      "size": 12441,
+      "lines": 462,
+      "type": "documentation",
+      "category": "Technical"
+    },
+    {
+      "path": "docs/technical/Dog Calendar Fixing toggleFavorite and Invalid React Child Errors.md",
+      "size": 13835,
+      "lines": 142,
+      "type": "documentation",
+      "category": "Technical"
+    },
+    {
+      "path": "docs/technical/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+      "size": 45829,
+      "lines": 886,
+      "type": "documentation",
+      "category": "Technical"
+    },
+    {
+      "path": "docs/technical/README.md",
+      "size": 1701,
+      "lines": 34,
+      "type": "documentation",
+      "category": "Technical"
+    },
+    {
+      "path": "src/App.jsx",
+      "type": "code",
+      "category": "Other"
+    },
+    {
+      "path": "src/components/ErrorBoundary.jsx",
+      "type": "code",
+      "category": "Component"
+    },
+    {
+      "path": "src/components/calendar/CalendarCard.jsx",
+      "type": "code",
+      "category": "Component"
+    },
+    {
+      "path": "src/components/calendar/DateNavigation.jsx",
+      "type": "code",
+      "category": "Component"
+    },
+    {
+      "path": "src/components/calendar/MonthCalendar.jsx",
+      "type": "code",
+      "category": "Component"
+    },
+    {
+      "path": "src/components/calendar/ThemeSelector.jsx",
+      "type": "code",
+      "category": "Component"
+    },
+    {
+      "path": "src/components/modals/AiModal.jsx",
+      "type": "code",
+      "category": "Component"
+    },
+    {
+      "path": "src/components/modals/FavoritesModal.jsx",
+      "type": "code",
+      "category": "Component"
+    },
+    {
+      "path": "src/components/modals/JournalModal.jsx",
+      "type": "code",
+      "category": "Component"
+    },
+    {
+      "path": "src/components/modals/KeyboardShortcutsModal.jsx",
+      "type": "code",
+      "category": "Component"
+    },
+    {
+      "path": "src/components/modals/Modal.jsx",
+      "type": "code",
+      "category": "Component"
+    },
+    {
+      "path": "src/components/modals/SettingsModal.jsx",
+      "type": "code",
+      "category": "Component"
+    },
+    {
+      "path": "src/components/modals/StatisticsModal.jsx",
+      "type": "code",
+      "category": "Component"
+    },
+    {
+      "path": "src/hooks/useDarkMode.js",
+      "type": "code",
+      "category": "Hook"
+    },
+    {
+      "path": "src/hooks/useKeyboardShortcuts.js",
+      "type": "code",
+      "category": "Hook"
+    },
+    {
+      "path": "src/index.jsx",
+      "type": "code",
+      "category": "Other"
+    },
+    {
+      "path": "src/services/breedDataIngestion.js",
+      "type": "code",
+      "category": "Service"
+    },
+    {
+      "path": "src/test/setup.js",
+      "type": "code",
+      "category": "Test"
+    },
+    {
+      "path": "src/utils/breedKnowledge.js",
+      "type": "code",
+      "category": "Utility"
+    },
+    {
+      "path": "src/utils/dailyContent.js",
+      "type": "code",
+      "category": "Utility"
+    },
+    {
+      "path": "src/utils/dailyContent.test.js",
+      "type": "code",
+      "category": "Utility"
+    },
+    {
+      "path": "src/utils/dataFreshness.js",
+      "type": "code",
+      "category": "Utility"
+    },
+    {
+      "path": "src/utils/dataFreshness.test.js",
+      "type": "code",
+      "category": "Utility"
+    },
+    {
+      "path": "src/utils/dataValidation.js",
+      "type": "code",
+      "category": "Utility"
+    },
+    {
+      "path": "src/utils/dataValidation.test.js",
+      "type": "code",
+      "category": "Utility"
+    },
+    {
+      "path": "src/utils/imageCache.js",
+      "type": "code",
+      "category": "Utility"
+    },
+    {
+      "path": "src/utils/imageCache.test.js",
+      "type": "code",
+      "category": "Utility"
+    }
+  ],
+  "features": [
+    {
+      "text": "- [ ] App store submission",
+      "source": "COMPREHENSIVE_ROADMAP.md",
+      "sources": [
+        "COMPREHENSIVE_ROADMAP.md"
+      ]
+    },
+    {
+      "text": "- [ ] Client-side image preview before upload",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "- [ ] Fix screen reader navigation",
+      "source": "CRITICAL_ANALYSIS.md",
+      "sources": [
+        "CRITICAL_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "- [ ] Handle quota exceeded errors gracefully",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "- [ ] Implement virtual scrolling for favorites",
+      "source": "COMPREHENSIVE_ROADMAP.md",
+      "sources": [
+        "COMPREHENSIVE_ROADMAP.md"
+      ]
+    },
+    {
+      "text": "- ✅ Web manifest for install prompt",
+      "source": "CRITICAL_ANALYSIS.md",
+      "sources": [
+        "CRITICAL_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "- Background sync",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "- Clear search UI",
+      "source": "COMPREHENSIVE_ROADMAP.md",
+      "sources": [
+        "COMPREHENSIVE_ROADMAP.md"
+      ]
+    },
+    {
+      "text": "- Historical tracking and analytics",
+      "source": "docs/archive/DISTILLED-AI-Powered-Dog-Care-Schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-AI-Powered-Dog-Care-Schedule.md",
+        "docs/archive/SYNTHESIS.md"
+      ]
+    },
+    {
+      "text": "\"Freaky Friday\" feature:",
+      "source": "COMPREHENSIVE_REPO_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_REPO_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "\"Generate Daily Pawsitive Report\"",
+      "source": "docs/archive/DISTILLED-AI-Powered-Dog-Care-Schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-AI-Powered-Dog-Care-Schedule.md"
+      ]
+    },
+    {
+      "text": "\"KOTAverse\" Timeline",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "\"Pop the Top\" Simulation",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "[AI Product Management Support](ChatPRD-AI-for-Product-Managers-AI-Product-Management-Support.md)",
+      "source": "docs/roadmap/README.md",
+      "sources": [
+        "docs/roadmap/README.md"
+      ]
+    },
+    {
+      "text": "[AI-Powered Dog Care Schedule - Distilled](DISTILLED-AI-Powered-Dog-Care-Schedule.md)",
+      "source": "docs/archive/README.md",
+      "sources": [
+        "docs/archive/README.md"
+      ]
+    },
+    {
+      "text": "[AI-Powered Dog Care Schedule.md](AI-Powered-Dog-Care-Schedule.md)",
+      "source": "docs/archive/README.md",
+      "sources": [
+        "docs/archive/README.md"
+      ]
+    },
+    {
+      "text": "[ChatPRD Documents](ChatPRD/)",
+      "source": "README.md",
+      "sources": [
+        "README.md"
+      ]
+    },
+    {
+      "text": "[Compiler Design Principles and Components](Compiler-Design-Principles-and-Components.md)",
+      "source": "docs/technical/README.md",
+      "sources": [
+        "docs/technical/README.md"
+      ]
+    },
+    {
+      "text": "[Custom Animal Photo Calendars](Custom-Animal-Photo-Calendars.md)",
+      "source": "docs/technical/README.md",
+      "sources": [
+        "docs/technical/README.md"
+      ]
+    },
+    {
+      "text": "[Dog Calendar App Roadmap](ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md)",
+      "source": "docs/roadmap/README.md",
+      "sources": [
+        "docs/roadmap/README.md"
+      ]
+    },
+    {
+      "text": "[Dog Calendar Fixing toggleFavorite and Invalid React Child Errors](Dog-Calendar-Fixing-toggleFavorite-and-Invalid-React-Child-Errors.md)",
+      "source": "docs/technical/README.md",
+      "sources": [
+        "docs/technical/README.md"
+      ]
+    },
+    {
+      "text": "[Dog Calendar v1 - Distilled](DISTILLED-dogcalv1.md)",
+      "source": "docs/archive/README.md",
+      "sources": [
+        "docs/archive/README.md"
+      ]
+    },
+    {
+      "text": "[DogTale Daily Personalized Dog Calendar App.md](DogTale-Daily-Personalized-Dog-Calendar-App.md)",
+      "source": "docs/archive/README.md",
+      "sources": [
+        "docs/archive/README.md"
+      ]
+    },
+    {
+      "text": "[DogTale Daily Product Vision - Distilled](DISTILLED-DogTale-Daily-Personalized-Dog-Calendar-App.md)",
+      "source": "docs/archive/README.md",
+      "sources": [
+        "docs/archive/README.md"
+      ]
+    },
+    {
+      "text": "[DogTale Daily Web App](DogTale-Daily-Web-App.md)",
+      "source": "docs/roadmap/README.md",
+      "sources": [
+        "docs/roadmap/README.md"
+      ]
+    },
+    {
+      "text": "[Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component](Fixing-ReferenceError-and-Invalid-React-Child-Errors-in-DogTearOffCalendar-Component.md)",
+      "source": "docs/technical/README.md",
+      "sources": [
+        "docs/technical/README.md"
+      ]
+    },
+    {
+      "text": "[Grok Development Projects Overview](Grok-Development-Projects-Overview.md)",
+      "source": "docs/roadmap/README.md",
+      "sources": [
+        "docs/roadmap/README.md"
+      ]
+    },
+    {
+      "text": "[Interactive Dog Calendar v2 - Distilled](DISTILLED-Interactive-Dog-Calendar-v2.md)",
+      "source": "docs/archive/README.md",
+      "sources": [
+        "docs/archive/README.md"
+      ]
+    },
+    {
+      "text": "[Interactive Dog Calendar v2.md](Interactive-Dog-Calendar-v2.md)",
+      "source": "docs/archive/README.md",
+      "sources": [
+        "docs/archive/README.md"
+      ]
+    },
+    {
+      "text": "[Living Document System](The-Living-Document-System.md)",
+      "source": "docs/roadmap/README.md",
+      "sources": [
+        "docs/roadmap/README.md"
+      ]
+    },
+    {
+      "text": "[NEXTday AI Phase 2 Guide](NEXTday-AI-phase-2-guide.md)",
+      "source": "docs/roadmap/README.md",
+      "sources": [
+        "docs/roadmap/README.md"
+      ]
+    },
+    {
+      "text": "[Roadmap & Planning](docs/roadmap/)",
+      "source": "README.md",
+      "sources": [
+        "README.md"
+      ]
+    },
+    {
+      "text": "[Technical Specs](docs/technical/)",
+      "source": "README.md",
+      "sources": [
+        "README.md"
+      ]
+    },
+    {
+      "text": "[Web Design Research - Distilled](DISTILLED-dogcal-schedule.md)",
+      "source": "docs/archive/README.md",
+      "sources": [
+        "docs/archive/README.md"
+      ]
+    },
+    {
+      "text": "@Codex (Architecture Strategist):",
+      "source": "AGENT_ORCHESTRATION.md",
+      "sources": [
+        "AGENT_ORCHESTRATION.md"
+      ]
+    },
+    {
+      "text": "@Copilot (Engineering Lead):",
+      "source": "AGENT_ORCHESTRATION.md",
+      "sources": [
+        "AGENT_ORCHESTRATION.md"
+      ]
+    },
+    {
+      "text": "@Gemini (Experience Lead):",
+      "source": "AGENT_ORCHESTRATION.md",
+      "sources": [
+        "AGENT_ORCHESTRATION.md"
+      ]
+    },
+    {
+      "text": "• Product Roadmap",
+      "source": "ChatPRD/dogcal-schedule.md",
+      "sources": [
+        "ChatPRD/dogcal-schedule.md",
+        "docs/archive/dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "✅ MVP Features Included",
+      "source": "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+      "sources": [
+        "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "docs/roadmap/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md"
+      ]
+    },
+    {
+      "text": "✨ Features Implemented (This Session)",
+      "source": "SESSION_2_SUMMARY.md",
+      "sources": [
+        "SESSION_2_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "🎮 Feature Concepts",
+      "source": "docs/archive/SYNTHESIS.md",
+      "sources": [
+        "docs/archive/SYNTHESIS.md"
+      ]
+    },
+    {
+      "text": "💡 Feature Requests",
+      "source": ".github/SUPPORT.md",
+      "sources": [
+        ".github/SUPPORT.md"
+      ]
+    },
+    {
+      "text": "🔮 FUTURE FEATURES (Month 2+)",
+      "source": "COMPREHENSIVE_ROADMAP.md",
+      "sources": [
+        "COMPREHENSIVE_ROADMAP.md"
+      ]
+    },
+    {
+      "text": "🔮 Remaining Features (Roadmap)",
+      "source": "FEATURE_IMPLEMENTATION_SUMMARY.md",
+      "sources": [
+        "FEATURE_IMPLEMENTATION_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "🚀 Features Implemented (Session Summary)",
+      "source": "FEATURE_IMPLEMENTATION_SUMMARY.md",
+      "sources": [
+        "FEATURE_IMPLEMENTATION_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "1. Check existing feature requests to avoid duplicates",
+      "source": ".github/SUPPORT.md",
+      "sources": [
+        ".github/SUPPORT.md"
+      ]
+    },
+    {
+      "text": "1. Pokemon Go-like AR Features 📍",
+      "source": "MISSING_FEATURES_ANALYSIS.md",
+      "sources": [
+        "MISSING_FEATURES_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "16. Social Features 👥",
+      "source": "COMPREHENSIVE_ROADMAP.md",
+      "sources": [
+        "COMPREHENSIVE_ROADMAP.md"
+      ]
+    },
+    {
+      "text": "2. Social Features (Privacy-First) 🟢 MEDIUM",
+      "source": "CRITICAL_ANALYSIS.md",
+      "sources": [
+        "CRITICAL_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "20. Monetization Features 💰",
+      "source": "COMPREHENSIVE_ROADMAP.md",
+      "sources": [
+        "COMPREHENSIVE_ROADMAP.md"
+      ]
+    },
+    {
+      "text": "23 new files",
+      "source": "MERGE_RESOLUTION.md",
+      "sources": [
+        "MERGE_RESOLUTION.md"
+      ]
+    },
+    {
+      "text": "3. feature-secure-api-key ✅ Archived",
+      "source": "BRANCH_MERGE_SUMMARY.md",
+      "sources": [
+        "BRANCH_MERGE_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "3. No Social/Community Features ⚠️ HIGH",
+      "source": "CRITICAL_ANALYSIS.md",
+      "sources": [
+        "CRITICAL_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "3. Post-Life Preservation / Memorial Features 🌈",
+      "source": "MISSING_FEATURES_ANALYSIS.md",
+      "sources": [
+        "MISSING_FEATURES_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "333 modules transformed",
+      "source": "FEATURE_IMPLEMENTATION_SUMMARY.md",
+      "sources": [
+        "FEATURE_IMPLEMENTATION_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "4. AI Feature Integration",
+      "source": "docs/archive/DISTILLED-dogcalv1.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcalv1.md"
+      ]
+    },
+    {
+      "text": "4. claude/comprehensive-features-011CUjTuCFGG9gG4q5wmcWpz ✅ Already Merged",
+      "source": "BRANCH_MERGE_SUMMARY.md",
+      "sources": [
+        "BRANCH_MERGE_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "5. PDF Export Feature 📄",
+      "source": "COMPREHENSIVE_ROADMAP.md",
+      "sources": [
+        "COMPREHENSIVE_ROADMAP.md"
+      ]
+    },
+    {
+      "text": "7-day streak",
+      "source": "CRITICAL_ANALYSIS.md",
+      "sources": [
+        "CRITICAL_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "7. Community Features",
+      "source": "docs/archive/DISTILLED-DogTale-Daily-Personalized-Dog-Calendar-App.md",
+      "sources": [
+        "docs/archive/DISTILLED-DogTale-Daily-Personalized-Dog-Calendar-App.md"
+      ]
+    },
+    {
+      "text": "8,989 lines",
+      "source": "MERGE_RESOLUTION.md",
+      "sources": [
+        "MERGE_RESOLUTION.md"
+      ]
+    },
+    {
+      "text": "a 50–100 word story snippet (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "a cheerful, encouraging summary of your progress, written as if from a helpful assistant who loves dogs!",
+      "source": "ChatPRD/AI-Powered Dog Care Schedule.md",
+      "sources": [
+        "ChatPRD/AI-Powered Dog Care Schedule.md",
+        "docs/archive/AI-Powered Dog Care Schedule.md"
+      ]
+    },
+    {
+      "text": "a code snippet for a specific screen (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "a code snippet to integrate it, and suggest next steps",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "a companion app widget showing daily panels",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "a comprehensive analysis of merge conflicts across all open pull requests in the repository",
+      "source": "PR_CONFLICT_STATUS.md",
+      "sources": [
+        "PR_CONFLICT_STATUS.md"
+      ]
+    },
+    {
+      "text": "a comprehensive summary of insights extracted from five distilled archive documents",
+      "source": "docs/archive/SYNTHESIS.md",
+      "sources": [
+        "docs/archive/SYNTHESIS.md"
+      ]
+    },
+    {
+      "text": "a concise and professional overview of all development-related projects or aspects pertaining to me, based on the provided context and my capabilities",
+      "source": "ChatPRD/Grok-Development-Projects-Overview.md",
+      "sources": [
+        "ChatPRD/Grok-Development-Projects-Overview.md",
+        "docs/roadmap/Grok-Development-Projects-Overview.md"
+      ]
+    },
+    {
+      "text": "a detailed development roadmap (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "a dropdown menu with themes (Park, Beach, Forest, Tundra, etc",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "a dynamic feel, aligning with your prototype’s style",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "a fallback string",
+      "source": "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+      "sources": [
+        "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+        "docs/technical/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md"
+      ]
+    },
+    {
+      "text": "a non-invasive health check, reassuring your stepmom about Max’s condition",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "a PDF overview for easy sharing",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "a reason to return",
+      "source": "ChatPRD/The-Living-Document-System.md",
+      "sources": [
+        "ChatPRD/The-Living-Document-System.md",
+        "docs/roadmap/The-Living-Document-System.md"
+      ]
+    },
+    {
+      "text": "a seamless, non-disorienting experience for users of assistive technologies",
+      "source": "ChatPRD/The-Living-Document-System.md",
+      "sources": [
+        "ChatPRD/The-Living-Document-System.md",
+        "docs/roadmap/The-Living-Document-System.md"
+      ]
+    },
+    {
+      "text": "a single story snippet, not a 30-day narrative arc with daily progressing panels (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "a sleek feel, expandable with JavaScript for smoother transitions",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "a space for users to post questions or tips (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "a space for vets or trainers to answer health or training questions, with user-posted queries and responses",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "a specific tenet!",
+      "source": "ChatPRD/Compiler-Design-Principles-and-Components.md",
+      "sources": [
+        "ChatPRD/Compiler-Design-Principles-and-Components.md",
+        "docs/technical/Compiler-Design-Principles-and-Components.md"
+      ]
+    },
+    {
+      "text": "a user-friendly fallback UI when errors occur",
+      "source": "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+      "sources": [
+        "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+        "docs/technical/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md"
+      ]
+    },
+    {
+      "text": "accessibility feature",
+      "source": "docs/archive/SYNTHESIS.md",
+      "sources": [
+        "docs/archive/SYNTHESIS.md"
+      ]
+    },
+    {
+      "text": "accurate feature",
+      "source": "MISSING_FEATURES_ANALYSIS.md",
+      "sources": [
+        "MISSING_FEATURES_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Activity Tracking",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "Advanced Features",
+      "source": "docs/technical/DATA_INGESTION_PIPELINE.md",
+      "sources": [
+        "docs/technical/DATA_INGESTION_PIPELINE.md"
+      ]
+    },
+    {
+      "text": "Affected packages",
+      "source": ".github/SECURITY.md",
+      "sources": [
+        ".github/SECURITY.md"
+      ]
+    },
+    {
+      "text": "AI API (OpenAI):",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "AI chat (basic keyword-based breed info)",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "AI-Powered Feature: \"Generate Daily Pawsitive Report\"",
+      "source": "docs/archive/DISTILLED-AI-Powered-Dog-Care-Schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-AI-Powered-Dog-Care-Schedule.md"
+      ]
+    },
+    {
+      "text": "all contexts",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "an ASCII wireframe for one screen",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "an ASCII wireframe or guide you to use Figma manually with this structure",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "an immersive dive into content",
+      "source": "ChatPRD/dogcal-schedule.md",
+      "sources": [
+        "ChatPRD/dogcal-schedule.md",
+        "docs/archive/dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "an interactive React web app called DogTale Daily with these key feature",
+      "source": "ChatPRD/DogTale-Daily-Web-App.md",
+      "sources": [
+        "ChatPRD/DogTale-Daily-Web-App.md",
+        "docs/roadmap/DogTale-Daily-Web-App.md"
+      ]
+    },
+    {
+      "text": "an interactive, sleek, modern representation of DogTale Daily, consolidating all the data and concepts we’ve discussed",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "API Keys",
+      "source": "DATA_INGESTION_README.md",
+      "sources": [
+        "DATA_INGESTION_README.md"
+      ]
+    },
+    {
+      "text": "Application Code",
+      "source": "MERGE_RESOLUTION.md",
+      "sources": [
+        "MERGE_RESOLUTION.md"
+      ]
+    },
+    {
+      "text": "ASCII wireframes for manual sketching",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Backend (Supabase):",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Background Elements",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "Base SHA",
+      "source": "PR_CONFLICT_STATUS.md",
+      "sources": [
+        "PR_CONFLICT_STATUS.md"
+      ]
+    },
+    {
+      "text": "Breed data",
+      "source": "DATA_INGESTION_README.md",
+      "sources": [
+        "DATA_INGESTION_README.md",
+        "docs/technical/DATA_INGESTION_PIPELINE.md"
+      ]
+    },
+    {
+      "text": "Breed Data Fetch",
+      "source": "DATA_INGESTION_README.md",
+      "sources": [
+        "DATA_INGESTION_README.md"
+      ]
+    },
+    {
+      "text": "Breed data ingestion (dogs and cats)",
+      "source": "DATA_INGESTION_README.md",
+      "sources": [
+        "DATA_INGESTION_README.md"
+      ]
+    },
+    {
+      "text": "browsing days, with date display (day, weekday, month, year), resembling a tear-off calendar’s daily ritual",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Build Success Rate",
+      "source": "SESSION_2_SUMMARY.md",
+      "sources": [
+        "SESSION_2_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "Built in 3.42s",
+      "source": "FEATURE_IMPLEMENTATION_SUMMARY.md",
+      "sources": [
+        "FEATURE_IMPLEMENTATION_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "Cache Lookup",
+      "source": "DATA_INGESTION_README.md",
+      "sources": [
+        "DATA_INGESTION_README.md"
+      ]
+    },
+    {
+      "text": "Calendar exports per month:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Changed Files",
+      "source": "PR_CONFLICT_STATUS.md",
+      "sources": [
+        "PR_CONFLICT_STATUS.md"
+      ]
+    },
+    {
+      "text": "Churn rate:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "clarity and organization for the issue described in the provided React code and error logs",
+      "source": "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+      "sources": [
+        "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+        "docs/technical/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md"
+      ]
+    },
+    {
+      "text": "clear feedback, delighting your stepmom with visual confirmation of Max’s content being saved",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "CLI tools with helpful output",
+      "source": "DATA_INGESTION_README.md",
+      "sources": [
+        "DATA_INGESTION_README.md"
+      ]
+    },
+    {
+      "text": "code snippets to integrate these into the current file—let me know which to focus on",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "coding and testing next steps",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "collaboration, allowing you to share the design with others to add events before exporting",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Comments per post:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Community Feature Ideas",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Community Ops:",
+      "source": "ECOSYSTEM_OVERVIEW.md",
+      "sources": [
+        "ECOSYSTEM_OVERVIEW.md"
+      ]
+    },
+    {
+      "text": "Community posts per day:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Community Programs:",
+      "source": "ROADMAP.md",
+      "sources": [
+        "ROADMAP.md"
+      ]
+    },
+    {
+      "text": "Compliance Goal: WCAG 2",
+      "source": "CRITICAL_ANALYSIS.md",
+      "sources": [
+        "CRITICAL_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "compound breed names (e",
+      "source": "FEATURE_IMPLEMENTATION_SUMMARY.md",
+      "sources": [
+        "FEATURE_IMPLEMENTATION_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "comprehensive feature",
+      "source": "SESSION_2_SUMMARY.md",
+      "sources": [
+        "SESSION_2_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "comprehensive full feature",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "comprehensive keyboard shortcuts system",
+      "source": "SESSION_2_SUMMARY.md",
+      "sources": [
+        "SESSION_2_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "Comprehensive tests",
+      "source": "DATA_INGESTION_README.md",
+      "sources": [
+        "DATA_INGESTION_README.md"
+      ]
+    },
+    {
+      "text": "Conflict Type",
+      "source": "MERGE_RESOLUTION.md",
+      "sources": [
+        "MERGE_RESOLUTION.md"
+      ]
+    },
+    {
+      "text": "Consistent Content",
+      "source": "FEATURE_IMPLEMENTATION_SUMMARY.md",
+      "sources": [
+        "FEATURE_IMPLEMENTATION_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "contact form",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "continuous learning and philosophical reflection: responses should challenge, refine, and critically engage Anthony's concepts and code",
+      "source": "docs/roadmap/NEXTday-AI-phase-2-guide.md",
+      "sources": [
+        "docs/roadmap/NEXTday-AI-phase-2-guide.md"
+      ]
+    },
+    {
+      "text": "copilot/flatten-function-sprawl branch",
+      "source": "MERGE_RESOLUTION.md",
+      "sources": [
+        "MERGE_RESOLUTION.md"
+      ]
+    },
+    {
+      "text": "Core Visual Motif",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "Could hit quota",
+      "source": "COMPREHENSIVE_REPO_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_REPO_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "CSS snippets to implement these (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "current and relevant information for development tasks without a strict knowledge cutoff",
+      "source": "ChatPRD/Grok-Development-Projects-Overview.md",
+      "sources": [
+        "ChatPRD/Grok-Development-Projects-Overview.md",
+        "docs/roadmap/Grok-Development-Projects-Overview.md"
+      ]
+    },
+    {
+      "text": "Current Features",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Current Files",
+      "source": "docs/technical/DATA_INGESTION_PIPELINE.md",
+      "sources": [
+        "docs/technical/DATA_INGESTION_PIPELINE.md"
+      ]
+    },
+    {
+      "text": "Current main SHA",
+      "source": "PR_CONFLICT_STATUS.md",
+      "sources": [
+        "PR_CONFLICT_STATUS.md"
+      ]
+    },
+    {
+      "text": "custom fallback UI in ErrorBoundary component",
+      "source": "docs/archive/DISTILLED-Interactive-Dog-Calendar-v2.md",
+      "sources": [
+        "docs/archive/DISTILLED-Interactive-Dog-Calendar-v2.md"
+      ]
+    },
+    {
+      "text": "custom fallback UI in the ErrorBoundary component",
+      "source": "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+      "sources": [
+        "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+        "docs/technical/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md"
+      ]
+    },
+    {
+      "text": "custom photo calendar creation with animal pictures and offer digital calendar integration",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "custom prompts for humor",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "custom prompts for role-switching (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Daily dog/cat images from Dog CEO API & Cat API",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "Daily open rate:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Dark mode with system preference detection",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "Data Format",
+      "source": "docs/technical/DATA_INGESTION_PIPELINE.md",
+      "sources": [
+        "docs/technical/DATA_INGESTION_PIPELINE.md"
+      ]
+    },
+    {
+      "text": "Data Insights:",
+      "source": "ROADMAP.md",
+      "sources": [
+        "ROADMAP.md"
+      ]
+    },
+    {
+      "text": "data to persist across sessions",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Data validation framework",
+      "source": "DATA_INGESTION_README.md",
+      "sources": [
+        "DATA_INGESTION_README.md"
+      ]
+    },
+    {
+      "text": "DAU (Daily Active Users):",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Day view with theme selector (8 themes)",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "Definition of Done:",
+      "source": "ECOSYSTEM_OVERVIEW.md",
+      "sources": [
+        "ECOSYSTEM_OVERVIEW.md"
+      ]
+    },
+    {
+      "text": "Design Collaboration:",
+      "source": "ECOSYSTEM_OVERVIEW.md",
+      "sources": [
+        "ECOSYSTEM_OVERVIEW.md"
+      ]
+    },
+    {
+      "text": "design output, you can share this prompt with a human designer or use a tool like Midjourney for visuals and Figma for interactivity",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Design System Alignment:",
+      "source": "ROADMAP.md",
+      "sources": [
+        "ROADMAP.md"
+      ]
+    },
+    {
+      "text": "detailed character creation, which could include dogs and humans in swapped roles (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "detailed textual descriptions of the wireframes, formatted for clarity, that you can use to sketch or share with a designer",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "developers to integrate Grok’s capabilities into their applications, enabling programmatic access to my question-answering and reasoning functionalities",
+      "source": "ChatPRD/Grok-Development-Projects-Overview.md",
+      "sources": [
+        "ChatPRD/Grok-Development-Projects-Overview.md",
+        "docs/roadmap/Grok-Development-Projects-Overview.md"
+      ]
+    },
+    {
+      "text": "development-related interactions",
+      "source": "ChatPRD/Grok-Development-Projects-Overview.md",
+      "sources": [
+        "ChatPRD/Grok-Development-Projects-Overview.md",
+        "docs/roadmap/Grok-Development-Projects-Overview.md"
+      ]
+    },
+    {
+      "text": "Development-Related Projects and Features of Grok",
+      "source": "ChatPRD/Grok-Development-Projects-Overview.md",
+      "sources": [
+        "ChatPRD/Grok-Development-Projects-Overview.md",
+        "docs/roadmap/Grok-Development-Projects-Overview.md"
+      ]
+    },
+    {
+      "text": "digital subscriptions, printable calendars, and merchandise, enhancing the emotional Christmas gift appeal",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Directories created:",
+      "source": "docs/TRANSFORMATION.md",
+      "sources": [
+        "docs/TRANSFORMATION.md"
+      ]
+    },
+    {
+      "text": "dist/assets/index 23.57 kB (gzip: 4.83 kB) CSS",
+      "source": "FEATURE_IMPLEMENTATION_SUMMARY.md",
+      "sources": [
+        "FEATURE_IMPLEMENTATION_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "dist/assets/index 293.55 kB (gzip: 95.05 kB) JS",
+      "source": "FEATURE_IMPLEMENTATION_SUMMARY.md",
+      "sources": [
+        "FEATURE_IMPLEMENTATION_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "dist/index.html 0.93 kB (gzip: 0.53 kB)",
+      "source": "FEATURE_IMPLEMENTATION_SUMMARY.md",
+      "sources": [
+        "FEATURE_IMPLEMENTATION_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "Document Processing",
+      "source": "DATA_INGESTION_README.md",
+      "sources": [
+        "DATA_INGESTION_README.md"
+      ]
+    },
+    {
+      "text": "Document processing and normalization",
+      "source": "DATA_INGESTION_README.md",
+      "sources": [
+        "DATA_INGESTION_README.md"
+      ]
+    },
+    {
+      "text": "Document Version",
+      "source": "CRITICAL_ANALYSIS.md",
+      "sources": [
+        "CRITICAL_ANALYSIS.md",
+        "docs/technical/DATA_INGESTION_PIPELINE.md"
+      ]
+    },
+    {
+      "text": "Document Version:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Documentation added:",
+      "source": "docs/TRANSFORMATION.md",
+      "sources": [
+        "docs/TRANSFORMATION.md"
+      ]
+    },
+    {
+      "text": "documentation ecosystem",
+      "source": "COMPREHENSIVE_REPO_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_REPO_ANALYSIS.md",
+        "PR_CONFLICT_STATUS.md"
+      ]
+    },
+    {
+      "text": "dog care, resonating with your stepmom’s nurturing role",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Dog CEO API",
+      "source": "DATA_INGESTION_README.md",
+      "sources": [
+        "DATA_INGESTION_README.md"
+      ]
+    },
+    {
+      "text": "Dog Journey",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "dog-based comics but not daily delivery or calendar integration",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "easy, automated website translation",
+      "source": "ChatPRD/dogcal-schedule.md",
+      "sources": [
+        "ChatPRD/dogcal-schedule.md",
+        "docs/archive/dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "efficient collaboration and future growth",
+      "source": "docs/TRANSFORMATION.md",
+      "sources": [
+        "docs/TRANSFORMATION.md"
+      ]
+    },
+    {
+      "text": "efficient execution, including handling scopes and dynamic behaviors",
+      "source": "ChatPRD/Compiler-Design-Principles-and-Components.md",
+      "sources": [
+        "ChatPRD/Compiler-Design-Principles-and-Components.md",
+        "docs/technical/Compiler-Design-Principles-and-Components.md"
+      ]
+    },
+    {
+      "text": "Email service:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Emotional Engagement",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "END OF ROADMAP",
+      "source": "COMPREHENSIVE_ROADMAP.md",
+      "sources": [
+        "COMPREHENSIVE_ROADMAP.md"
+      ]
+    },
+    {
+      "text": "Enhancement Strategy",
+      "source": "docs/technical/DATA_INGESTION_PIPELINE.md",
+      "sources": [
+        "docs/technical/DATA_INGESTION_PIPELINE.md"
+      ]
+    },
+    {
+      "text": "Error boundary",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "Error Handling",
+      "source": "CONTRIBUTING.md",
+      "sources": [
+        "CONTRIBUTING.md"
+      ]
+    },
+    {
+      "text": "Error handling and retry logic",
+      "source": "DATA_INGESTION_README.md",
+      "sources": [
+        "DATA_INGESTION_README.md"
+      ]
+    },
+    {
+      "text": "ES6+ JavaScript",
+      "source": "CONTRIBUTING.md",
+      "sources": [
+        "CONTRIBUTING.md"
+      ]
+    },
+    {
+      "text": "Estimated Time to MVP:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "event additions and printing",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "expert advice:",
+      "source": "SESSION_2_SUMMARY.md",
+      "sources": [
+        "SESSION_2_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "Explanation of Features and Layouts",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "exporting calendars for reference",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Favorites per user:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Favorites system",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "feedback system",
+      "source": "ChatPRD/ChatPRD-AI-for-Product-Managers-AI-Product-Management-Support.md",
+      "sources": [
+        "ChatPRD/ChatPRD-AI-for-Product-Managers-AI-Product-Management-Support.md",
+        "docs/roadmap/ChatPRD-AI-for-Product-Managers-AI-Product-Management-Support.md"
+      ]
+    },
+    {
+      "text": "File watching system",
+      "source": "DATA_INGESTION_README.md",
+      "sources": [
+        "DATA_INGESTION_README.md"
+      ]
+    },
+    {
+      "text": "Files organized:",
+      "source": "docs/TRANSFORMATION.md",
+      "sources": [
+        "docs/TRANSFORMATION.md"
+      ]
+    },
+    {
+      "text": "Files removed:",
+      "source": "docs/TRANSFORMATION.md",
+      "sources": [
+        "docs/TRANSFORMATION.md"
+      ]
+    },
+    {
+      "text": "Final Timeline of Edits (Including New Flip Feature)",
+      "source": "ChatPRD/dogcalv1.md",
+      "sources": [
+        "ChatPRD/dogcalv1.md",
+        "docs/archive/dogcalv1.md"
+      ]
+    },
+    {
+      "text": "First journal entry",
+      "source": "CRITICAL_ANALYSIS.md",
+      "sources": [
+        "CRITICAL_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "fixes based on the provided code",
+      "source": "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+      "sources": [
+        "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+        "docs/technical/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md"
+      ]
+    },
+    {
+      "text": "for 1 month = ~10 hours",
+      "source": "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+      "sources": [
+        "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "docs/roadmap/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md"
+      ]
+    },
+    {
+      "text": "for custom dog + human images",
+      "source": "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+      "sources": [
+        "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "docs/roadmap/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md"
+      ]
+    },
+    {
+      "text": "for expandable features",
+      "source": "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+      "sources": [
+        "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "docs/roadmap/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md"
+      ]
+    },
+    {
+      "text": "for PMs | Reference for feature planning and agent context",
+      "source": "DOC_INDEX.md",
+      "sources": [
+        "DOC_INDEX.md"
+      ]
+    },
+    {
+      "text": "For questions or suggestions, please open an issue in this repository",
+      "source": "docs/PROJECT.md",
+      "sources": [
+        "docs/PROJECT.md"
+      ]
+    },
+    {
+      "text": "Free to paid conversion:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "free, customizable photo calendar templates where you can upload animal photos to create a yearly calendar",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Freshness monitoring",
+      "source": "DATA_INGESTION_README.md",
+      "sources": [
+        "DATA_INGESTION_README.md"
+      ]
+    },
+    {
+      "text": "Full Feature List",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Full Feature List for DogTale Daily",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Full Launch:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Fun Facts",
+      "source": "FEATURE_IMPLEMENTATION_SUMMARY.md",
+      "sources": [
+        "FEATURE_IMPLEMENTATION_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "Function Sprawl",
+      "source": "CHANGELOG.md",
+      "sources": [
+        "CHANGELOG.md"
+      ]
+    },
+    {
+      "text": "further assistance",
+      "source": "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+      "sources": [
+        "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+        "docs/technical/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md"
+      ]
+    },
+    {
+      "text": "Future Requirement",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "Game Design",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "Game Hub:",
+      "source": "COMPREHENSIVE_REPO_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_REPO_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Getting Help",
+      "source": ".github/SUPPORT.md",
+      "sources": [
+        ".github/SUPPORT.md"
+      ]
+    },
+    {
+      "text": "gifting subscriptions or printed calendars for holidays, mirroring your tradition",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Git history",
+      "source": "PR_CONFLICT_STATUS.md",
+      "sources": [
+        "PR_CONFLICT_STATUS.md"
+      ]
+    },
+    {
+      "text": "Goal Completion",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "guidelines and instructions for contributing to the project",
+      "source": "CONTRIBUTING.md",
+      "sources": [
+        "CONTRIBUTING.md"
+      ]
+    },
+    {
+      "text": "health tracking, and fosters community, all while being manageable for your coding level",
+      "source": "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+      "sources": [
+        "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/roadmap/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "High Priority Missing Features",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "High Value Features (Should Have)",
+      "source": "COMPREHENSIVE_REPO_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_REPO_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "high-contrast mode option",
+      "source": "CRITICAL_ANALYSIS.md",
+      "sources": [
+        "CRITICAL_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "HMR and dev tools",
+      "source": ".github/SECURITY.md",
+      "sources": [
+        ".github/SECURITY.md"
+      ]
+    },
+    {
+      "text": "iCal export (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Illustrated Milestones",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "Image caching (50 images, 7-day expiry) - src/utils/imageCache.js",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "Image Links",
+      "source": "docs/archive/README.md",
+      "sources": [
+        "docs/archive/README.md"
+      ]
+    },
+    {
+      "text": "Image Processing",
+      "source": "docs/technical/README.md",
+      "sources": [
+        "docs/technical/README.md"
+      ]
+    },
+    {
+      "text": "Image storage (Cloudinary):",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Image storage:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "image uploads for character integration and exports comics as PDFs or CBZs",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "implementations for these functions to resolve the errors and ensure the calendar functionality works as intended",
+      "source": "ChatPRD/Dog Calendar Fixing toggleFavorite and Invalid React Child Errors.md",
+      "sources": [
+        "ChatPRD/Dog Calendar Fixing toggleFavorite and Invalid React Child Errors.md",
+        "docs/technical/Dog Calendar Fixing toggleFavorite and Invalid React Child Errors.md"
+      ]
+    },
+    {
+      "text": "In Scope v1.0",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "instant, authentic social proof",
+      "source": "ChatPRD/The-Living-Document-System.md",
+      "sources": [
+        "ChatPRD/The-Living-Document-System.md",
+        "docs/roadmap/The-Living-Document-System.md"
+      ]
+    },
+    {
+      "text": "Integration with Current Design and Features",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Interactive Design Features",
+      "source": "docs/archive/DISTILLED-AI-Powered-Dog-Care-Schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-AI-Powered-Dog-Care-Schedule.md"
+      ]
+    },
+    {
+      "text": "Is Minimal ⚠️ HIGH",
+      "source": "CRITICAL_ANALYSIS.md",
+      "sources": [
+        "CRITICAL_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Issue Tracking:",
+      "source": "ECOSYSTEM_OVERVIEW.md",
+      "sources": [
+        "ECOSYSTEM_OVERVIEW.md"
+      ]
+    },
+    {
+      "text": "JavaScript/CSS for a selected system—let me know which",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Journal entries per week:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Journal entries with search & date filtering",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "JS/CSS for a selected expansion—let me know which",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "JS/CSS for a selected feature—let me know which",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "JS/CSS for a selected method—let me know which",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "JS/CSS to mock these—let me know which to start with",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Keep or remove?",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "Key Features",
+      "source": "BRANCH_MERGE_SUMMARY.md",
+      "sources": [
+        "BRANCH_MERGE_SUMMARY.md",
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/archive/DISTILLED-DogTale-Daily-Personalized-Dog-Calendar-App.md",
+        "docs/legacy/README.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Key Features (Planned)",
+      "source": "docs/PROJECT.md",
+      "sources": [
+        "docs/PROJECT.md"
+      ]
+    },
+    {
+      "text": "Key Features Discussed",
+      "source": "docs/archive/DISTILLED-dogcalv1.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcalv1.md"
+      ]
+    },
+    {
+      "text": "Keyboard shortcuts",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "Last major merge",
+      "source": "PR_CONFLICT_STATUS.md",
+      "sources": [
+        "PR_CONFLICT_STATUS.md"
+      ]
+    },
+    {
+      "text": "Last Updated",
+      "source": ".github/SECURITY.md",
+      "sources": [
+        ".github/SECURITY.md",
+        "docs/archive/SYNTHESIS.md"
+      ]
+    },
+    {
+      "text": "liking and commenting on posts",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Lines Added",
+      "source": "SESSION_2_SUMMARY.md",
+      "sources": [
+        "SESSION_2_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "Loading States",
+      "source": "CONTRIBUTING.md",
+      "sources": [
+        "CONTRIBUTING.md"
+      ]
+    },
+    {
+      "text": "localStorage persistence",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "main branch",
+      "source": "MERGE_RESOLUTION.md",
+      "sources": [
+        "MERGE_RESOLUTION.md"
+      ]
+    },
+    {
+      "text": "Main branch HEAD",
+      "source": "PR_CONFLICT_STATUS.md",
+      "sources": [
+        "PR_CONFLICT_STATUS.md"
+      ]
+    },
+    {
+      "text": "manual comic-style layouts",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "manual comic-style layouts with text",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Market Expansion",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "Marketplace Exploration:",
+      "source": "ROADMAP.md",
+      "sources": [
+        "ROADMAP.md"
+      ]
+    },
+    {
+      "text": "Max’s nutrition, aligning with your stepmom’s caregiving role",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "meaningful fallback UI",
+      "source": "docs/archive/DISTILLED-Interactive-Dog-Calendar-v2.md",
+      "sources": [
+        "docs/archive/DISTILLED-Interactive-Dog-Calendar-v2.md"
+      ]
+    },
+    {
+      "text": "Memorial Features",
+      "source": "MISSING_FEATURES_ANALYSIS.md",
+      "sources": [
+        "MISSING_FEATURES_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Merchandise (5% purchase):",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Merchandise orders:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Mergeable State",
+      "source": "PR_CONFLICT_STATUS.md",
+      "sources": [
+        "PR_CONFLICT_STATUS.md"
+      ]
+    },
+    {
+      "text": "Metadata Headers",
+      "source": "docs/archive/README.md",
+      "sources": [
+        "docs/archive/README.md"
+      ]
+    },
+    {
+      "text": "missing feature",
+      "source": "COMPREHENSIVE_REPO_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_REPO_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Modified Files",
+      "source": "SESSION_2_SUMMARY.md",
+      "sources": [
+        "SESSION_2_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "modular scanners",
+      "source": "ChatPRD/Compiler-Design-Principles-and-Components.md",
+      "sources": [
+        "ChatPRD/Compiler-Design-Principles-and-Components.md",
+        "docs/technical/Compiler-Design-Principles-and-Components.md"
+      ]
+    },
+    {
+      "text": "Month 2+: Future Features",
+      "source": "COMPREHENSIVE_ROADMAP.md",
+      "sources": [
+        "COMPREHENSIVE_ROADMAP.md"
+      ]
+    },
+    {
+      "text": "Month calendar view - src/components/calendar/MonthCalendar.jsx",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "monthly arcs, but daily panel generation isn’t automated",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Mood of the Day",
+      "source": "FEATURE_IMPLEMENTATION_SUMMARY.md",
+      "sources": [
+        "FEATURE_IMPLEMENTATION_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "MRR (Monthly Recurring Revenue):",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "multiple dog profiles",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "MVP Feature Set",
+      "source": "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+      "sources": [
+        "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "docs/roadmap/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md"
+      ]
+    },
+    {
+      "text": "narrative arc through app feature",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "navigation (previous/next day) with left/right arrows",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Need Help?",
+      "source": "DATA_INGESTION_README.md",
+      "sources": [
+        "DATA_INGESTION_README.md"
+      ]
+    },
+    {
+      "text": "new feature",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "New Files",
+      "source": "SESSION_2_SUMMARY.md",
+      "sources": [
+        "SESSION_2_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "Next Step:",
+      "source": "COMPREHENSIVE_REPO_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_REPO_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "No Console Logs",
+      "source": "CONTRIBUTING.md",
+      "sources": [
+        "CONTRIBUTING.md"
+      ]
+    },
+    {
+      "text": "No external state library",
+      "source": "FEATURE_IMPLEMENTATION_SUMMARY.md",
+      "sources": [
+        "FEATURE_IMPLEMENTATION_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "None identified",
+      "source": "SESSION_2_SUMMARY.md",
+      "sources": [
+        "SESSION_2_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "NOT RELATED",
+      "source": "COMPREHENSIVE_REPO_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_REPO_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Notifications & Integrations:",
+      "source": "ROADMAP.md",
+      "sources": [
+        "ROADMAP.md"
+      ]
+    },
+    {
+      "text": "notifications toggle",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "only 2 cards flipped at a time",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "only required API endpoints",
+      "source": ".github/SECURITY.md",
+      "sources": [
+        ".github/SECURITY.md"
+      ]
+    },
+    {
+      "text": "OS-Agents (Ops Collective):",
+      "source": "AGENT_ORCHESTRATION.md",
+      "sources": [
+        "AGENT_ORCHESTRATION.md"
+      ]
+    },
+    {
+      "text": "Out of Scope v1.0",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "Overall Feel",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "Parallax Effect",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "paywall for premium feature",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "personalized dog content every day",
+      "source": "docs/PROJECT.md",
+      "sources": [
+        "docs/PROJECT.md"
+      ]
+    },
+    {
+      "text": "personalized motivation and feedback",
+      "source": "docs/archive/DISTILLED-AI-Powered-Dog-Care-Schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-AI-Powered-Dog-Care-Schedule.md"
+      ]
+    },
+    {
+      "text": "Personalized Scheduling Engine:",
+      "source": "ROADMAP.md",
+      "sources": [
+        "ROADMAP.md"
+      ]
+    },
+    {
+      "text": "Phase 1: Core Missing Features (Week 1-2)",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "Phase 1: Critical Features (Week 1-2)",
+      "source": "COMPREHENSIVE_REPO_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_REPO_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Phase 2 — Feature Delivery (Weeks 5-10)",
+      "source": "ROADMAP.md",
+      "sources": [
+        "ROADMAP.md"
+      ]
+    },
+    {
+      "text": "Phase 2 Features",
+      "source": "docs/technical/DATA_INGESTION_PIPELINE.md",
+      "sources": [
+        "docs/technical/DATA_INGESTION_PIPELINE.md"
+      ]
+    },
+    {
+      "text": "Phase 3: Feature Expansion",
+      "source": "docs/archive/SYNTHESIS.md",
+      "sources": [
+        "docs/archive/SYNTHESIS.md"
+      ]
+    },
+    {
+      "text": "Phase 3: Feature Expansion (AI-Powered Schedule)",
+      "source": "docs/archive/README.md",
+      "sources": [
+        "docs/archive/README.md"
+      ]
+    },
+    {
+      "text": "photo upload feature",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "photo upload system",
+      "source": "docs/archive/SYNTHESIS.md",
+      "sources": [
+        "docs/archive/SYNTHESIS.md"
+      ]
+    },
+    {
+      "text": "Photo uploads per user:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "photo-to-comic conversion and narrative creation, which aligns with your dog photo upload concept",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "potential feature reuse",
+      "source": "docs/legacy/README.md",
+      "sources": [
+        "docs/legacy/README.md"
+      ]
+    },
+    {
+      "text": "PR 14 to proceed as draft",
+      "source": "PR_CONFLICT_STATUS.md",
+      "sources": [
+        "PR_CONFLICT_STATUS.md"
+      ]
+    },
+    {
+      "text": "precise blueprint of feature",
+      "source": "ChatPRD/dogcal-schedule.md",
+      "sources": [
+        "ChatPRD/dogcal-schedule.md",
+        "docs/archive/dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "precise, verifiable translation from source code (a string in a formal language) to machine code, while addressing computability, decidability, and complexity",
+      "source": "ChatPRD/Compiler-Design-Principles-and-Components.md",
+      "sources": [
+        "ChatPRD/Compiler-Design-Principles-and-Components.md",
+        "docs/technical/Compiler-Design-Principles-and-Components.md"
+      ]
+    },
+    {
+      "text": "Premium subscriptions (5% conversion):",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Preserved Data",
+      "source": "BRANCH_MERGE_SUMMARY.md",
+      "sources": [
+        "BRANCH_MERGE_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "Preserved Files",
+      "source": "BRANCH_MERGE_SUMMARY.md",
+      "sources": [
+        "BRANCH_MERGE_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "printable calendar gifts with 12 monthly images or all 365 days",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Printable calendars:",
+      "source": "COMPREHENSIVE_REPO_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_REPO_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Product Features",
+      "source": "docs/archive/README.md",
+      "sources": [
+        "docs/archive/README.md"
+      ]
+    },
+    {
+      "text": "Profanity Filter",
+      "source": "DATA_INGESTION_README.md",
+      "sources": [
+        "DATA_INGESTION_README.md"
+      ]
+    },
+    {
+      "text": "Profile Design",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "Progression System",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "Props Flow",
+      "source": "FEATURE_IMPLEMENTATION_SUMMARY.md",
+      "sources": [
+        "FEATURE_IMPLEMENTATION_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "Q&A Format",
+      "source": "docs/archive/README.md",
+      "sources": [
+        "docs/archive/README.md"
+      ]
+    },
+    {
+      "text": "Quality Gates:",
+      "source": "ROADMAP.md",
+      "sources": [
+        "ROADMAP.md"
+      ]
+    },
+    {
+      "text": "Rate Limits",
+      "source": "docs/technical/DATA_INGESTION_PIPELINE.md",
+      "sources": [
+        "docs/technical/DATA_INGESTION_PIPELINE.md"
+      ]
+    },
+    {
+      "text": "React Hooks",
+      "source": "CONTRIBUTING.md",
+      "sources": [
+        "CONTRIBUTING.md",
+        "FEATURE_IMPLEMENTATION_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "React Native",
+      "source": "docs/archive/SYNTHESIS.md",
+      "sources": [
+        "docs/archive/SYNTHESIS.md"
+      ]
+    },
+    {
+      "text": "React Native + WebGL",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "README files added:",
+      "source": "docs/TRANSFORMATION.md",
+      "sources": [
+        "docs/TRANSFORMATION.md"
+      ]
+    },
+    {
+      "text": "Ready to build what matters?",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "realistic feature",
+      "source": "COMPREHENSIVE_REPO_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_REPO_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "reasonable accuracy",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "recovery mechanisms, such as panic-mode parsing (skipping to synchronizing tokens defined by regular sets) or error productions in CFGs, ensuring continued recognition despite local undecidability (e",
+      "source": "ChatPRD/Compiler-Design-Principles-and-Components.md",
+      "sources": [
+        "ChatPRD/Compiler-Design-Principles-and-Components.md",
+        "docs/technical/Compiler-Design-Principles-and-Components.md"
+      ]
+    },
+    {
+      "text": "Registered users:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Repository state",
+      "source": "PR_CONFLICT_STATUS.md",
+      "sources": [
+        "PR_CONFLICT_STATUS.md"
+      ]
+    },
+    {
+      "text": "Requirement Harmonization:",
+      "source": "ROADMAP.md",
+      "sources": [
+        "ROADMAP.md"
+      ]
+    },
+    {
+      "text": "Responsive design",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "Retention D30:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Retention D7:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "reusable modules (e",
+      "source": "ChatPRD/Compiler-Design-Principles-and-Components.md",
+      "sources": [
+        "ChatPRD/Compiler-Design-Principles-and-Components.md",
+        "docs/technical/Compiler-Design-Principles-and-Components.md"
+      ]
+    },
+    {
+      "text": "revisiting or sharing the full narrative",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Reward Moments",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "Role-switching (dog as human, human as dog)",
+      "source": "COMPREHENSIVE_REPO_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_REPO_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "role-switching via custom prompts, none have a dedicated feature to automatically morph human and dog roles in a humorous, narrative-driven way (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "role-switching via prompts (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "scheduling of video playdates where owners can connect their dogs (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "score based on speed and accuracy",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "search functionality",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Security Vulnerabilities:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Sensitive Features:",
+      "source": "CRITICAL_ANALYSIS.md",
+      "sources": [
+        "CRITICAL_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Settings panel with cache management",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "sharing and gifting subscriptions or printed calendars",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "sharing daily content and gifting subscriptions or printed calendars, tying to your Christmas tradition",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "sharing daily images, animations, or game scores to X or other platforms with a single tap",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "sharing individual outputs but don’t foster a community around daily pet comics or encourage user interaction (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Signature Interactions",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "Social Hub Beta:",
+      "source": "ROADMAP.md",
+      "sources": [
+        "ROADMAP.md"
+      ]
+    },
+    {
+      "text": "Social shares per week:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Source Control:",
+      "source": "ECOSYSTEM_OVERVIEW.md",
+      "sources": [
+        "ECOSYSTEM_OVERVIEW.md"
+      ]
+    },
+    {
+      "text": "specific CSS/JS snippets—let me know which to focus on",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Sprint 2 (Week 2): UX & Features",
+      "source": "COMPREHENSIVE_ROADMAP.md",
+      "sources": [
+        "COMPREHENSIVE_ROADMAP.md"
+      ]
+    },
+    {
+      "text": "Statistics dashboard",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "Strategic Planning",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "sublinear preprocessing but limit nesting, while CFLs enable recursion but risk exponential parsing in ambiguous grammars (mitigated by determinization)",
+      "source": "ChatPRD/Compiler-Design-Principles-and-Components.md",
+      "sources": [
+        "ChatPRD/Compiler-Design-Principles-and-Components.md",
+        "docs/technical/Compiler-Design-Principles-and-Components.md"
+      ]
+    },
+    {
+      "text": "switching between dog and cat modes, broadening appeal but focusing on your dog-centric tradition",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "syncing of key dates (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "tabbed interface for AI feature",
+      "source": "docs/archive/DISTILLED-dogcalv1.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcalv1.md"
+      ]
+    },
+    {
+      "text": "Tamagotchi Features",
+      "source": "MISSING_FEATURES_ANALYSIS.md",
+      "sources": [
+        "MISSING_FEATURES_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "tangible proof of an active community and project",
+      "source": "ChatPRD/The-Living-Document-System.md",
+      "sources": [
+        "ChatPRD/The-Living-Document-System.md",
+        "docs/roadmap/The-Living-Document-System.md"
+      ]
+    },
+    {
+      "text": "Task 2.2: Journal Feature",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Tech Stack:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Technical Note",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "Technical Spike:",
+      "source": "ROADMAP.md",
+      "sources": [
+        "ROADMAP.md"
+      ]
+    },
+    {
+      "text": "Technical Validation",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "Test Coverage:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "The Cat API",
+      "source": "DATA_INGESTION_README.md",
+      "sources": [
+        "DATA_INGESTION_README.md"
+      ]
+    },
+    {
+      "text": "the code for the \\DogTearOffCalendar\\ component or describe what the application does, I can offer more targeted advice",
+      "source": "ChatPRD/Interactive Dog Calendar v2.md",
+      "sources": [
+        "ChatPRD/Interactive Dog Calendar v2.md",
+        "docs/archive/Interactive Dog Calendar v2.md"
+      ]
+    },
+    {
+      "text": "the code for the DogTearOffCalendar component or describe what the application does, I can offer more targeted advice",
+      "source": "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+      "sources": [
+        "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+        "docs/technical/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md"
+      ]
+    },
+    {
+      "text": "the high-level vision, scope, and documentation structure for a new mobile application for dog owners",
+      "source": "ChatPRD/dogcal-schedule.md",
+      "sources": [
+        "ChatPRD/dogcal-schedule.md",
+        "docs/archive/dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "the mathematical backbone for compiler design, rooted in concepts from automata theory, grammars, and the Chomsky hierarchy",
+      "source": "ChatPRD/Compiler-Design-Principles-and-Components.md",
+      "sources": [
+        "ChatPRD/Compiler-Design-Principles-and-Components.md",
+        "docs/technical/Compiler-Design-Principles-and-Components.md"
+      ]
+    },
+    {
+      "text": "the recognition machinery—e",
+      "source": "ChatPRD/Compiler-Design-Principles-and-Components.md",
+      "sources": [
+        "ChatPRD/Compiler-Design-Principles-and-Components.md",
+        "docs/technical/Compiler-Design-Principles-and-Components.md"
+      ]
+    },
+    {
+      "text": "the updated \"Interactive Dog Calendar",
+      "source": "ChatPRD/Dog Calendar Fixing toggleFavorite and Invalid React Child Errors.md",
+      "sources": [
+        "ChatPRD/Dog Calendar Fixing toggleFavorite and Invalid React Child Errors.md",
+        "docs/technical/Dog Calendar Fixing toggleFavorite and Invalid React Child Errors.md"
+      ]
+    },
+    {
+      "text": "theme selection (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "theme selector component",
+      "source": "CONTRIBUTING.md",
+      "sources": [
+        "CONTRIBUTING.md"
+      ]
+    },
+    {
+      "text": "these functions inside the DogTearOffCalendar component",
+      "source": "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+      "sources": [
+        "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+        "docs/technical/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md"
+      ]
+    },
+    {
+      "text": "this function inside the DogTearOffCalendar component",
+      "source": "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+      "sources": [
+        "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+        "docs/technical/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md"
+      ]
+    },
+    {
+      "text": "this, respecting your coding limitations",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "thread title, metadata, frontmatter, prompt/response table of contents, suggested organizational structure, and uniqueID",
+      "source": "ChatPRD/Dog Calendar Fixing toggleFavorite and Invalid React Child Errors.md",
+      "sources": [
+        "ChatPRD/Dog Calendar Fixing toggleFavorite and Invalid React Child Errors.md",
+        "docs/technical/Dog Calendar Fixing toggleFavorite and Invalid React Child Errors.md"
+      ]
+    },
+    {
+      "text": "TIER 2: Core Feature Implementation (MVP)",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "TIER 3: Engagement Features (Phase 2)",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "TIER 4: Health & Utility Features (Phase 3)",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "TIER 5: Community Features (Phase 4)",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Time in app per session:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Total New Code",
+      "source": "FEATURE_IMPLEMENTATION_SUMMARY.md",
+      "sources": [
+        "FEATURE_IMPLEMENTATION_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "Total potential:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Total Tasks Identified:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Total vulnerabilities",
+      "source": ".github/SECURITY.md",
+      "sources": [
+        ".github/SECURITY.md"
+      ]
+    },
+    {
+      "text": "Transformation Date:",
+      "source": "docs/TRANSFORMATION.md",
+      "sources": [
+        "docs/TRANSFORMATION.md"
+      ]
+    },
+    {
+      "text": "Unique Content",
+      "source": "BRANCH_MERGE_SUMMARY.md",
+      "sources": [
+        "BRANCH_MERGE_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "Update Frequency",
+      "source": "docs/technical/DATA_INGESTION_PIPELINE.md",
+      "sources": [
+        "docs/technical/DATA_INGESTION_PIPELINE.md"
+      ]
+    },
+    {
+      "text": "uploading 3–5 dog photos and 1 human photo, previewed in a thumbnail grid, saved for all content",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "uploading 3–5 photos of the user’s dog and 1 optional human photo for customization",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "us to see the patterns in what you're drawn to and create a precise blueprint of features and styles for the Dog App project",
+      "source": "ChatPRD/dogcal-schedule.md",
+      "sources": [
+        "ChatPRD/dogcal-schedule.md",
+        "docs/archive/dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "user-friendly error messages",
+      "source": "docs/archive/SYNTHESIS.md",
+      "sources": [
+        "docs/archive/SYNTHESIS.md"
+      ]
+    },
+    {
+      "text": "User-generated content:",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "users to compile monthly arc covers into a printable calendar for gifting, preserving your mom’s tradition",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "users to contribute sentences to a community story (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "users to exchange digital or physical gifts (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "users to export key comic events (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "users to input their dog’s name, breed, age, favorite toy, and personality traits (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "users to log daily activities (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "users to save panels as a monthly comic book PDF or share them on social media",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "users to schedule vet visits (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "users to set a monthly theme or let the AI suggest one based on initial photo analysis",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "users to share their daily content to the feed",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "users to upload 1–3 dog photos (and optional human photos) for consistent characters",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "users to upload 1–3 dog photos and optionally a human photo for role-switching",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "users to upload and view a gallery of their dogs’ photos, tagged with themes or milestones (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "users to upload dog and human photos for personalization",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "users to upload dog and human photos for personalized comics, making the app a sentimental gift, like your Christmas tradition",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "users to upload dog and human photos for personalized content, essential for your stepmom’s idea",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "users to upload one human photo alongside dog photos for role-switching",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "verbose logging:",
+      "source": "DATA_INGESTION_README.md",
+      "sources": [
+        "DATA_INGESTION_README.md"
+      ]
+    },
+    {
+      "text": "Version Control",
+      "source": "CHANGELOG.md",
+      "sources": [
+        "CHANGELOG.md",
+        "docs/technical/DATA_INGESTION_PIPELINE.md"
+      ]
+    },
+    {
+      "text": "Vet Visit Scheduling Feature",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "vet visits",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "vet visits; events include health fairs",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "video tutorials for key feature",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Video/Animated Hub:",
+      "source": "COMPREHENSIVE_REPO_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_REPO_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Vision Statement",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "Visual Benchmark",
+      "source": "docs/archive/DISTILLED-dogcal-schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "visual help",
+      "source": "SESSION_2_SUMMARY.md",
+      "sources": [
+        "SESSION_2_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "voice input (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Week 4-5 (Engagement Features)",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "What I built:",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "Why it was wrong:",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "Why localStorage?",
+      "source": "FEATURE_IMPLEMENTATION_SUMMARY.md",
+      "sources": [
+        "FEATURE_IMPLEMENTATION_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "Why no Context API?",
+      "source": "FEATURE_IMPLEMENTATION_SUMMARY.md",
+      "sources": [
+        "FEATURE_IMPLEMENTATION_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "Why not needed:",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "Why rule-based AI?",
+      "source": "FEATURE_IMPLEMENTATION_SUMMARY.md",
+      "sources": [
+        "FEATURE_IMPLEMENTATION_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "Why seeded random?",
+      "source": "FEATURE_IMPLEMENTATION_SUMMARY.md",
+      "sources": [
+        "FEATURE_IMPLEMENTATION_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "with proper formatting",
+      "source": "SESSION_2_SUMMARY.md",
+      "sources": [
+        "SESSION_2_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "XSS Protection",
+      "source": "DATA_INGESTION_README.md",
+      "sources": [
+        "DATA_INGESTION_README.md"
+      ]
+    },
+    {
+      "text": "you to create a visually striking pet calendar, similar to the thematic appeal of firefighter calendars",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "you to create custom 2025 photo calendars with animal pictures, offering wall, desk, and other formats",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "you to create personalized photo calendars with your animal pictures and either integrate with or export to standard digital calendars for scheduling",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "you to upload animal photos and create custom yearly calendars, with some offering digital calendar syncing or export options to link with standard calendar apps like those used for scheduling (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "your approval (by indicating \"Yes\" or \"No\" for each item), I will proceed with modifying the code to implement the approved edits",
+      "source": "ChatPRD/dogcalv1.md",
+      "sources": [
+        "ChatPRD/dogcalv1.md",
+        "docs/archive/dogcalv1.md"
+      ]
+    },
+    {
+      "text": "your approval for each item",
+      "source": "ChatPRD/dogcalv1.md",
+      "sources": [
+        "ChatPRD/dogcalv1.md",
+        "docs/archive/dogcalv1.md"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "AiModal",
+      "source": "src/components/modals/AiModal.jsx",
+      "sources": [
+        "src/components/modals/AiModal.jsx"
+      ]
+    },
+    {
+      "name": "App",
+      "source": "src/App.jsx",
+      "sources": [
+        "src/App.jsx"
+      ]
+    },
+    {
+      "name": "cacheImage",
+      "source": "src/utils/imageCache.js",
+      "sources": [
+        "src/utils/imageCache.js"
+      ]
+    },
+    {
+      "name": "CalendarCard",
+      "source": "src/components/calendar/CalendarCard.jsx",
+      "sources": [
+        "src/components/calendar/CalendarCard.jsx"
+      ]
+    },
+    {
+      "name": "capitalize",
+      "source": "src/services/breedDataIngestion.js",
+      "sources": [
+        "src/services/breedDataIngestion.js"
+      ]
+    },
+    {
+      "name": "checkBreedDataFreshness",
+      "source": "src/utils/dataFreshness.js",
+      "sources": [
+        "src/utils/dataFreshness.js"
+      ]
+    },
+    {
+      "name": "checkCacheFreshness",
+      "source": "src/utils/dataFreshness.js",
+      "sources": [
+        "src/utils/dataFreshness.js"
+      ]
+    },
+    {
+      "name": "checkDocumentFreshness",
+      "source": "src/utils/dataFreshness.js",
+      "sources": [
+        "src/utils/dataFreshness.js"
+      ]
+    },
+    {
+      "name": "clearCache",
+      "source": "src/utils/imageCache.js",
+      "sources": [
+        "src/utils/imageCache.js"
+      ]
+    },
+    {
+      "name": "clearOldestEntries",
+      "source": "src/utils/imageCache.js",
+      "sources": [
+        "src/utils/imageCache.js"
+      ]
+    },
+    {
+      "name": "DateNavigation",
+      "source": "src/components/calendar/DateNavigation.jsx",
+      "sources": [
+        "src/components/calendar/DateNavigation.jsx"
+      ]
+    },
+    {
+      "name": "disableDarkMode",
+      "source": "src/hooks/useDarkMode.js",
+      "sources": [
+        "src/hooks/useDarkMode.js"
+      ]
+    },
+    {
+      "name": "enableDarkMode",
+      "source": "src/hooks/useDarkMode.js",
+      "sources": [
+        "src/hooks/useDarkMode.js"
+      ]
+    },
+    {
+      "name": "FavoritesModal",
+      "source": "src/components/modals/FavoritesModal.jsx",
+      "sources": [
+        "src/components/modals/FavoritesModal.jsx"
+      ]
+    },
+    {
+      "name": "fetchAllBreeds",
+      "source": "src/services/breedDataIngestion.js",
+      "sources": [
+        "src/services/breedDataIngestion.js"
+      ]
+    },
+    {
+      "name": "fetchCatBreeds",
+      "source": "src/services/breedDataIngestion.js",
+      "sources": [
+        "src/services/breedDataIngestion.js"
+      ]
+    },
+    {
+      "name": "fetchDogBreedImages",
+      "source": "src/services/breedDataIngestion.js",
+      "sources": [
+        "src/services/breedDataIngestion.js"
+      ]
+    },
+    {
+      "name": "fetchDogBreeds",
+      "source": "src/services/breedDataIngestion.js",
+      "sources": [
+        "src/services/breedDataIngestion.js"
+      ]
+    },
+    {
+      "name": "fetchWithRetry",
+      "source": "src/services/breedDataIngestion.js",
+      "sources": [
+        "src/services/breedDataIngestion.js"
+      ]
+    },
+    {
+      "name": "findDuplicates",
+      "source": "src/utils/dataValidation.js",
+      "sources": [
+        "src/utils/dataValidation.js"
+      ]
+    },
+    {
+      "name": "formatAge",
+      "source": "src/utils/dataFreshness.js",
+      "sources": [
+        "src/utils/dataFreshness.js"
+      ]
+    },
+    {
+      "name": "formatDate",
+      "source": "src/components/calendar/CalendarCard.jsx",
+      "sources": [
+        "src/components/calendar/CalendarCard.jsx",
+        "src/components/modals/FavoritesModal.jsx",
+        "src/components/modals/JournalModal.jsx",
+        "src/components/modals/StatisticsModal.jsx"
+      ]
+    },
+    {
+      "name": "formatMonthYear",
+      "source": "src/components/calendar/MonthCalendar.jsx",
+      "sources": [
+        "src/components/calendar/MonthCalendar.jsx"
+      ]
+    },
+    {
+      "name": "generateAiResponse",
+      "source": "src/components/modals/AiModal.jsx",
+      "sources": [
+        "src/components/modals/AiModal.jsx"
+      ]
+    },
+    {
+      "name": "getAllDailyContent",
+      "source": "src/utils/dailyContent.js",
+      "sources": [
+        "src/utils/dailyContent.js"
+      ]
+    },
+    {
+      "name": "getBreedDataStats",
+      "source": "src/services/breedDataIngestion.js",
+      "sources": [
+        "src/services/breedDataIngestion.js"
+      ]
+    },
+    {
+      "name": "getBreedInfo",
+      "source": "src/utils/breedKnowledge.js",
+      "sources": [
+        "src/utils/breedKnowledge.js"
+      ]
+    },
+    {
+      "name": "getBreedSpecificResponse",
+      "source": "src/utils/breedKnowledge.js",
+      "sources": [
+        "src/utils/breedKnowledge.js"
+      ]
+    },
+    {
+      "name": "getCache",
+      "source": "src/utils/imageCache.js",
+      "sources": [
+        "src/utils/imageCache.js"
+      ]
+    },
+    {
+      "name": "getCachedImage",
+      "source": "src/utils/imageCache.js",
+      "sources": [
+        "src/utils/imageCache.js"
+      ]
+    },
+    {
+      "name": "getCacheStats",
+      "source": "src/utils/imageCache.js",
+      "sources": [
+        "src/utils/imageCache.js"
+      ]
+    },
+    {
+      "name": "getDailyFact",
+      "source": "src/utils/dailyContent.js",
+      "sources": [
+        "src/utils/dailyContent.js"
+      ]
+    },
+    {
+      "name": "getDailyMood",
+      "source": "src/utils/dailyContent.js",
+      "sources": [
+        "src/utils/dailyContent.js"
+      ]
+    },
+    {
+      "name": "getDailyQuote",
+      "source": "src/utils/dailyContent.js",
+      "sources": [
+        "src/utils/dailyContent.js"
+      ]
+    },
+    {
+      "name": "getDataAge",
+      "source": "src/utils/dataFreshness.js",
+      "sources": [
+        "src/utils/dataFreshness.js"
+      ]
+    },
+    {
+      "name": "getDateKey",
+      "source": "src/utils/imageCache.js",
+      "sources": [
+        "src/utils/imageCache.js"
+      ]
+    },
+    {
+      "name": "getDateSeed",
+      "source": "src/utils/dailyContent.js",
+      "sources": [
+        "src/utils/dailyContent.js"
+      ]
+    },
+    {
+      "name": "getFreshnessStatus",
+      "source": "src/utils/dataFreshness.js",
+      "sources": [
+        "src/utils/dataFreshness.js"
+      ]
+    },
+    {
+      "name": "getNextRefreshDate",
+      "source": "src/utils/dataFreshness.js",
+      "sources": [
+        "src/utils/dataFreshness.js"
+      ]
+    },
+    {
+      "name": "getOverallHealth",
+      "source": "src/utils/dataFreshness.js",
+      "sources": [
+        "src/utils/dataFreshness.js"
+      ]
+    },
+    {
+      "name": "getRefreshInterval",
+      "source": "src/utils/dataFreshness.js",
+      "sources": [
+        "src/utils/dataFreshness.js"
+      ]
+    },
+    {
+      "name": "getStatusMessage",
+      "source": "src/utils/dataFreshness.js",
+      "sources": [
+        "src/utils/dataFreshness.js"
+      ]
+    },
+    {
+      "name": "getWelcomeMessage",
+      "source": "src/components/modals/AiModal.jsx",
+      "sources": [
+        "src/components/modals/AiModal.jsx"
+      ]
+    },
+    {
+      "name": "goToNextDay",
+      "source": "src/components/calendar/DateNavigation.jsx",
+      "sources": [
+        "src/components/calendar/DateNavigation.jsx"
+      ]
+    },
+    {
+      "name": "goToPreviousDay",
+      "source": "src/components/calendar/DateNavigation.jsx",
+      "sources": [
+        "src/components/calendar/DateNavigation.jsx"
+      ]
+    },
+    {
+      "name": "goToToday",
+      "source": "src/components/calendar/DateNavigation.jsx",
+      "sources": [
+        "src/components/calendar/DateNavigation.jsx"
+      ]
+    },
+    {
+      "name": "handleAddFavorite",
+      "source": "src/App.jsx",
+      "sources": [
+        "src/App.jsx"
+      ]
+    },
+    {
+      "name": "handleAiClick",
+      "source": "src/App.jsx",
+      "sources": [
+        "src/App.jsx"
+      ]
+    },
+    {
+      "name": "handleChange",
+      "source": "src/components/modals/JournalModal.jsx",
+      "sources": [
+        "src/components/modals/JournalModal.jsx",
+        "src/components/modals/SettingsModal.jsx",
+        "src/hooks/useDarkMode.js"
+      ]
+    },
+    {
+      "name": "handleClear",
+      "source": "src/components/modals/JournalModal.jsx",
+      "sources": [
+        "src/components/modals/JournalModal.jsx"
+      ]
+    },
+    {
+      "name": "handleClearAllClick",
+      "source": "src/components/modals/FavoritesModal.jsx",
+      "sources": [
+        "src/components/modals/FavoritesModal.jsx"
+      ]
+    },
+    {
+      "name": "handleClearAllData",
+      "source": "src/components/modals/SettingsModal.jsx",
+      "sources": [
+        "src/components/modals/SettingsModal.jsx"
+      ]
+    },
+    {
+      "name": "handleClearAllFavorites",
+      "source": "src/App.jsx",
+      "sources": [
+        "src/App.jsx"
+      ]
+    },
+    {
+      "name": "handleClearCache",
+      "source": "src/components/modals/SettingsModal.jsx",
+      "sources": [
+        "src/components/modals/SettingsModal.jsx"
+      ]
+    },
+    {
+      "name": "handleClearChat",
+      "source": "src/components/modals/AiModal.jsx",
+      "sources": [
+        "src/components/modals/AiModal.jsx"
+      ]
+    },
+    {
+      "name": "handleCycleTheme",
+      "source": "src/App.jsx",
+      "sources": [
+        "src/App.jsx"
+      ]
+    },
+    {
+      "name": "handleDateClick",
+      "source": "src/components/calendar/MonthCalendar.jsx",
+      "sources": [
+        "src/components/calendar/MonthCalendar.jsx"
+      ]
+    },
+    {
+      "name": "handleEscape",
+      "source": "src/components/modals/Modal.jsx",
+      "sources": [
+        "src/components/modals/Modal.jsx"
+      ]
+    },
+    {
+      "name": "handleExport",
+      "source": "src/components/modals/JournalModal.jsx",
+      "sources": [
+        "src/components/modals/JournalModal.jsx"
+      ]
+    },
+    {
+      "name": "handleExportText",
+      "source": "src/components/modals/JournalModal.jsx",
+      "sources": [
+        "src/components/modals/JournalModal.jsx"
+      ]
+    },
+    {
+      "name": "handleFavoriteClick",
+      "source": "src/components/calendar/CalendarCard.jsx",
+      "sources": [
+        "src/components/calendar/CalendarCard.jsx"
+      ]
+    },
+    {
+      "name": "handleFavoritesClick",
+      "source": "src/App.jsx",
+      "sources": [
+        "src/App.jsx"
+      ]
+    },
+    {
+      "name": "handleJournalClick",
+      "source": "src/App.jsx",
+      "sources": [
+        "src/App.jsx"
+      ]
+    },
+    {
+      "name": "handleKeyDown",
+      "source": "src/hooks/useKeyboardShortcuts.js",
+      "sources": [
+        "src/hooks/useKeyboardShortcuts.js"
+      ]
+    },
+    {
+      "name": "handleKeyPress",
+      "source": "src/components/modals/AiModal.jsx",
+      "sources": [
+        "src/components/modals/AiModal.jsx"
+      ]
+    },
+    {
+      "name": "handleNextDay",
+      "source": "src/App.jsx",
+      "sources": [
+        "src/App.jsx"
+      ]
+    },
+    {
+      "name": "handleNextMonth",
+      "source": "src/components/calendar/MonthCalendar.jsx",
+      "sources": [
+        "src/components/calendar/MonthCalendar.jsx"
+      ]
+    },
+    {
+      "name": "handlePreviousDay",
+      "source": "src/App.jsx",
+      "sources": [
+        "src/App.jsx"
+      ]
+    },
+    {
+      "name": "handlePrevMonth",
+      "source": "src/components/calendar/MonthCalendar.jsx",
+      "sources": [
+        "src/components/calendar/MonthCalendar.jsx"
+      ]
+    },
+    {
+      "name": "handleRemoveFavorite",
+      "source": "src/App.jsx",
+      "sources": [
+        "src/App.jsx"
+      ]
+    },
+    {
+      "name": "handleReset",
+      "source": "src/components/modals/SettingsModal.jsx",
+      "sources": [
+        "src/components/modals/SettingsModal.jsx"
+      ]
+    },
+    {
+      "name": "handleSave",
+      "source": "src/components/modals/SettingsModal.jsx",
+      "sources": [
+        "src/components/modals/SettingsModal.jsx"
+      ]
+    },
+    {
+      "name": "handleSettingsChange",
+      "source": "src/App.jsx",
+      "sources": [
+        "src/App.jsx"
+      ]
+    },
+    {
+      "name": "handleSuggestionClick",
+      "source": "src/components/modals/AiModal.jsx",
+      "sources": [
+        "src/components/modals/AiModal.jsx"
+      ]
+    },
+    {
+      "name": "handleToday",
+      "source": "src/App.jsx",
+      "sources": [
+        "src/App.jsx",
+        "src/components/calendar/MonthCalendar.jsx"
+      ]
+    },
+    {
+      "name": "hasFavorite",
+      "source": "src/components/calendar/MonthCalendar.jsx",
+      "sources": [
+        "src/components/calendar/MonthCalendar.jsx"
+      ]
+    },
+    {
+      "name": "hasJournalEntry",
+      "source": "src/components/calendar/MonthCalendar.jsx",
+      "sources": [
+        "src/components/calendar/MonthCalendar.jsx"
+      ]
+    },
+    {
+      "name": "highlightText",
+      "source": "src/components/modals/JournalModal.jsx",
+      "sources": [
+        "src/components/modals/JournalModal.jsx"
+      ]
+    },
+    {
+      "name": "isCacheFull",
+      "source": "src/utils/imageCache.js",
+      "sources": [
+        "src/utils/imageCache.js"
+      ]
+    },
+    {
+      "name": "isFamilyFriendly",
+      "source": "src/utils/dataValidation.js",
+      "sources": [
+        "src/utils/dataValidation.js"
+      ]
+    },
+    {
+      "name": "isFuture",
+      "source": "src/components/calendar/DateNavigation.jsx",
+      "sources": [
+        "src/components/calendar/DateNavigation.jsx",
+        "src/components/calendar/MonthCalendar.jsx"
+      ]
+    },
+    {
+      "name": "isSelected",
+      "source": "src/components/calendar/MonthCalendar.jsx",
+      "sources": [
+        "src/components/calendar/MonthCalendar.jsx"
+      ]
+    },
+    {
+      "name": "isStale",
+      "source": "src/utils/dataFreshness.js",
+      "sources": [
+        "src/utils/dataFreshness.js"
+      ]
+    },
+    {
+      "name": "isToday",
+      "source": "src/components/calendar/DateNavigation.jsx",
+      "sources": [
+        "src/components/calendar/DateNavigation.jsx",
+        "src/components/calendar/MonthCalendar.jsx"
+      ]
+    },
+    {
+      "name": "JournalModal",
+      "source": "src/components/modals/JournalModal.jsx",
+      "sources": [
+        "src/components/modals/JournalModal.jsx"
+      ]
+    },
+    {
+      "name": "KeyBadge",
+      "source": "src/components/modals/KeyboardShortcutsModal.jsx",
+      "sources": [
+        "src/components/modals/KeyboardShortcutsModal.jsx"
+      ]
+    },
+    {
+      "name": "KeyboardShortcutsModal",
+      "source": "src/components/modals/KeyboardShortcutsModal.jsx",
+      "sources": [
+        "src/components/modals/KeyboardShortcutsModal.jsx"
+      ]
+    },
+    {
+      "name": "Modal",
+      "source": "src/components/modals/Modal.jsx",
+      "sources": [
+        "src/components/modals/Modal.jsx"
+      ]
+    },
+    {
+      "name": "MonthCalendar",
+      "source": "src/components/calendar/MonthCalendar.jsx",
+      "sources": [
+        "src/components/calendar/MonthCalendar.jsx"
+      ]
+    },
+    {
+      "name": "preloadNearbyDates",
+      "source": "src/utils/imageCache.js",
+      "sources": [
+        "src/utils/imageCache.js"
+      ]
+    },
+    {
+      "name": "retryWithBackoff",
+      "source": "src/services/breedDataIngestion.js",
+      "sources": [
+        "src/services/breedDataIngestion.js"
+      ]
+    },
+    {
+      "name": "sanitizeInput",
+      "source": "src/utils/dataValidation.js",
+      "sources": [
+        "src/utils/dataValidation.js"
+      ]
+    },
+    {
+      "name": "saveCache",
+      "source": "src/utils/imageCache.js",
+      "sources": [
+        "src/utils/imageCache.js"
+      ]
+    },
+    {
+      "name": "scrollToBottom",
+      "source": "src/components/modals/AiModal.jsx",
+      "sources": [
+        "src/components/modals/AiModal.jsx"
+      ]
+    },
+    {
+      "name": "seededRandom",
+      "source": "src/utils/dailyContent.js",
+      "sources": [
+        "src/utils/dailyContent.js"
+      ]
+    },
+    {
+      "name": "SettingsModal",
+      "source": "src/components/modals/SettingsModal.jsx",
+      "sources": [
+        "src/components/modals/SettingsModal.jsx"
+      ]
+    },
+    {
+      "name": "StatCard",
+      "source": "src/components/modals/StatisticsModal.jsx",
+      "sources": [
+        "src/components/modals/StatisticsModal.jsx"
+      ]
+    },
+    {
+      "name": "StatisticsModal",
+      "source": "src/components/modals/StatisticsModal.jsx",
+      "sources": [
+        "src/components/modals/StatisticsModal.jsx"
+      ]
+    },
+    {
+      "name": "ThemeSelector",
+      "source": "src/components/calendar/ThemeSelector.jsx",
+      "sources": [
+        "src/components/calendar/ThemeSelector.jsx"
+      ]
+    },
+    {
+      "name": "toggleDarkMode",
+      "source": "src/hooks/useDarkMode.js",
+      "sources": [
+        "src/hooks/useDarkMode.js"
+      ]
+    },
+    {
+      "name": "useDarkMode",
+      "source": "src/hooks/useDarkMode.js",
+      "sources": [
+        "src/hooks/useDarkMode.js"
+      ]
+    },
+    {
+      "name": "useKeyboardShortcuts",
+      "source": "src/hooks/useKeyboardShortcuts.js",
+      "sources": [
+        "src/hooks/useKeyboardShortcuts.js"
+      ]
+    },
+    {
+      "name": "useModalShortcuts",
+      "source": "src/hooks/useKeyboardShortcuts.js",
+      "sources": [
+        "src/hooks/useKeyboardShortcuts.js"
+      ]
+    },
+    {
+      "name": "useNavigationShortcuts",
+      "source": "src/hooks/useKeyboardShortcuts.js",
+      "sources": [
+        "src/hooks/useKeyboardShortcuts.js"
+      ]
+    },
+    {
+      "name": "useThemeCycleShortcut",
+      "source": "src/hooks/useKeyboardShortcuts.js",
+      "sources": [
+        "src/hooks/useKeyboardShortcuts.js"
+      ]
+    },
+    {
+      "name": "validateArray",
+      "source": "src/utils/dataValidation.js",
+      "sources": [
+        "src/utils/dataValidation.js"
+      ]
+    },
+    {
+      "name": "validateBreed",
+      "source": "src/utils/dataValidation.js",
+      "sources": [
+        "src/utils/dataValidation.js"
+      ]
+    },
+    {
+      "name": "validateBreedData",
+      "source": "src/services/breedDataIngestion.js",
+      "sources": [
+        "src/services/breedDataIngestion.js"
+      ]
+    },
+    {
+      "name": "validateContentData",
+      "source": "src/utils/dataValidation.js",
+      "sources": [
+        "src/utils/dataValidation.js"
+      ]
+    },
+    {
+      "name": "validateContentItem",
+      "source": "src/utils/dataValidation.js",
+      "sources": [
+        "src/utils/dataValidation.js"
+      ]
+    },
+    {
+      "name": "validateDate",
+      "source": "src/utils/dataValidation.js",
+      "sources": [
+        "src/utils/dataValidation.js"
+      ]
+    },
+    {
+      "name": "validateNumber",
+      "source": "src/utils/dataValidation.js",
+      "sources": [
+        "src/utils/dataValidation.js"
+      ]
+    },
+    {
+      "name": "validateRequired",
+      "source": "src/utils/dataValidation.js",
+      "sources": [
+        "src/utils/dataValidation.js"
+      ]
+    },
+    {
+      "name": "validateString",
+      "source": "src/utils/dataValidation.js",
+      "sources": [
+        "src/utils/dataValidation.js"
+      ]
+    }
+  ],
+  "capabilities": [],
+  "technicalComponents": [
+    {
+      "text": "\"gpt-3.5-turbo\",",
+      "source": "CRITICAL_ANALYSIS.md",
+      "sources": [
+        "CRITICAL_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "~$100-200 (increased usage)",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "$0-20",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "$200-500",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "DynamoDB (NoSQL, scales to zero)",
+      "source": "CRITICAL_ANALYSIS.md",
+      "sources": [
+        "CRITICAL_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "react",
+      "source": "ANNOTATED_BIBLIOGRAPHY.md",
+      "sources": [
+        "ANNOTATED_BIBLIOGRAPHY.md",
+        "COMPREHENSIVE_ANALYSIS.md",
+        "CRITICAL_ANALYSIS.md",
+        "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+        "ChatPRD/Interactive Dog Calendar v2.md",
+        "docs/archive/Interactive Dog Calendar v2.md",
+        "docs/roadmap/NEXTday-AI-phase-2-guide.md",
+        "docs/technical/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md"
+      ]
+    }
+  ],
+  "uiElements": [
+    {
+      "name": "“Save” stores content in Firebase.",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "name": "“This was made for you, Max.”",
+      "source": "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+      "sources": [
+        "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "docs/roadmap/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md"
+      ]
+    },
+    {
+      "name": "[PROJECT.md](PROJECT.md)",
+      "source": "docs/TRANSFORMATION.md",
+      "sources": [
+        "docs/TRANSFORMATION.md"
+      ]
+    },
+    {
+      "name": "<div className=\"flex gap-2 p-4\">",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "name": "<div className=\"relative h-80 sm:h-96\">",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "name": "<div>Hello</div> }",
+      "source": "docs/archive/DISTILLED-Interactive-Dog-Calendar-v2.md",
+      "sources": [
+        "docs/archive/DISTILLED-Interactive-Dog-Calendar-v2.md"
+      ]
+    },
+    {
+      "name": "<div>Hello</div> };",
+      "source": "docs/archive/DISTILLED-Interactive-Dog-Calendar-v2.md",
+      "sources": [
+        "docs/archive/DISTILLED-Interactive-Dog-Calendar-v2.md"
+      ]
+    },
+    {
+      "name": "<div>Hello</div> }; // Wrong",
+      "source": "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+      "sources": [
+        "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+        "ChatPRD/Interactive Dog Calendar v2.md",
+        "docs/archive/Interactive Dog Calendar v2.md",
+        "docs/technical/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md"
+      ]
+    },
+    {
+      "name": "<MyComponent /> } instead of <MyComponent />.",
+      "source": "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+      "sources": [
+        "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+        "docs/technical/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md"
+      ]
+    },
+    {
+      "name": "<MyComponent /> }\\ instead of \\<MyComponent />\\.",
+      "source": "ChatPRD/Interactive Dog Calendar v2.md",
+      "sources": [
+        "ChatPRD/Interactive Dog Calendar v2.md",
+        "docs/archive/Interactive Dog Calendar v2.md"
+      ]
+    },
+    {
+      "name": "AiModal",
+      "source": "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+      "sources": [
+        "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/roadmap/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "docs/technical/Custom Animal Photo Calendars.md",
+        "src/components/modals/AiModal.jsx"
+      ]
+    },
+    {
+      "name": "App",
+      "source": "src/App.jsx",
+      "type": "component",
+      "sources": [
+        "src/App.jsx"
+      ]
+    },
+    {
+      "name": "App.jsx ⚠️ MODERATE",
+      "source": "CRITICAL_ANALYSIS.md",
+      "sources": [
+        "CRITICAL_ANALYSIS.md"
+      ]
+    },
+    {
+      "name": "BREED_INFO",
+      "source": "src/utils/breedKnowledge.js",
+      "type": "component",
+      "sources": [
+        "src/utils/breedKnowledge.js"
+      ]
+    },
+    {
+      "name": "BreedSpotlightModal",
+      "source": "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+      "sources": [
+        "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/roadmap/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "name": "CACHE_EXPIRY_DAYS",
+      "source": "src/utils/imageCache.js",
+      "type": "component",
+      "sources": [
+        "src/utils/imageCache.js"
+      ]
+    },
+    {
+      "name": "CACHE_KEY",
+      "source": "src/utils/imageCache.js",
+      "type": "component",
+      "sources": [
+        "src/utils/imageCache.js"
+      ]
+    },
+    {
+      "name": "CalendarCard",
+      "source": "src/components/calendar/CalendarCard.jsx",
+      "type": "component",
+      "sources": [
+        "src/components/calendar/CalendarCard.jsx"
+      ]
+    },
+    {
+      "name": "CalendarPage",
+      "source": "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+      "sources": [
+        "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/roadmap/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "name": "CAT_API_BASE",
+      "source": "src/services/breedDataIngestion.js",
+      "type": "component",
+      "sources": [
+        "src/services/breedDataIngestion.js"
+      ]
+    },
+    {
+      "name": "CAT_FACTS",
+      "source": "src/utils/dailyContent.js",
+      "type": "component",
+      "sources": [
+        "src/utils/dailyContent.js"
+      ]
+    },
+    {
+      "name": "Core Experience:",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "name": "DateNavigation",
+      "source": "src/components/calendar/DateNavigation.jsx",
+      "type": "component",
+      "sources": [
+        "src/components/calendar/DateNavigation.jsx"
+      ]
+    },
+    {
+      "name": "DOG_API_BASE",
+      "source": "src/services/breedDataIngestion.js",
+      "type": "component",
+      "sources": [
+        "src/services/breedDataIngestion.js"
+      ]
+    },
+    {
+      "name": "DOG_FACTS",
+      "source": "src/utils/dailyContent.js",
+      "type": "component",
+      "sources": [
+        "src/utils/dailyContent.js"
+      ]
+    },
+    {
+      "name": "FavoritesModal",
+      "source": "src/components/modals/FavoritesModal.jsx",
+      "type": "component",
+      "sources": [
+        "src/components/modals/FavoritesModal.jsx"
+      ]
+    },
+    {
+      "name": "FETCH_TIMEOUT",
+      "source": "src/components/calendar/CalendarCard.jsx",
+      "type": "component",
+      "sources": [
+        "src/components/calendar/CalendarCard.jsx"
+      ]
+    },
+    {
+      "name": "FRESHNESS_THRESHOLDS",
+      "source": "src/utils/dataFreshness.js",
+      "type": "component",
+      "sources": [
+        "src/utils/dataFreshness.js"
+      ]
+    },
+    {
+      "name": "GameHubModal",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "name": "GameModal",
+      "source": "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+      "sources": [
+        "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/roadmap/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "name": "INITIAL_RETRY_DELAY",
+      "source": "src/services/breedDataIngestion.js",
+      "type": "component",
+      "sources": [
+        "src/services/breedDataIngestion.js"
+      ]
+    },
+    {
+      "name": "javascript",
+      "source": "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+      "sources": [
+        "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+        "docs/technical/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md"
+      ]
+    },
+    {
+      "name": "JournalModal",
+      "source": "src/components/modals/JournalModal.jsx",
+      "type": "component",
+      "sources": [
+        "src/components/modals/JournalModal.jsx"
+      ]
+    },
+    {
+      "name": "KeyBadge",
+      "source": "src/components/modals/KeyboardShortcutsModal.jsx",
+      "type": "component",
+      "sources": [
+        "src/components/modals/KeyboardShortcutsModal.jsx"
+      ]
+    },
+    {
+      "name": "KeyboardShortcutsModal",
+      "source": "src/components/modals/KeyboardShortcutsModal.jsx",
+      "type": "component",
+      "sources": [
+        "src/components/modals/KeyboardShortcutsModal.jsx"
+      ]
+    },
+    {
+      "name": "MAX_CACHE_SIZE",
+      "source": "src/utils/imageCache.js",
+      "type": "component",
+      "sources": [
+        "src/utils/imageCache.js"
+      ]
+    },
+    {
+      "name": "MAX_RETRIES",
+      "source": "src/components/calendar/CalendarCard.jsx",
+      "type": "component",
+      "sources": [
+        "src/components/calendar/CalendarCard.jsx",
+        "src/services/breedDataIngestion.js"
+      ]
+    },
+    {
+      "name": "Modal",
+      "source": "src/components/modals/Modal.jsx",
+      "type": "component",
+      "sources": [
+        "src/components/modals/Modal.jsx"
+      ]
+    },
+    {
+      "name": "MonthCalendar",
+      "source": "src/components/calendar/MonthCalendar.jsx",
+      "type": "component",
+      "sources": [
+        "src/components/calendar/MonthCalendar.jsx"
+      ]
+    },
+    {
+      "name": "MOODS",
+      "source": "src/utils/dailyContent.js",
+      "type": "component",
+      "sources": [
+        "src/utils/dailyContent.js"
+      ]
+    },
+    {
+      "name": "MyComponent",
+      "source": "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+      "sources": [
+        "ChatPRD/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md",
+        "ChatPRD/Interactive Dog Calendar v2.md",
+        "docs/archive/Interactive Dog Calendar v2.md",
+        "docs/technical/Fixing ReferenceError and Invalid React Child Errors in DogTearOffCalendar Component.md"
+      ]
+    },
+    {
+      "name": "NewsModal",
+      "source": "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+      "sources": [
+        "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/roadmap/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "name": "QUOTES",
+      "source": "src/utils/dailyContent.js",
+      "type": "component",
+      "sources": [
+        "src/utils/dailyContent.js"
+      ]
+    },
+    {
+      "name": "SettingsModal",
+      "source": "src/components/modals/SettingsModal.jsx",
+      "type": "component",
+      "sources": [
+        "src/components/modals/SettingsModal.jsx"
+      ]
+    },
+    {
+      "name": "StatCard",
+      "source": "src/components/modals/StatisticsModal.jsx",
+      "type": "component",
+      "sources": [
+        "src/components/modals/StatisticsModal.jsx"
+      ]
+    },
+    {
+      "name": "StatisticsModal",
+      "source": "src/components/modals/StatisticsModal.jsx",
+      "type": "component",
+      "sources": [
+        "src/components/modals/StatisticsModal.jsx"
+      ]
+    },
+    {
+      "name": "ThemeSelector",
+      "source": "src/components/calendar/ThemeSelector.jsx",
+      "type": "component",
+      "sources": [
+        "src/components/calendar/ThemeSelector.jsx"
+      ]
+    },
+    {
+      "name": "VideoAnimatedHubModal",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    }
+  ],
+  "integrations": [
+    {
+      "text": "- [ ] Context management",
+      "source": "COMPREHENSIVE_ROADMAP.md",
+      "sources": [
+        "COMPREHENSIVE_ROADMAP.md"
+      ]
+    },
+    {
+      "text": "- [ ] Donation/tip system",
+      "source": "COMPREHENSIVE_ROADMAP.md",
+      "sources": [
+        "COMPREHENSIVE_ROADMAP.md"
+      ]
+    },
+    {
+      "text": "- [ ] Fulfillment webhook handling",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "- [ ] Mobile app (React Native)",
+      "source": "SESSION_2_SUMMARY.md",
+      "sources": [
+        "SESSION_2_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "- [ ] Photo upload",
+      "source": "COMPREHENSIVE_ROADMAP.md",
+      "sources": [
+        "COMPREHENSIVE_ROADMAP.md"
+      ]
+    },
+    {
+      "text": "- [ ] Visual indicator on calendar for upcoming reminders",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "- ❌ NO location-based discovery system",
+      "source": "MISSING_FEATURES_ANALYSIS.md",
+      "sources": [
+        "MISSING_FEATURES_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "- Could integrate OpenAI/Claude API",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "- Medication tracking with alerts",
+      "source": "docs/archive/DISTILLED-AI-Powered-Dog-Care-Schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-AI-Powered-Dog-Care-Schedule.md",
+        "docs/archive/SYNTHESIS.md"
+      ]
+    },
+    {
+      "text": "- Offline-first (sync when online)",
+      "source": "CRITICAL_ANALYSIS.md",
+      "sources": [
+        "CRITICAL_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "- Premium features",
+      "source": "docs/archive/DISTILLED-DogTale-Daily-Personalized-Dog-Calendar-App.md",
+      "sources": [
+        "docs/archive/DISTILLED-DogTale-Daily-Personalized-Dog-Calendar-App.md"
+      ]
+    },
+    {
+      "text": "- Premium subscriptions",
+      "source": "docs/PROJECT.md",
+      "sources": [
+        "docs/PROJECT.md"
+      ]
+    },
+    {
+      "text": "- User-submitted content",
+      "source": "docs/technical/DATA_INGESTION_PIPELINE.md",
+      "sources": [
+        "docs/technical/DATA_INGESTION_PIPELINE.md"
+      ]
+    },
+    {
+      "text": "- View toggle state",
+      "source": "CRITICAL_ANALYSIS.md",
+      "sources": [
+        "CRITICAL_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "- Voice control for hands-free operation",
+      "source": "docs/archive/SYNTHESIS.md",
+      "sources": [
+        "docs/archive/SYNTHESIS.md"
+      ]
+    },
+    {
+      "text": "(auth, database)",
+      "source": "FEATURE_IMPLEMENTATION_SUMMARY.md",
+      "sources": [
+        "FEATURE_IMPLEMENTATION_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "(log after completing reminder)",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "(optional) | $0 to start (you pay when someone buys) |",
+      "source": "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+      "sources": [
+        "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "docs/roadmap/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md"
+      ]
+    },
+    {
+      "text": "(photo upload)",
+      "source": "CRITICAL_ANALYSIS.md",
+      "sources": [
+        "CRITICAL_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "(real stories, QA responses)",
+      "source": "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+      "sources": [
+        "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "docs/roadmap/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md"
+      ]
+    },
+    {
+      "text": "(tests run on every PR)",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "(text, image, audio, interactive/game)",
+      "source": "docs/roadmap/NEXTday-AI-phase-2-guide.md",
+      "sources": [
+        "docs/roadmap/NEXTday-AI-phase-2-guide.md"
+      ]
+    },
+    {
+      "text": "& retrieval from MORS",
+      "source": "docs/roadmap/NEXTday-AI-phase-2-guide.md",
+      "sources": [
+        "docs/roadmap/NEXTday-AI-phase-2-guide.md"
+      ]
+    },
+    {
+      "text": "a calendar API (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "a Cat API (thecatapi",
+      "source": "ChatPRD/dogcalv1.md",
+      "sources": [
+        "ChatPRD/dogcalv1.md",
+        "docs/archive/dogcalv1.md"
+      ]
+    },
+    {
+      "text": "a lightweight AI API (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "a new AI feature to make it even more helpful",
+      "source": "ChatPRD/AI-Powered Dog Care Schedule.md",
+      "sources": [
+        "ChatPRD/AI-Powered Dog Care Schedule.md",
+        "docs/archive/AI-Powered Dog Care Schedule.md"
+      ]
+    },
+    {
+      "text": "AI image gen API + photo upload logic (3–5 photos) | 1 week |",
+      "source": "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+      "sources": [
+        "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "docs/roadmap/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md"
+      ]
+    },
+    {
+      "text": "AI image generation (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "AI image generation API",
+      "source": "docs/archive/SYNTHESIS.md",
+      "sources": [
+        "docs/archive/SYNTHESIS.md"
+      ]
+    },
+    {
+      "text": "AI tools, starting with static placeholders",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "and exports comics as PDFs or CBZs",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "and veterinarian appointment booking",
+      "source": "ChatPRD/dogcal-schedule.md",
+      "sources": [
+        "ChatPRD/dogcal-schedule.md",
+        "docs/archive/dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "Anthropic Claude API (paid)",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "API for mood detection from dog photos",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Cat API for cat-side content",
+      "source": "docs/archive/DISTILLED-dogcalv1.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcalv1.md"
+      ]
+    },
+    {
+      "text": "chosen API",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "code that may be useful for future reference or feature extraction",
+      "source": "docs/legacy/README.md",
+      "sources": [
+        "docs/legacy/README.md"
+      ]
+    },
+    {
+      "text": "code worth preserving",
+      "source": "BRANCH_MERGE_SUMMARY.md",
+      "sources": [
+        "BRANCH_MERGE_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "Current Design",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Current Design and Animations",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Current Design and Features",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Design Philosophy: Remove technical \"AI\" terminology in favor of playful, thematic names",
+      "source": "docs/archive/DISTILLED-dogcalv1.md",
+      "sources": [
+        "docs/archive/DISTILLED-dogcalv1.md"
+      ]
+    },
+    {
+      "text": "digital calendars (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "digital calendars or mimicking the daily engagement of a tear-off calendar",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Dog CEO API",
+      "source": "DATA_INGESTION_README.md",
+      "sources": [
+        "DATA_INGESTION_README.md"
+      ]
+    },
+    {
+      "text": "DogTale Daily",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "examples preserved",
+      "source": "BRANCH_MERGE_SUMMARY.md",
+      "sources": [
+        "BRANCH_MERGE_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "Existing Animations",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "for AI-powered care recommendations",
+      "source": "docs/legacy/README.md",
+      "sources": [
+        "docs/legacy/README.md"
+      ]
+    },
+    {
+      "text": "for care recommendations",
+      "source": "BRANCH_MERGE_SUMMARY.md",
+      "sources": [
+        "BRANCH_MERGE_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "for easy sharing",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "for generating care recommendations",
+      "source": "docs/legacy/README.md",
+      "sources": [
+        "docs/legacy/README.md"
+      ]
+    },
+    {
+      "text": "for photo uploads",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Gemini API key for report generation\"",
+      "source": "BRANCH_MERGE_SUMMARY.md",
+      "sources": [
+        "BRANCH_MERGE_SUMMARY.md"
+      ]
+    },
+    {
+      "text": "Google Drive to store the calendar and manually align events with digital calendars",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Grok’s capabilities into their applications, enabling programmatic access to my question-answering and reasoning functionalities",
+      "source": "ChatPRD/Grok-Development-Projects-Overview.md",
+      "sources": [
+        "ChatPRD/Grok-Development-Projects-Overview.md",
+        "docs/roadmap/Grok-Development-Projects-Overview.md"
+      ]
+    },
+    {
+      "text": "image gen API (e",
+      "source": "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+      "sources": [
+        "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "docs/roadmap/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md"
+      ]
+    },
+    {
+      "text": "insights from multiple specialized AI models",
+      "source": "docs/roadmap/NEXTday-AI-phase-2-guide.md",
+      "sources": [
+        "docs/roadmap/NEXTday-AI-phase-2-guide.md"
+      ]
+    },
+    {
+      "text": "Instagram stories (auto generate postable daily dog story)",
+      "source": "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+      "sources": [
+        "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "docs/roadmap/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md"
+      ]
+    },
+    {
+      "text": "into your prototype:",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "it, and suggest next steps",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "ML image captioning (Azure Computer Vision API)",
+      "source": "CRITICAL_ANALYSIS.md",
+      "sources": [
+        "CRITICAL_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "motion design trends (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "not only validates compiler correctness (e",
+      "source": "ChatPRD/Compiler-Design-Principles-and-Components.md",
+      "sources": [
+        "ChatPRD/Compiler-Design-Principles-and-Components.md",
+        "docs/technical/Compiler-Design-Principles-and-Components.md"
+      ]
+    },
+    {
+      "text": "OpenAI API (paid)",
+      "source": "REALISTIC_PLAN.md",
+      "sources": [
+        "REALISTIC_PLAN.md"
+      ]
+    },
+    {
+      "text": "or export to standard digital calendars for scheduling",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "payment processor (Stripe recommended)",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "PDF generation library (jsPDF or similar)",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "pet health tracking features",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "playful naming",
+      "source": "docs/archive/README.md",
+      "sources": [
+        "docs/archive/README.md"
+      ]
+    },
+    {
+      "text": "point, designed to create a supportive network",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "point, designed to deepen the sense of community and reflect the joy of dog ownership",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "point, designed to enhance the app’s utility and emotional resonance",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "point, emphasizing the personal dog-owner relationship",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "point, reflecting trends in AI-driven design and user engagement",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "point:• HTTP methods, resource URLs",
+      "source": "ChatPRD/dogcal-schedule.md",
+      "sources": [
+        "ChatPRD/dogcal-schedule.md",
+        "docs/archive/dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "popular APIs (FitBark, Furbo, etc",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "print-on-demand API (Printful, Printify)",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "Priority: LOW",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "real story generation: Use GPT API (or me!) to generate 30-day arcs for each breed or user-uploaded pet",
+      "source": "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+      "sources": [
+        "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "docs/roadmap/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md"
+      ]
+    },
+    {
+      "text": "role-swap prompts into your AiModal story generation (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "sentiment analysis (Sentiment",
+      "source": "CRITICAL_ANALYSIS.md",
+      "sources": [
+        "CRITICAL_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "smart collars or pet cams",
+      "source": "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+      "sources": [
+        "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "docs/roadmap/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md"
+      ]
+    },
+    {
+      "text": "smart home devices",
+      "source": "docs/archive/DISTILLED-AI-Powered-Dog-Care-Schedule.md",
+      "sources": [
+        "docs/archive/DISTILLED-AI-Powered-Dog-Care-Schedule.md"
+      ]
+    },
+    {
+      "text": "social sharing directly to platforms like Instagram or X, with hashtags like DogComicDaily",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "Specification: Details the endpoints for user authentication, profile management, and posting walk data",
+      "source": "ChatPRD/dogcal-schedule.md",
+      "sources": [
+        "ChatPRD/dogcal-schedule.md",
+        "docs/archive/dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "story text generation",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "testing between the app and the backend API",
+      "source": "ChatPRD/dogcal-schedule.md",
+      "sources": [
+        "ChatPRD/dogcal-schedule.md",
+        "docs/archive/dogcal-schedule.md"
+      ]
+    },
+    {
+      "text": "Tests - 12 tests",
+      "source": "CRITICAL_ANALYSIS.md",
+      "sources": [
+        "CRITICAL_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "tests for core user flows",
+      "source": "CRITICAL_ANALYSIS.md",
+      "sources": [
+        "CRITICAL_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "tests for user flows (favorites, journal)",
+      "source": "COMPREHENSIVE_ANALYSIS.md",
+      "sources": [
+        "COMPREHENSIVE_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "tests: Key workflows",
+      "source": "DATA_INGESTION_README.md",
+      "sources": [
+        "DATA_INGESTION_README.md"
+      ]
+    },
+    {
+      "text": "their dogs (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "these into the current file—let me know which to focus on",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "this feature into the current HTML design, full feature set, and prior expansions (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "vet portals (where available)",
+      "source": "CRITICAL_ANALYSIS.md",
+      "sources": [
+        "CRITICAL_ANALYSIS.md"
+      ]
+    },
+    {
+      "text": "via APIs or libraries (e",
+      "source": "ChatPRD/Custom Animal Photo Calendars.md",
+      "sources": [
+        "ChatPRD/Custom Animal Photo Calendars.md",
+        "docs/technical/Custom Animal Photo Calendars.md"
+      ]
+    },
+    {
+      "text": "with other owners",
+      "source": "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+      "sources": [
+        "ChatPRD/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md",
+        "docs/roadmap/ChatPRD-AI-for-Product-Managers-Dog-Calendar-App-Roadmap.md"
+      ]
+    }
+  ],
+  "unresolvedConcepts": [],
+  "statistics": {
+    "totalDocuments": 97,
+    "documentsByCategory": {
+      "Root": 28,
+      "ChatPRD": 17,
+      "Archive": 12,
+      "Legacy": 2,
+      "Roadmap": 5,
+      "Technical": 6,
+      "Other": 2,
+      "Component": 12,
+      "Hook": 2,
+      "Service": 1,
+      "Test": 1,
+      "Utility": 9
+    },
+    "documentsByType": {
+      "documentation": 70,
+      "code": 27
+    },
+    "totalFeatures": 461,
+    "totalFunctions": 114,
+    "totalUIElements": 48,
+    "totalTechnicalComponents": 6,
+    "totalIntegrations": 99
+  }
+}
