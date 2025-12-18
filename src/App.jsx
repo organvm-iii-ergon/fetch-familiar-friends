@@ -226,6 +226,12 @@ function App() {
 
   return (
     <ErrorBoundary>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 px-4 py-2 bg-blue-600 text-white rounded-lg shadow-lg"
+      >
+        Skip to main content
+      </a>
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-4 transition-colors duration-200">
         <div className="container mx-auto max-w-2xl">
           <div className="relative mb-4">
@@ -280,46 +286,48 @@ function App() {
             Your daily dose of dog joy 🐾
           </p>
 
-          {!showMonthView && (
-            <DateNavigation
-              currentDate={currentDate}
-              onDateChange={setCurrentDate}
-            />
-          )}
+          <main id="main-content" tabIndex="-1" className="outline-none">
+            {!showMonthView && (
+              <DateNavigation
+                currentDate={currentDate}
+                onDateChange={setCurrentDate}
+              />
+            )}
 
-          {!showMonthView && (
-            <ThemeSelector
-              currentTheme={theme}
-              onThemeChange={setTheme}
-              themes={themes}
-            />
-          )}
+            {!showMonthView && (
+              <ThemeSelector
+                currentTheme={theme}
+                onThemeChange={setTheme}
+                themes={themes}
+              />
+            )}
 
-          {showMonthView ? (
-            <MonthCalendar
-              currentDate={currentDate}
-              journalEntries={journalEntries}
-              favorites={favorites}
-              onDateSelect={(date) => {
-                setCurrentDate(date);
-                setShowMonthView(false);
-              }}
-            />
-          ) : (
-            <CalendarCard
-              date={currentDate}
-              theme={theme}
-              onJournalClick={handleJournalClick}
-              onAiClick={handleAiClick}
-              onFavoritesClick={handleFavoritesClick}
-              onImageLoad={setCurrentImage}
-              onFavoriteToggle={handleAddFavorite}
-              isFavorited={isCurrentImageFavorited}
-              journalEntry={currentJournalEntry}
-              favoriteCount={favorites.length}
-              settings={settings}
-            />
-          )}
+            {showMonthView ? (
+              <MonthCalendar
+                currentDate={currentDate}
+                journalEntries={journalEntries}
+                favorites={favorites}
+                onDateSelect={(date) => {
+                  setCurrentDate(date);
+                  setShowMonthView(false);
+                }}
+              />
+            ) : (
+              <CalendarCard
+                date={currentDate}
+                theme={theme}
+                onJournalClick={handleJournalClick}
+                onAiClick={handleAiClick}
+                onFavoritesClick={handleFavoritesClick}
+                onImageLoad={setCurrentImage}
+                onFavoriteToggle={handleAddFavorite}
+                isFavorited={isCurrentImageFavorited}
+                journalEntry={currentJournalEntry}
+                favoriteCount={favorites.length}
+                settings={settings}
+              />
+            )}
+          </main>
         </div>
       </div>
 
