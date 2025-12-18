@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import CalendarCard from './components/calendar/CalendarCard';
 import ThemeSelector from './components/calendar/ThemeSelector';
 import DateNavigation from './components/calendar/DateNavigation';
@@ -224,6 +224,12 @@ function App() {
     ',': () => setIsSettingsOpen(true),
   }, !anyModalOpen);
 
+  // Stable handler for date selection to prevent MonthCalendar re-renders
+  const handleDateSelect = useCallback((date) => {
+    setCurrentDate(date);
+    setShowMonthView(false);
+  }, []);
+
   return (
     <ErrorBoundary>
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-4 transition-colors duration-200">
@@ -300,10 +306,7 @@ function App() {
               currentDate={currentDate}
               journalEntries={journalEntries}
               favorites={favorites}
-              onDateSelect={(date) => {
-                setCurrentDate(date);
-                setShowMonthView(false);
-              }}
+              onDateSelect={handleDateSelect}
             />
           ) : (
             <CalendarCard

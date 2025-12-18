@@ -1,8 +1,11 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
-const MonthCalendar = ({ currentDate, journalEntries = {}, favorites = [], onDateSelect }) => {
+// Static data defined outside component to avoid recreation
+const WEEK_DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], onDateSelect }) => {
   const [viewDate, setViewDate] = useState(new Date(currentDate));
 
   // Get calendar data for the month
@@ -126,8 +129,6 @@ const MonthCalendar = ({ currentDate, journalEntries = {}, favorites = [], onDat
     return viewDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   };
 
-  const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transition-colors">
       {/* Header */}
@@ -166,7 +167,7 @@ const MonthCalendar = ({ currentDate, journalEntries = {}, favorites = [], onDat
 
       {/* Week day headers */}
       <div className="grid grid-cols-7 gap-2 mb-2">
-        {weekDays.map((day) => (
+        {WEEK_DAYS.map((day) => (
           <div
             key={day}
             className="text-center text-sm font-semibold text-gray-600 dark:text-gray-400 py-2"
@@ -255,7 +256,7 @@ const MonthCalendar = ({ currentDate, journalEntries = {}, favorites = [], onDat
       </div>
     </div>
   );
-};
+});
 
 MonthCalendar.propTypes = {
   currentDate: PropTypes.instanceOf(Date).isRequired,
