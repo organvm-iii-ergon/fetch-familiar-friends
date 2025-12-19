@@ -1,23 +1,78 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Modal = ({ isOpen, onClose, title, children, size = 'md' }) => {
+  const modalRef = useRef(null);
+
   useEffect(() => {
-    const handleEscape = (e) => {
+    const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
         onClose();
+        return;
+      }
+
+      // Focus Trap
+      if (e.key === 'Tab') {
+        if (!modalRef.current) return;
+
+        // Get all focusable elements
+        const allFocusable = modalRef.current.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+
+        // Filter out disabled elements
+        const focusableElements = Array.from(allFocusable).filter(
+          (el) => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden')
+        );
+
+        if (focusableElements.length === 0) return;
+
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey) {
+          // Shift + Tab
+          if (document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          // Tab
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
       }
     };
 
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
+      document.addEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'hidden';
+
+      // Attempt to focus the first element if nothing inside is focused
+      setTimeout(() => {
+        if (modalRef.current && !modalRef.current.contains(document.activeElement)) {
+          const allFocusable = modalRef.current.querySelectorAll(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          );
+          const focusableElements = Array.from(allFocusable).filter(
+            (el) => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden')
+          );
+
+          if (focusableElements.length > 0) {
+            focusableElements[0].focus();
+          } else {
+            modalRef.current.focus();
+          }
+        }
+      }, 50);
     }
 
     return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
     };
   }, [isOpen, onClose]);
 
@@ -46,14 +101,16 @@ const Modal = ({ isOpen, onClose, title, children, size = 'md' }) => {
           {/* Modal */}
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <motion.div
+              ref={modalRef}
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: 'spring', duration: 0.3 }}
-              className={`bg-white rounded-lg shadow-xl w-full ${sizeClasses[size]} max-h-[90vh] overflow-hidden`}
+              className={`bg-white rounded-lg shadow-xl w-full ${sizeClasses[size]} max-h-[90vh] overflow-hidden focus:outline-none`}
               role="dialog"
               aria-modal="true"
               aria-labelledby="modal-title"
+              tabIndex="-1"
             >
               {/* Header */}
               <div className="flex items-center justify-between p-4 border-b border-gray-200">
