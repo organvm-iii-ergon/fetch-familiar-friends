@@ -13,6 +13,15 @@ This repository contains comprehensive planning and documentation for the projec
 
 **Start Here**: [📖 Complete Project Documentation](docs/PROJECT.md)
 
+### 🆕 Comprehensive Analysis & Planning (NEW!)
+
+- **[COMPLETE_COMPREHENSIVE_CRITIQUE.md](COMPLETE_COMPREHENSIVE_CRITIQUE.md)** — 9-part comprehensive analysis framework
+  - Critique, Logic Check, Logos, Pathos, Ethos, Blindspots, Shatterpoints, Bloom, Evolve
+- **[IMPLEMENTATION_ROADMAP.md](IMPLEMENTATION_ROADMAP.md)** — Actionable 16-week plan from analysis to production
+- **[BLINDSPOTS_ANALYSIS.md](BLINDSPOTS_ANALYSIS.md)** — 25+ identified blindspots across 6 categories
+- **[PRIVACY_POLICY.md](PRIVACY_POLICY.md)** — Comprehensive privacy policy (ready to integrate)
+- **[ACCESSIBILITY.md](ACCESSIBILITY.md)** — Accessibility statement and WCAG compliance roadmap
+
 ### Quick Links
 
 - **[Roadmap & Planning](docs/roadmap/)** - Strategic plans and product roadmaps
