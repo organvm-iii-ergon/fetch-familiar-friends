@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 // Static data defined outside component to avoid recreation
 const WEEK_DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], onDateSelect }) => {
+const MonthCalendar = memo(function MonthCalendar({ currentDate, journalEntries = {}, favorites = [], onDateSelect }) {
   const [viewDate, setViewDate] = useState(new Date(currentDate));
 
   // Get calendar data for the month
@@ -70,19 +70,24 @@ const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], 
     return days;
   }, [viewDate]);
 
-  // Check if a date has journal entry
+  // Optimize journal entry lookup
+  // Fix: use consistent date key format with App.jsx (YYYY-MM-DD) instead of toDateString()
   const hasJournalEntry = (date) => {
-    const dateKey = date.toDateString();
+    const dateKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
     return journalEntries[dateKey] && journalEntries[dateKey].trim().length > 0;
   };
 
-  // Check if a date has favorites
-  const hasFavorite = (date) => {
-    const dateStr = date.toDateString();
-    return favorites.some(fav => {
-      const favDate = new Date(fav.savedAt).toDateString();
-      return favDate === dateStr;
+  // Optimize favorite lookup using Set for O(1) access
+  const favoriteDatesSet = useMemo(() => {
+    const set = new Set();
+    favorites.forEach(fav => {
+      set.add(new Date(fav.savedAt).toDateString());
     });
+    return set;
+  }, [favorites]);
+
+  const hasFavorite = (date) => {
+    return favoriteDatesSet.has(date.toDateString());
   };
 
   // Check if date is today
