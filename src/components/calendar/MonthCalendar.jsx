@@ -202,7 +202,7 @@ const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], 
                 ${isFutureDay ? 'opacity-40 cursor-not-allowed' : 'cursor-pointer'}
                 ${!isFutureDay && !isSelectedDay ? 'focus:outline-none focus:ring-2 focus:ring-blue-400' : ''}
               `}
-              aria-label={`${dayData.date.toLocaleDateString()}`}
+              aria-label={`${dayData.date.toLocaleDateString()}${hasJournal ? ', has journal entry' : ''}${hasFav ? ', has favorite' : ''}`}
               title={`${dayData.date.toLocaleDateString()}${hasJournal ? ' (has journal)' : ''}${hasFav ? ' (has favorites)' : ''}`}
             >
               <div className="text-sm font-medium">{dayData.day}</div>
