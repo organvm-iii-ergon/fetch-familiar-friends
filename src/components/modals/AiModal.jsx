@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Modal from './Modal';
 import { getBreedSpecificResponse } from '../../utils/breedKnowledge';
+import { isFamilyFriendly } from '../../utils/dataValidation';
 
 const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
   // Initial welcome message mentions breed if available
@@ -29,13 +30,13 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
     }
   }, [isOpen]);
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const generateAiResponse = (userMessage) => {
     const lowerMessage = userMessage.toLowerCase();
@@ -98,6 +99,12 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
 
   const handleSend = async () => {
     if (!inputMessage.trim() || inputMessage.length > 500) return;
+
+    // Security Check: Ensure content is family friendly
+    if (!isFamilyFriendly(inputMessage)) {
+      alert('Please keep the conversation friendly! 🐾');
+      return;
+    }
 
     const userMessage = {
       role: 'user',
