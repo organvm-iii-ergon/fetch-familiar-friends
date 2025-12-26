@@ -5,7 +5,16 @@ import { motion } from 'framer-motion';
 // Static data defined outside component to avoid recreation
 const WEEK_DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], onDateSelect }) => {
+// Helper to format date key consistently (YYYY-MM-DD)
+// This matches how keys are stored in App.jsx and is faster than toDateString()
+const formatDateKey = (date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+const MonthCalendar = memo(function MonthCalendar({ currentDate, journalEntries = {}, favorites = [], onDateSelect }) {
   const [viewDate, setViewDate] = useState(new Date(currentDate));
 
   // Get calendar data for the month
@@ -70,38 +79,38 @@ const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], 
     return days;
   }, [viewDate]);
 
-  // Check if a date has journal entry
-  const hasJournalEntry = (date) => {
-    const dateKey = date.toDateString();
-    return journalEntries[dateKey] && journalEntries[dateKey].trim().length > 0;
-  };
-
-  // Check if a date has favorites
-  const hasFavorite = (date) => {
-    const dateStr = date.toDateString();
-    return favorites.some(fav => {
-      const favDate = new Date(fav.savedAt).toDateString();
-      return favDate === dateStr;
+  // Optimize lookups: Pre-calculate sets for O(1) access
+  const favoriteDatesSet = useMemo(() => {
+    const set = new Set();
+    favorites.forEach(fav => {
+      if (fav.savedAt) {
+        // Use toDateString for favorites to match legacy behavior/test expectations
+        // Ideally this should also be YYYY-MM-DD but let's stick to what works for favorites first
+        // Wait, if I change to YYYY-MM-DD, I need to match what I check against.
+        // Let's check against toDateString() for favorites as per original code behavior?
+        // Original code: new Date(fav.savedAt).toDateString() === date.toDateString()
+        // So yes, I should store toDateString() in the Set.
+        set.add(new Date(fav.savedAt).toDateString());
+      }
     });
-  };
+    return set;
+  }, [favorites]);
 
-  // Check if date is today
-  const isToday = (date) => {
-    const today = new Date();
-    return date.toDateString() === today.toDateString();
-  };
+  // Pre-calculate comparison dates to avoid new Date() inside render loop
+  const { todayStr, selectedStr, todayTime } = useMemo(() => {
+    const now = new Date();
+    const todayStr = now.toDateString();
 
-  // Check if date is selected
-  const isSelected = (date) => {
-    return date.toDateString() === currentDate.toDateString();
-  };
+    // For isFuture check
+    const todayStart = new Date(now);
+    todayStart.setHours(0, 0, 0, 0);
 
-  // Check if date is in the future
-  const isFuture = (date) => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    return date > today;
-  };
+    return {
+      todayStr,
+      selectedStr: currentDate.toDateString(),
+      todayTime: todayStart.getTime()
+    };
+  }, [currentDate]);
 
   const handlePrevMonth = () => {
     const newDate = new Date(viewDate);
@@ -120,7 +129,10 @@ const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], 
   };
 
   const handleDateClick = (date) => {
-    if (!isFuture(date) && onDateSelect) {
+    // Re-implement isFuture logic here properly
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (!(date > today) && onDateSelect) {
       onDateSelect(date);
     }
   };
@@ -180,11 +192,16 @@ const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], 
       {/* Calendar grid */}
       <div className="grid grid-cols-7 gap-2">
         {calendarData.map((dayData, index) => {
-          const hasJournal = hasJournalEntry(dayData.date);
-          const hasFav = hasFavorite(dayData.date);
-          const isCurrentDay = isToday(dayData.date);
-          const isSelectedDay = isSelected(dayData.date);
-          const isFutureDay = isFuture(dayData.date);
+          // Optimization: Use pre-calculated values and fast lookups
+          const dateStr = dayData.date.toDateString();
+          // Fix: Use YYYY-MM-DD for journal lookup to match storage format
+          const dateKey = formatDateKey(dayData.date);
+
+          const hasJournal = journalEntries[dateKey] && journalEntries[dateKey].trim().length > 0;
+          const hasFav = favoriteDatesSet.has(dateStr);
+          const isCurrentDay = dateStr === todayStr;
+          const isSelectedDay = dateStr === selectedStr;
+          const isFutureDay = dayData.date.getTime() > todayTime;
 
           return (
             <motion.button
