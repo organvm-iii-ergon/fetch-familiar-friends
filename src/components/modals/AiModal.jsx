@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Modal from './Modal';
 import { getBreedSpecificResponse } from '../../utils/breedKnowledge';
+import { isFamilyFriendly, sanitizeInput } from '../../utils/dataValidation';
 
 const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
   // Initial welcome message mentions breed if available
@@ -20,6 +21,7 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
   ]);
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [error, setError] = useState(null);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -29,13 +31,13 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
     }
   }, [isOpen]);
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const generateAiResponse = (userMessage) => {
     const lowerMessage = userMessage.toLowerCase();
@@ -99,20 +101,31 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
   const handleSend = async () => {
     if (!inputMessage.trim() || inputMessage.length > 500) return;
 
+    // Security: Validate content is family friendly
+    if (!isFamilyFriendly(inputMessage)) {
+      setError('Please keep the conversation family-friendly!');
+      return;
+    }
+
+    // Security: Sanitize input although we rely on React's automatic escaping
+    // This is a defense-in-depth measure
+    const cleanInput = sanitizeInput(inputMessage.slice(0, 500));
+
     const userMessage = {
       role: 'user',
-      content: inputMessage.slice(0, 500) // Ensure max length
+      content: cleanInput
     };
 
     setMessages(prev => [...prev, userMessage]);
     setInputMessage('');
+    setError(null);
     setIsTyping(true);
 
     // Simulate AI thinking time
     setTimeout(() => {
       const aiResponse = {
         role: 'assistant',
-        content: generateAiResponse(inputMessage)
+        content: generateAiResponse(cleanInput)
       };
       setMessages(prev => [...prev, aiResponse]);
       setIsTyping(false);
@@ -194,6 +207,20 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
 
           <div ref={messagesEndRef} />
         </div>
+
+        {/* Error Message */}
+        {error && (
+          <div className="mb-2 px-3 py-2 bg-red-100 border border-red-200 text-red-700 text-sm rounded-lg flex items-center justify-between animate-fade-in" role="alert">
+            <span>{error}</span>
+            <button
+              onClick={() => setError(null)}
+              className="text-red-500 hover:text-red-700 font-bold focus:outline-none"
+              aria-label="Dismiss error"
+            >
+              ✕
+            </button>
+          </div>
+        )}
 
         {/* Suggested Questions */}
         {messages.length <= 1 && (
