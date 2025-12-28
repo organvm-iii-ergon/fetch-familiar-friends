@@ -4,8 +4,9 @@ import { motion } from 'framer-motion';
 
 // Static data defined outside component to avoid recreation
 const WEEK_DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const FULL_WEEK_DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], onDateSelect }) => {
+const MonthCalendar = memo(function MonthCalendar({ currentDate, journalEntries = {}, favorites = [], onDateSelect }) {
   const [viewDate, setViewDate] = useState(new Date(currentDate));
 
   // Get calendar data for the month
@@ -167,10 +168,11 @@ const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], 
 
       {/* Week day headers */}
       <div className="grid grid-cols-7 gap-2 mb-2">
-        {WEEK_DAYS.map((day) => (
+        {WEEK_DAYS.map((day, index) => (
           <div
             key={day}
             className="text-center text-sm font-semibold text-gray-600 dark:text-gray-400 py-2"
+            aria-label={FULL_WEEK_DAYS[index]}
           >
             {day}
           </div>
@@ -202,20 +204,19 @@ const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], 
                 ${isFutureDay ? 'opacity-40 cursor-not-allowed' : 'cursor-pointer'}
                 ${!isFutureDay && !isSelectedDay ? 'focus:outline-none focus:ring-2 focus:ring-blue-400' : ''}
               `}
-              aria-label={`${dayData.date.toLocaleDateString()}`}
+              aria-label={`${dayData.date.toLocaleDateString()}${hasJournal ? ', has journal entry' : ''}${hasFav ? ', has favorites' : ''}`}
               title={`${dayData.date.toLocaleDateString()}${hasJournal ? ' (has journal)' : ''}${hasFav ? ' (has favorites)' : ''}`}
             >
               <div className="text-sm font-medium">{dayData.day}</div>
 
               {/* Indicators */}
               {(hasJournal || hasFav) && (
-                <div className="absolute bottom-1 left-1/2 -translate-x-1/2 flex gap-0.5">
+                <div className="absolute bottom-1 left-1/2 -translate-x-1/2 flex gap-0.5" aria-hidden="true">
                   {hasJournal && (
                     <div
                       className={`w-1.5 h-1.5 rounded-full ${
                         isSelectedDay ? 'bg-white' : 'bg-green-500'
                       }`}
-                      aria-label="Has journal entry"
                     />
                   )}
                   {hasFav && (
@@ -223,7 +224,6 @@ const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], 
                       className={`w-1.5 h-1.5 rounded-full ${
                         isSelectedDay ? 'bg-yellow-200' : 'bg-yellow-500'
                       }`}
-                      aria-label="Has favorite"
                     />
                   )}
                 </div>
