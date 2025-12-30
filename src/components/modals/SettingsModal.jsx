@@ -132,11 +132,12 @@ const SettingsModal = ({ isOpen, onClose, settings, onSettingsChange }) => {
           </h3>
           <div className="space-y-3">
             <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-              <label className="block mb-2">
+              <label htmlFor="setting-default-view" className="block mb-2">
                 <span className="font-medium text-gray-800 dark:text-gray-100">Default view</span>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Choose your starting view</p>
               </label>
               <select
+                id="setting-default-view"
                 value={localSettings.defaultView}
                 onChange={(e) => handleChange('defaultView', e.target.value)}
                 className="w-full px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-800 dark:text-gray-100"
@@ -195,13 +196,14 @@ const SettingsModal = ({ isOpen, onClose, settings, onSettingsChange }) => {
 
             {localSettings.preloadImages && (
               <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                <label className="block mb-2">
+                <label htmlFor="setting-preload-range" className="block mb-2">
                   <span className="font-medium text-gray-800 dark:text-gray-100">Preload range</span>
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                     Days to preload: ±{localSettings.preloadDays}
                   </p>
                 </label>
                 <input
+                  id="setting-preload-range"
                   type="range"
                   min="1"
                   max="7"
@@ -217,11 +219,12 @@ const SettingsModal = ({ isOpen, onClose, settings, onSettingsChange }) => {
             )}
 
             <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-              <label className="block mb-2">
+              <label htmlFor="setting-image-quality" className="block mb-2">
                 <span className="font-medium text-gray-800 dark:text-gray-100">Image quality</span>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Balance quality vs performance</p>
               </label>
               <select
+                id="setting-image-quality"
                 value={localSettings.imageQuality}
                 onChange={(e) => handleChange('imageQuality', e.target.value)}
                 className="w-full px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-800 dark:text-gray-100"
