@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Modal from './Modal';
 import { getBreedSpecificResponse } from '../../utils/breedKnowledge';
+import { isFamilyFriendly } from '../../utils/dataValidation';
 
 const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
   // Initial welcome message mentions breed if available
@@ -20,6 +21,7 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
   ]);
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [error, setError] = useState(null);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -28,6 +30,11 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
       inputRef.current.focus();
     }
   }, [isOpen]);
+
+  // Clear error when input changes
+  useEffect(() => {
+    if (error) setError(null);
+  }, [inputMessage]);
 
   useEffect(() => {
     scrollToBottom();
@@ -98,6 +105,12 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
 
   const handleSend = async () => {
     if (!inputMessage.trim() || inputMessage.length > 500) return;
+
+    // Security: Check for profanity
+    if (!isFamilyFriendly(inputMessage)) {
+      setError('Please keep the conversation family-friendly! 🐾');
+      return;
+    }
 
     const userMessage = {
       role: 'user',
@@ -214,37 +227,48 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
         )}
 
         {/* Input Area */}
-        <div className="flex gap-2">
-          <input
-            ref={inputRef}
-            type="text"
-            value={inputMessage}
-            onChange={(e) => setInputMessage(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder="Ask me anything about dogs..."
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            disabled={isTyping}
-            maxLength={500}
-            aria-label="Message input"
-          />
-          <button
-            onClick={handleSend}
-            disabled={!inputMessage.trim() || isTyping}
-            className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
-            aria-label="Send message"
-          >
-            Send
-          </button>
-          <button
-            onClick={handleClearChat}
-            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400"
-            aria-label="Clear chat"
-            title="Clear chat history"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-            </svg>
-          </button>
+        <div className="flex flex-col gap-2">
+          <div className="flex gap-2">
+            <input
+              ref={inputRef}
+              type="text"
+              value={inputMessage}
+              onChange={(e) => setInputMessage(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder="Ask me anything about dogs..."
+              className={`flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                error ? 'border-red-500 focus:ring-red-500' : 'border-gray-300'
+              }`}
+              disabled={isTyping}
+              maxLength={500}
+              aria-label="Message input"
+              aria-invalid={!!error}
+              aria-describedby={error ? "input-error" : undefined}
+            />
+            <button
+              onClick={handleSend}
+              disabled={!inputMessage.trim() || isTyping}
+              className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
+              aria-label="Send message"
+            >
+              Send
+            </button>
+            <button
+              onClick={handleClearChat}
+              className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400"
+              aria-label="Clear chat"
+              title="Clear chat history"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </button>
+          </div>
+          {error && (
+            <p id="input-error" className="text-xs text-red-500 ml-1" role="alert">
+              {error}
+            </p>
+          )}
         </div>
 
         {/* Disclaimer */}
