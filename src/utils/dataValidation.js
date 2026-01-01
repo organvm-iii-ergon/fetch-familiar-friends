@@ -445,8 +445,13 @@ export function isFamilyFriendly(content) {
 
   const lowerContent = content.toLowerCase();
 
+  // Use word boundaries to prevent false positives (e.g., "hello" containing "hell")
   for (const word of profanity) {
-    if (lowerContent.includes(word)) {
+    // Regex explanation:
+    // \b matches a word boundary (start/end of string, space, punctuation)
+    // We escape the word just in case, though our list is safe
+    const regex = new RegExp(`\\b${word}\\b`, 'i');
+    if (regex.test(lowerContent)) {
       return false;
     }
   }

@@ -298,3 +298,9 @@ describe('isFamilyFriendly', () => {
     expect(isFamilyFriendly('What the HELL')).toBe(false);
   });
 });
+
+  it('should not flag innocent words containing profanity substrings', () => {
+    expect(isFamilyFriendly('Hello there')).toBe(true);
+    expect(isFamilyFriendly('Classroom')).toBe(true);
+    expect(isFamilyFriendly('Assemble')).toBe(true);
+  });

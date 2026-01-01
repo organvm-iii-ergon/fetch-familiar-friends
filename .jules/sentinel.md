@@ -1,9 +1,7 @@
-## 2024-05-23 - [Sanitization Improvement]
-**Vulnerability:** The previous `sanitizeInput` function used a fragile regex-based blacklist (removing `<script>`, `<iframe>`, etc.) which is easily bypassed by other XSS vectors (e.g., `<img onerror=...>`).
-**Learning:** Regex-based blacklisting is insufficient for security. HTML entity encoding is a safer default when full HTML parsing/sanitization libraries (like DOMPurify) are not available or desired to keep dependencies low.
-**Prevention:** Always default to HTML entity encoding for user input unless rich text is explicitly required.
-
-## 2024-05-23 - [Input Length Limits]
-**Vulnerability:** The AI chat input field lacked a maximum length constraint, potentially allowing massive payloads that could cause client-side DoS or server-side issues (simulated).
-**Learning:** Even for client-side interactions, enforcing reasonable input limits improves robustness and prevents UI breaking.
-**Prevention:** Always add `maxLength` attributes to input fields and validate length on submission.
+## 2024-05-23 - AiModal Input Validation and Sanitization
+**Vulnerability:** The AI chat input lacked profanity filtering despite memory logs claiming it existed. Additionally, the existing `isFamilyFriendly` utility used naive substring matching, leading to false positives (e.g., flagging "hello" because of "hell").
+**Learning:** Never assume security controls exist based on documentation or memory logs alone; always verify implementation. Naive string matching for profanity filters is prone to "clbuttic" errors (Scunthorpe problem).
+**Prevention:**
+1. Always verify security controls in the actual code path (`handleSend` in this case).
+2. Use word boundaries (`\b`) or more sophisticated libraries for keyword filtering to avoid false positives.
+3. Added `react-dom` version pinning to resolve peer dependency issues impacting test reliability.
