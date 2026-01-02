@@ -5,8 +5,22 @@ import { motion } from 'framer-motion';
 // Static data defined outside component to avoid recreation
 const WEEK_DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], onDateSelect }) => {
+const MonthCalendar = memo(function MonthCalendar({ currentDate, journalEntries = {}, favorites = [], onDateSelect }) {
   const [viewDate, setViewDate] = useState(new Date(currentDate));
+
+  // Optimize favorites lookup by converting to a Set of date strings
+  // This reduces lookup complexity from O(N * M) to O(M) where N is favorites and M is days
+  const favoriteDates = useMemo(() => {
+    const dates = new Set();
+    favorites.forEach(fav => {
+      try {
+        dates.add(new Date(fav.savedAt).toDateString());
+      } catch (e) {
+        // Handle invalid dates gracefully
+      }
+    });
+    return dates;
+  }, [favorites]);
 
   // Get calendar data for the month
   const calendarData = useMemo(() => {
@@ -78,11 +92,7 @@ const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], 
 
   // Check if a date has favorites
   const hasFavorite = (date) => {
-    const dateStr = date.toDateString();
-    return favorites.some(fav => {
-      const favDate = new Date(fav.savedAt).toDateString();
-      return favDate === dateStr;
-    });
+    return favoriteDates.has(date.toDateString());
   };
 
   // Check if date is today
