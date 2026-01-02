@@ -213,7 +213,17 @@ function App() {
   };
 
   // Keyboard shortcuts (only active when no modal is open)
-  const anyModalOpen = isJournalOpen || isAiOpen || isFavoritesOpen || isStatsOpen || isShortcutsOpen || isSettingsOpen || isASCIIVisualizerOpen || isSocialHubOpen;
+  const modalStates = [
+    isJournalOpen,
+    isAiOpen,
+    isFavoritesOpen,
+    isStatsOpen,
+    isShortcutsOpen,
+    isSettingsOpen,
+    isASCIIVisualizerOpen,
+    isSocialHubOpen
+  ];
+  const anyModalOpen = modalStates.some(state => state);
 
   useNavigationShortcuts({
     onPrevious: handlePreviousDay,

@@ -395,7 +395,7 @@ const SocialHub = ({ isOpen, onClose }) => {
                 </div>
                 <div className="flex justify-between p-3 bg-gray-50 rounded-lg">
                   <span className="text-sm text-gray-700">Birthday</span>
-                  <span className="text-sm font-medium">3 years old</span>
+                  <span className="text-sm font-medium">March 15</span>
                 </div>
                 <div className="flex justify-between p-3 bg-gray-50 rounded-lg">
                   <span className="text-sm text-gray-700">Microchip ID</span>
