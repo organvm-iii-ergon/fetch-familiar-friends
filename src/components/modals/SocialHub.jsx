@@ -237,11 +237,11 @@ const SocialHub = ({ isOpen, onClose }) => {
                 <div className="space-y-2">
                   <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                     <span className="text-sm text-gray-700">Last Checkup</span>
-                    <span className="text-sm font-medium">Dec 15, 2025</span>
+                    <span className="text-sm font-medium">3 weeks ago</span>
                   </div>
                   <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                     <span className="text-sm text-gray-700">Next Vaccination</span>
-                    <span className="text-sm font-medium text-orange-600">Jan 20, 2026</span>
+                    <span className="text-sm font-medium text-orange-600">In 2 weeks</span>
                   </div>
                   <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                     <span className="text-sm text-gray-700">Weight</span>
@@ -395,7 +395,7 @@ const SocialHub = ({ isOpen, onClose }) => {
                 </div>
                 <div className="flex justify-between p-3 bg-gray-50 rounded-lg">
                   <span className="text-sm text-gray-700">Birthday</span>
-                  <span className="text-sm font-medium">March 15, 2023</span>
+                  <span className="text-sm font-medium">3 years old</span>
                 </div>
                 <div className="flex justify-between p-3 bg-gray-50 rounded-lg">
                   <span className="text-sm text-gray-700">Microchip ID</span>
