@@ -3,7 +3,15 @@ import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
 // Static data defined outside component to avoid recreation
-const WEEK_DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const WEEK_DAYS = [
+  { short: 'Sun', full: 'Sunday' },
+  { short: 'Mon', full: 'Monday' },
+  { short: 'Tue', full: 'Tuesday' },
+  { short: 'Wed', full: 'Wednesday' },
+  { short: 'Thu', full: 'Thursday' },
+  { short: 'Fri', full: 'Friday' },
+  { short: 'Sat', full: 'Saturday' }
+];
 
 const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], onDateSelect }) => {
   const [viewDate, setViewDate] = useState(new Date(currentDate));
@@ -169,10 +177,11 @@ const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], 
       <div className="grid grid-cols-7 gap-2 mb-2">
         {WEEK_DAYS.map((day) => (
           <div
-            key={day}
+            key={day.short}
             className="text-center text-sm font-semibold text-gray-600 dark:text-gray-400 py-2"
+            aria-label={day.full}
           >
-            {day}
+            {day.short}
           </div>
         ))}
       </div>
@@ -185,6 +194,11 @@ const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], 
           const isCurrentDay = isToday(dayData.date);
           const isSelectedDay = isSelected(dayData.date);
           const isFutureDay = isFuture(dayData.date);
+
+          // Construct accessible label
+          let ariaLabel = dayData.date.toLocaleDateString();
+          if (hasJournal) ariaLabel += ', has journal entry';
+          if (hasFav) ariaLabel += ', has favorites';
 
           return (
             <motion.button
@@ -202,7 +216,7 @@ const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], 
                 ${isFutureDay ? 'opacity-40 cursor-not-allowed' : 'cursor-pointer'}
                 ${!isFutureDay && !isSelectedDay ? 'focus:outline-none focus:ring-2 focus:ring-blue-400' : ''}
               `}
-              aria-label={`${dayData.date.toLocaleDateString()}`}
+              aria-label={ariaLabel}
               title={`${dayData.date.toLocaleDateString()}${hasJournal ? ' (has journal)' : ''}${hasFav ? ' (has favorites)' : ''}`}
             >
               <div className="text-sm font-medium">{dayData.day}</div>
