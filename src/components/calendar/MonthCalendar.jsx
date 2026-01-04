@@ -70,19 +70,39 @@ const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], 
     return days;
   }, [viewDate]);
 
+  // Performance optimization: Create Sets for O(1) lookups
+  // This avoids O(N) operations inside the render loop which runs 42 times
+  const journalSet = useMemo(() => {
+    const set = new Set();
+    Object.keys(journalEntries).forEach(key => {
+      if (journalEntries[key] && journalEntries[key].trim().length > 0) {
+        set.add(key);
+      }
+    });
+    return set;
+  }, [journalEntries]);
+
+  const favoriteSet = useMemo(() => {
+    const set = new Set();
+    favorites.forEach(fav => {
+      // Normalize to date string to match calendar dates
+      set.add(new Date(fav.savedAt).toDateString());
+    });
+    return set;
+  }, [favorites]);
+
   // Check if a date has journal entry
   const hasJournalEntry = (date) => {
-    const dateKey = date.toDateString();
-    return journalEntries[dateKey] && journalEntries[dateKey].trim().length > 0;
+    // Check both legacy format (toDateString) and standardized format (YYYY-MM-DD)
+    const dateStr = date.toDateString();
+    const dateKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+
+    return journalSet.has(dateStr) || journalSet.has(dateKey);
   };
 
   // Check if a date has favorites
   const hasFavorite = (date) => {
-    const dateStr = date.toDateString();
-    return favorites.some(fav => {
-      const favDate = new Date(fav.savedAt).toDateString();
-      return favDate === dateStr;
-    });
+    return favoriteSet.has(date.toDateString());
   };
 
   // Check if date is today
