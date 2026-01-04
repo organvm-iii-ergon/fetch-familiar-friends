@@ -286,6 +286,8 @@ describe('isFamilyFriendly', () => {
   it('should pass family-friendly content', () => {
     expect(isFamilyFriendly('Dogs are wonderful pets!')).toBe(true);
     expect(isFamilyFriendly('Have a great day with your furry friend!')).toBe(true);
+    expect(isFamilyFriendly('Hello there')).toBe(true); // Should not flag "hello"
+    expect(isFamilyFriendly('This is a classic example')).toBe(true); // Should not flag "classic" (contains "ass")
   });
 
   it('should flag profanity', () => {
