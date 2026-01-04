@@ -45,7 +45,7 @@ function App() {
     preloadImages: true,
     preloadDays: 3,
     defaultView: 'day',
-    animationsEnabled: true,
+    animationsEnabled: typeof window !== 'undefined' ? !window.matchMedia('(prefers-reduced-motion: reduce)').matches : true,
     compactMode: false,
     autoTheme: false
   });
