@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 // Static data defined outside component to avoid recreation
 const WEEK_DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], onDateSelect }) => {
+const MonthCalendar = memo(function MonthCalendar({ currentDate, journalEntries = {}, favorites = [], onDateSelect }) {
   const [viewDate, setViewDate] = useState(new Date(currentDate));
 
   // Get calendar data for the month
@@ -70,6 +70,25 @@ const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], 
     return days;
   }, [viewDate]);
 
+  // Optimization: Pre-calculate favorite dates set to avoid O(N) lookup in render loop
+  const favoriteDatesSet = useMemo(() => {
+    const set = new Set();
+    if (Array.isArray(favorites)) {
+      favorites.forEach(fav => {
+        if (fav.savedAt) {
+          set.add(new Date(fav.savedAt).toDateString());
+        }
+      });
+    }
+    return set;
+  }, [favorites]);
+
+  // Optimization: Create 'today' objects once per render
+  const todayObj = new Date();
+  const todayDateString = todayObj.toDateString();
+  todayObj.setHours(0, 0, 0, 0);
+  const todayMidnight = todayObj;
+
   // Check if a date has journal entry
   const hasJournalEntry = (date) => {
     const dateKey = date.toDateString();
@@ -78,17 +97,12 @@ const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], 
 
   // Check if a date has favorites
   const hasFavorite = (date) => {
-    const dateStr = date.toDateString();
-    return favorites.some(fav => {
-      const favDate = new Date(fav.savedAt).toDateString();
-      return favDate === dateStr;
-    });
+    return favoriteDatesSet.has(date.toDateString());
   };
 
   // Check if date is today
   const isToday = (date) => {
-    const today = new Date();
-    return date.toDateString() === today.toDateString();
+    return date.toDateString() === todayDateString;
   };
 
   // Check if date is selected
@@ -98,9 +112,7 @@ const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], 
 
   // Check if date is in the future
   const isFuture = (date) => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    return date > today;
+    return date > todayMidnight;
   };
 
   const handlePrevMonth = () => {
