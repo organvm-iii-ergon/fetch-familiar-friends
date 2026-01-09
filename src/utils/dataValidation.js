@@ -446,7 +446,10 @@ export function isFamilyFriendly(content) {
   const lowerContent = content.toLowerCase();
 
   for (const word of profanity) {
-    if (lowerContent.includes(word)) {
+    // Use regex with word boundaries to avoid Scunthorpe problem
+    // Escape the word to handle any special regex characters if they were to be added to profanity list
+    const regex = new RegExp(`\\b${word}\\b`, 'i');
+    if (regex.test(lowerContent)) {
       return false;
     }
   }

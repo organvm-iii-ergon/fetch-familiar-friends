@@ -297,4 +297,12 @@ describe('isFamilyFriendly', () => {
     expect(isFamilyFriendly('This is SHIT')).toBe(false);
     expect(isFamilyFriendly('What the HELL')).toBe(false);
   });
+
+  it('should not flag false positives (Scunthorpe problem)', () => {
+    expect(isFamilyFriendly('Hello world')).toBe(true);
+    expect(isFamilyFriendly('I assume so')).toBe(true);
+    expect(isFamilyFriendly('Class is in session')).toBe(true);
+    expect(isFamilyFriendly('Pass the ball')).toBe(true);
+    expect(isFamilyFriendly('This is a scrap book')).toBe(true);
+  });
 });
