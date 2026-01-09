@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 // Static data defined outside component to avoid recreation
 const WEEK_DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], onDateSelect }) => {
+const MonthCalendar = memo(function MonthCalendar({ currentDate, journalEntries = {}, favorites = [], onDateSelect }) {
   const [viewDate, setViewDate] = useState(new Date(currentDate));
 
   // Get calendar data for the month
@@ -76,13 +76,20 @@ const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], 
     return journalEntries[dateKey] && journalEntries[dateKey].trim().length > 0;
   };
 
+  // Memoize favorite dates set for O(1) lookup
+  const favoriteDates = useMemo(() => {
+    const dates = new Set();
+    favorites.forEach(fav => {
+      if (fav.savedAt) {
+        dates.add(new Date(fav.savedAt).toDateString());
+      }
+    });
+    return dates;
+  }, [favorites]);
+
   // Check if a date has favorites
   const hasFavorite = (date) => {
-    const dateStr = date.toDateString();
-    return favorites.some(fav => {
-      const favDate = new Date(fav.savedAt).toDateString();
-      return favDate === dateStr;
-    });
+    return favoriteDates.has(date.toDateString());
   };
 
   // Check if date is today

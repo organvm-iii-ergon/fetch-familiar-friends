@@ -1,0 +1,150 @@
+
+> dogtale-daily@0.2.0 lint /app
+> eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0 --no-ignore src/components/calendar/MonthCalendar.jsx
+
+
+/app/scripts/historyParser.js
+   13:7   warning  '__dirname' is assigned a value but never used  no-unused-vars
+  157:35  error    'process' is not defined                        no-undef
+  220:35  error    'process' is not defined                        no-undef
+  602:17  error    'process' is not defined                        no-undef
+
+/app/scripts/ingestBreedData.js
+   31:3   error  'global' is not defined   no-undef
+   34:3   error  'process' is not defined  no-undef
+   51:16  error  'process' is not defined  no-undef
+  283:5   error  'process' is not defined  no-undef
+  331:7   error  'process' is not defined  no-undef
+  334:7   error  'process' is not defined  no-undef
+  339:5   error  'process' is not defined  no-undef
+  346:3   error  'process' is not defined  no-undef
+
+/app/scripts/processDocuments.js
+  312:16  error  'process' is not defined  no-undef
+  382:5   error  'process' is not defined  no-undef
+  425:3   error  'process' is not defined  no-undef
+
+/app/scripts/watchDocuments.js
+  144:19  error  Unnecessary escape character: \/  no-useless-escape
+  175:3   error  'process' is not defined          no-undef
+  178:5   error  'process' is not defined          no-undef
+  181:3   error  'process' is not defined          no-undef
+  184:5   error  'process' is not defined          no-undef
+
+/app/src/App.jsx
+  74:9  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  72 |
+  73 |       if (savedFavorites) {
+> 74 |         setFavorites(JSON.parse(savedFavorites));
+     |         ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  75 |       }
+  76 |       if (savedJournalEntries) {
+  77 |         setJournalEntries(JSON.parse(savedJournalEntries));  react-hooks/set-state-in-effect
+
+/app/src/components/modals/AiModal.jsx
+  33:5  error  Error: Cannot access variable before it is declared
+
+`scrollToBottom` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+  31 |
+  32 |   useEffect(() => {
+> 33 |     scrollToBottom();
+     |     ^^^^^^^^^^^^^^ `scrollToBottom` accessed before it is declared
+  34 |   }, [messages]);
+  35 |
+  36 |   const scrollToBottom = () => {
+
+  34 |   }, [messages]);
+  35 |
+> 36 |   const scrollToBottom = () => {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 37 |     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 38 |   };
+     | ^^^^^ `scrollToBottom` is declared here
+  39 |
+  40 |   const generateAiResponse = (userMessage) => {
+  41 |     const lowerMessage = userMessage.toLowerCase();  react-hooks/immutability
+
+/app/src/components/modals/JournalModal.jsx
+  15:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  13 |
+  14 |   useEffect(() => {
+> 15 |     setEntry(initialEntry);
+     |     ^^^^^^^^ Avoid calling setState() directly within an effect
+  16 |     setCharCount(initialEntry.length);
+  17 |     setViewMode('edit'); // Reset to edit mode when date changes
+  18 |     setSearchQuery(''); // Clear search when switching entries  react-hooks/set-state-in-effect
+
+/app/src/components/modals/KeyboardShortcutsModal.jsx
+  47:3  error  Error: This value cannot be modified
+
+This modifies a variable that React considers immutable.
+
+  45 |   );
+  46 |
+> 47 |   KeyBadge.propTypes = {
+     |   ^^^^^^^^ value cannot be modified
+  48 |     keyText: PropTypes.string.isRequired
+  49 |   };
+  50 |  react-hooks/immutability
+
+/app/src/components/modals/SettingsModal.jsx
+  12:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  10 |
+  11 |   useEffect(() => {
+> 12 |     setLocalSettings(settings);
+     |     ^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  13 |     setHasChanges(false);
+  14 |   }, [settings, isOpen]);
+  15 |  react-hooks/set-state-in-effect
+
+/app/src/components/modals/StatisticsModal.jsx
+  124:3  error  Error: This value cannot be modified
+
+This modifies a variable that React considers immutable.
+
+  122 |   };
+  123 |
+> 124 |   StatCard.propTypes = {
+      |   ^^^^^^^^ value cannot be modified
+  125 |     icon: PropTypes.string.isRequired,
+  126 |     label: PropTypes.string.isRequired,
+  127 |     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,  react-hooks/immutability
+
+/app/src/services/breedDataIngestion.js
+  392:38  error  'module' is not defined  no-undef
+  393:3   error  'module' is not defined  no-undef
+
+/app/src/utils/dataFreshness.js
+  161:9  warning  'now' is assigned a value but never used  no-unused-vars
+
+/app/src/utils/imageCache.test.js
+    1:44  warning  'vi' is defined but never used                no-unused-vars
+  194:13  warning  'oldDate' is assigned a value but never used  no-unused-vars
+  195:13  warning  'newDate' is assigned a value but never used  no-unused-vars
+
+✖ 32 problems (27 errors, 5 warnings)
+
+ ELIFECYCLE  Command failed with exit code 1.
