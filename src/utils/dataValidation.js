@@ -443,13 +443,12 @@ export function isFamilyFriendly(content) {
     // Add more as needed, but keep it reasonable
   ];
 
-  const lowerContent = content.toLowerCase();
+  // Use word boundaries to avoid false positives (e.g., 'class', 'shell')
+  // We escape special regex characters in the words just in case (though current list is safe)
+  const escapedProfanity = profanity.map(word => word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
 
-  for (const word of profanity) {
-    if (lowerContent.includes(word)) {
-      return false;
-    }
-  }
+  // \b matches word boundary.
+  const pattern = new RegExp(`\\b(${escapedProfanity.join('|')})\\b`, 'i');
 
-  return true;
+  return !pattern.test(content);
 }
