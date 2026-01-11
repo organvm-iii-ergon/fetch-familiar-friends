@@ -202,7 +202,7 @@ const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], 
                 ${isFutureDay ? 'opacity-40 cursor-not-allowed' : 'cursor-pointer'}
                 ${!isFutureDay && !isSelectedDay ? 'focus:outline-none focus:ring-2 focus:ring-blue-400' : ''}
               `}
-              aria-label={`${dayData.date.toLocaleDateString()}`}
+              aria-label={`${dayData.date.toLocaleDateString()}${hasJournal ? ', has journal entry' : ''}${hasFav ? ', marked as favorite' : ''}`}
               title={`${dayData.date.toLocaleDateString()}${hasJournal ? ' (has journal)' : ''}${hasFav ? ' (has favorites)' : ''}`}
             >
               <div className="text-sm font-medium">{dayData.day}</div>
@@ -215,7 +215,6 @@ const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], 
                       className={`w-1.5 h-1.5 rounded-full ${
                         isSelectedDay ? 'bg-white' : 'bg-green-500'
                       }`}
-                      aria-label="Has journal entry"
                     />
                   )}
                   {hasFav && (
@@ -223,7 +222,6 @@ const MonthCalendar = memo(({ currentDate, journalEntries = {}, favorites = [], 
                       className={`w-1.5 h-1.5 rounded-full ${
                         isSelectedDay ? 'bg-yellow-200' : 'bg-yellow-500'
                       }`}
-                      aria-label="Has favorite"
                     />
                   )}
                 </div>
