@@ -29,13 +29,13 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
     }
   }, [isOpen]);
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const generateAiResponse = (userMessage) => {
     const lowerMessage = userMessage.toLowerCase();
@@ -153,7 +153,14 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
     <Modal isOpen={isOpen} onClose={onClose} title="AI Assistant" size="xl">
       <div className="flex flex-col h-[500px]">
         {/* Messages Area */}
-        <div className="flex-1 overflow-y-auto mb-4 space-y-4 p-2">
+        <div
+          className="flex-1 overflow-y-auto mb-4 space-y-4 p-2 focus:ring-2 focus:ring-blue-500 rounded-lg"
+          role="log"
+          aria-live="polite"
+          aria-atomic="false"
+          aria-label="Chat history"
+          tabIndex={0}
+        >
           {messages.map((message, index) => (
             <div
               key={index}
@@ -180,9 +187,10 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
           {isTyping && (
             <div className="flex justify-start">
               <div className="bg-gray-100 p-3 rounded-lg">
-                <div className="flex items-center gap-2">
-                  <span className="text-lg">🤖</span>
-                  <div className="flex gap-1">
+                <div className="flex items-center gap-2" role="status">
+                  <span className="sr-only">AI is typing...</span>
+                  <span className="text-lg" aria-hidden="true">🤖</span>
+                  <div className="flex gap-1" aria-hidden="true">
                     <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
                     <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
                     <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
