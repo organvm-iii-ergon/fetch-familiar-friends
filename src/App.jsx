@@ -16,10 +16,58 @@ import SocialHub from './components/modals/SocialHub';
 import { useNavigationShortcuts, useModalShortcuts, useThemeCycleShortcut, useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 import { useDarkMode } from './hooks/useDarkMode';
 
+const DEFAULT_SETTINGS = {
+  autoSave: true,
+  notifications: false,
+  imageQuality: 'high',
+  cacheEnabled: true,
+  preloadImages: true,
+  preloadDays: 3,
+  defaultView: 'day',
+  animationsEnabled: true,
+  compactMode: false,
+  autoTheme: false
+};
+
 function App() {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [theme, setTheme] = useState('park');
   const { isDarkMode, toggleDarkMode } = useDarkMode();
+
+  // Lazy initialization for state to avoid effects and re-renders
+  const [theme, setTheme] = useState(() => {
+    try {
+      return localStorage.getItem('dogtale-theme') || 'park';
+    } catch {
+      return 'park';
+    }
+  });
+
+  const [favorites, setFavorites] = useState(() => {
+    try {
+      const saved = localStorage.getItem('dogtale-favorites');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const [journalEntries, setJournalEntries] = useState(() => {
+    try {
+      const saved = localStorage.getItem('dogtale-journal');
+      return saved ? JSON.parse(saved) : {};
+    } catch {
+      return {};
+    }
+  });
+
+  const [settings, setSettings] = useState(() => {
+    try {
+      const saved = localStorage.getItem('dogtale-settings');
+      return saved ? JSON.parse(saved) : DEFAULT_SETTINGS;
+    } catch {
+      return DEFAULT_SETTINGS;
+    }
+  });
 
   // Modal states
   const [isJournalOpen, setIsJournalOpen] = useState(false);
@@ -31,24 +79,19 @@ function App() {
   const [showMonthView, setShowMonthView] = useState(false);
   const [isASCIIVisualizerOpen, setIsASCIIVisualizerOpen] = useState(false);
   const [isSocialHubOpen, setIsSocialHubOpen] = useState(false);
-  const [showLanding, setShowLanding] = useState(false);
+
+  // Lazy initialize showLanding
+  const [showLanding, setShowLanding] = useState(() => {
+    try {
+      const hasSeenLanding = localStorage.getItem('dogtale-landing-seen');
+      return !hasSeenLanding;
+    } catch {
+      return false;
+    }
+  });
 
   // Data states
-  const [favorites, setFavorites] = useState([]);
-  const [journalEntries, setJournalEntries] = useState({});
   const [currentImage, setCurrentImage] = useState(null);
-  const [settings, setSettings] = useState({
-    autoSave: true,
-    notifications: false,
-    imageQuality: 'high',
-    cacheEnabled: true,
-    preloadImages: true,
-    preloadDays: 3,
-    defaultView: 'day',
-    animationsEnabled: true,
-    compactMode: false,
-    autoTheme: false
-  });
 
   const themes = [
     { name: 'park', label: 'Park', icon: '🌳', gradient: 'from-lime-400 to-emerald-600' },
@@ -60,36 +103,6 @@ function App() {
     { name: 'snow', label: 'Snow', icon: '🌨️', gradient: 'from-blue-100 to-cyan-300' },
     { name: 'autumn', label: 'Autumn', icon: '🍂', gradient: 'from-yellow-600 to-red-700' }
   ];
-
-  // Load data from localStorage on mount
-  useEffect(() => {
-    try {
-      const savedFavorites = localStorage.getItem('dogtale-favorites');
-      const savedJournalEntries = localStorage.getItem('dogtale-journal');
-      const savedTheme = localStorage.getItem('dogtale-theme');
-      const savedSettings = localStorage.getItem('dogtale-settings');
-      const hasSeenLanding = localStorage.getItem('dogtale-landing-seen');
-
-      if (savedFavorites) {
-        setFavorites(JSON.parse(savedFavorites));
-      }
-      if (savedJournalEntries) {
-        setJournalEntries(JSON.parse(savedJournalEntries));
-      }
-      if (savedTheme) {
-        setTheme(savedTheme);
-      }
-      if (savedSettings) {
-        setSettings(JSON.parse(savedSettings));
-      }
-      // Show landing if user hasn't seen it before
-      if (!hasSeenLanding) {
-        setShowLanding(true);
-      }
-    } catch (error) {
-      console.error('Error loading data from localStorage:', error);
-    }
-  }, []);
 
   useEffect(() => {
     try {
@@ -127,18 +140,18 @@ function App() {
     }
   }, [settings]);
 
-  // Modal handlers
-  const handleJournalClick = () => {
+  // Modal handlers - Memoized
+  const handleJournalClick = useCallback(() => {
     setIsJournalOpen(true);
-  };
+  }, []);
 
-  const handleAiClick = () => {
+  const handleAiClick = useCallback(() => {
     setIsAiOpen(true);
-  };
+  }, []);
 
-  const handleFavoritesClick = () => {
+  const handleFavoritesClick = useCallback(() => {
     setIsFavoritesOpen(true);
-  };
+  }, []);
 
   // Journal handlers
   const handleSaveJournal = async (date, entry) => {
@@ -149,8 +162,8 @@ function App() {
     }));
   };
 
-  // Favorites handlers
-  const handleAddFavorite = (imageUrl, imageType) => {
+  // Favorites handlers - Memoized
+  const handleAddFavorite = useCallback((imageUrl, imageType) => {
     const newFavorite = {
       id: Date.now().toString(),
       url: imageUrl,
@@ -158,7 +171,7 @@ function App() {
       savedAt: Date.now()
     };
     setFavorites(prev => [newFavorite, ...prev]);
-  };
+  }, []); // Empty deps because it uses functional state update
 
   const handleRemoveFavorite = (id) => {
     setFavorites(prev => prev.filter(fav => fav.id !== id));

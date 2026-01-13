@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getAllDailyContent } from '../../utils/dailyContent';
 import { getCachedImage, cacheImage, preloadNearbyDates } from '../../utils/imageCache';
 
-const CalendarCard = ({
+const CalendarCard = memo(({
   date,
   theme = 'park',
   onJournalClick,
@@ -438,7 +438,9 @@ const CalendarCard = ({
       </div>
     </motion.div>
   );
-};
+});
+
+CalendarCard.displayName = 'CalendarCard';
 
 CalendarCard.propTypes = {
   date: PropTypes.instanceOf(Date).isRequired,
