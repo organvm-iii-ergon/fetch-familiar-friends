@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Modal from './Modal';
 import { getBreedSpecificResponse } from '../../utils/breedKnowledge';
+import { isFamilyFriendly, sanitizeInput } from '../../utils/dataValidation';
 
 const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
   // Initial welcome message mentions breed if available
@@ -20,6 +21,7 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
   ]);
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [error, setError] = useState('');
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -29,13 +31,13 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
     }
   }, [isOpen]);
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const generateAiResponse = (userMessage) => {
     const lowerMessage = userMessage.toLowerCase();
@@ -99,13 +101,23 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
   const handleSend = async () => {
     if (!inputMessage.trim() || inputMessage.length > 500) return;
 
+    // Validate content
+    if (!isFamilyFriendly(inputMessage)) {
+      setError('Please use appropriate language.');
+      setTimeout(() => setError(''), 3000);
+      return;
+    }
+
+    const sanitizedMessage = sanitizeInput(inputMessage.slice(0, 500));
+
     const userMessage = {
       role: 'user',
-      content: inputMessage.slice(0, 500) // Ensure max length
+      content: sanitizedMessage
     };
 
     setMessages(prev => [...prev, userMessage]);
     setInputMessage('');
+    setError('');
     setIsTyping(true);
 
     // Simulate AI thinking time
@@ -214,18 +226,29 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
         )}
 
         {/* Input Area */}
+        {error && (
+          <p className="text-red-500 text-xs mb-2 px-2" role="alert">
+            {error}
+          </p>
+        )}
         <div className="flex gap-2">
           <input
             ref={inputRef}
             type="text"
             value={inputMessage}
-            onChange={(e) => setInputMessage(e.target.value)}
+            onChange={(e) => {
+              setInputMessage(e.target.value);
+              if (error) setError('');
+            }}
             onKeyPress={handleKeyPress}
             placeholder="Ask me anything about dogs..."
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className={`flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+              error ? 'border-red-500 bg-red-50' : 'border-gray-300'
+            }`}
             disabled={isTyping}
             maxLength={500}
             aria-label="Message input"
+            aria-invalid={!!error}
           />
           <button
             onClick={handleSend}

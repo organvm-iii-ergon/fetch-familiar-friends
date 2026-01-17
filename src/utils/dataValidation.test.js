@@ -297,4 +297,16 @@ describe('isFamilyFriendly', () => {
     expect(isFamilyFriendly('This is SHIT')).toBe(false);
     expect(isFamilyFriendly('What the HELL')).toBe(false);
   });
+
+  it('should avoid Scunthorpe problem (false positives)', () => {
+    expect(isFamilyFriendly('This is a classic car')).toBe(true); // contains "ass"
+    expect(isFamilyFriendly('Hello world')).toBe(true); // contains "hell"
+    expect(isFamilyFriendly('Scrape the ice')).toBe(true); // contains "crap"
+    expect(isFamilyFriendly('I have class today')).toBe(true); // contains "ass"
+  });
+
+  it('should still catch profanity with punctuation', () => {
+    expect(isFamilyFriendly('You are an ass.')).toBe(false);
+    expect(isFamilyFriendly('What the hell!')).toBe(false);
+  });
 });
