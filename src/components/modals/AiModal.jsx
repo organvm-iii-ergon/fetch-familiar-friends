@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Modal from './Modal';
 import { getBreedSpecificResponse } from '../../utils/breedKnowledge';
+import { sanitizeInput, isFamilyFriendly } from '../../utils/dataValidation';
 
 const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
   // Initial welcome message mentions breed if available
@@ -20,6 +21,7 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
   ]);
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [error, setError] = useState('');
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -97,11 +99,23 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
   };
 
   const handleSend = async () => {
+    setError('');
     if (!inputMessage.trim() || inputMessage.length > 500) return;
+
+    // Security check: Profanity filter
+    if (!isFamilyFriendly(inputMessage)) {
+      setError('Please keep the conversation family-friendly.');
+      return;
+    }
+
+    // Security check: Input sanitization
+    // Although React escapes by default, we sanitize here to prevent
+    // any potential future issues if this data is used elsewhere.
+    const sanitizedContent = sanitizeInput(inputMessage.slice(0, 500));
 
     const userMessage = {
       role: 'user',
-      content: inputMessage.slice(0, 500) // Ensure max length
+      content: sanitizedContent
     };
 
     setMessages(prev => [...prev, userMessage]);
@@ -112,7 +126,7 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
     setTimeout(() => {
       const aiResponse = {
         role: 'assistant',
-        content: generateAiResponse(inputMessage)
+        content: generateAiResponse(inputMessage) // AI response generation is safe to use original input for matching keywords
       };
       setMessages(prev => [...prev, aiResponse]);
       setIsTyping(false);
@@ -213,13 +227,23 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
           </div>
         )}
 
+        {/* Error Message */}
+        {error && (
+          <div className="mb-2 px-3 py-2 bg-red-100 border border-red-200 text-red-700 text-sm rounded-lg" role="alert">
+            {error}
+          </div>
+        )}
+
         {/* Input Area */}
         <div className="flex gap-2">
           <input
             ref={inputRef}
             type="text"
             value={inputMessage}
-            onChange={(e) => setInputMessage(e.target.value)}
+            onChange={(e) => {
+              setInputMessage(e.target.value);
+              if (error) setError('');
+            }}
             onKeyPress={handleKeyPress}
             placeholder="Ask me anything about dogs..."
             className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
