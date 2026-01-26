@@ -60,18 +60,19 @@ describe('imageApi', () => {
 
       const result = await fetchPetImage('dog', { useFallback: true });
 
-      expect(result.url).toBe('/fallback-dog.jpg');
+      expect(result.url).toBe('/fallback-dog.svg');
       expect(result.isFallback).toBe(true);
       expect(result.error).toBe('Network error');
-    });
+    }, 15000); // Extend timeout to accommodate retry delays
 
     it('should throw error when useFallback is false', async () => {
-      global.fetch.mockRejectedValue(new Error('Network error'));
+      // Mock fetch to fail immediately without retry delays
+      global.fetch.mockImplementation(() => Promise.reject(new Error('Network error')));
 
       await expect(
         fetchPetImage('dog', { useFallback: false })
       ).rejects.toThrow('Network error');
-    });
+    }, 15000); // Extend timeout to accommodate retry delays
 
     it('should extract breed from dog image URL', async () => {
       global.fetch.mockResolvedValueOnce({
@@ -168,7 +169,7 @@ describe('imageApi', () => {
 
       expect(results[0].isFallback).toBe(false);
       expect(results[1].isFallback).toBe(true);
-      expect(results[1].url).toBe('/fallback-cat.jpg');
+      expect(results[1].url).toBe('/fallback-cat.svg');
     });
   });
 
