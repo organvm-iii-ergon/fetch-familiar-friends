@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
+import { RefreshCw, Star, ChevronDown, BookOpen, Sparkles, Heart, AlertCircle } from 'lucide-react';
 import { getAllDailyContent } from '../../utils/dailyContent';
 import { getCachedImage, cacheImage, preloadNearbyDates } from '../../utils/imageCache';
+import Skeleton from '../ui/Skeleton';
 
 const CalendarCard = ({
   date,
@@ -239,7 +241,7 @@ const CalendarCard = ({
     >
       <div className="relative preserve-3d">
         <motion.div
-          className={`glass-effect rounded-custom-lg p-6 bg-gradient-to-br ${themeGradients[theme]}`}
+          className={`glass-effect rounded-2xl p-6 bg-gradient-to-br ${themeGradients[theme]} shadow-soft-lg`}
           animate={{ rotateY: isFlipped ? 180 : 0 }}
           transition={{ duration: 0.6, type: "spring" }}
           style={{ transformStyle: 'preserve-3d' }}
@@ -247,40 +249,49 @@ const CalendarCard = ({
           {/* Card Header */}
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-white text-xl font-bold">{formatDate()}</h3>
-            <button
+            <motion.button
               onClick={() => setIsFlipped(!isFlipped)}
-              className="text-white/80 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white/50 rounded-lg p-1"
+              className="text-white/80 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white/50 rounded-xl p-2 hover:bg-white/10"
               aria-label={`Flip card to show ${isFlipped ? 'dog' : 'cat'} mode`}
               title="Toggle between dog and cat mode"
+              whileHover={{ scale: 1.05, rotate: 180 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.3 }}
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                      d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-              </svg>
-            </button>
+              <RefreshCw className="w-5 h-5" />
+            </motion.button>
           </div>
 
           {/* Image Container */}
-          <div className="relative h-64 mb-4 rounded-custom overflow-hidden bg-white/10">
+          <motion.div
+            className="relative h-64 mb-4 rounded-xl overflow-hidden bg-white/10"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+          >
             {loading ? (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+              <div className="absolute inset-0">
+                <Skeleton.Image aspectRatio="4/3" className="h-full w-full rounded-xl" />
               </div>
             ) : error ? (
-              <div className="absolute inset-0 flex items-center justify-center flex-col gap-2 p-4">
-                <span className="text-white text-4xl">😢</span>
+              <div className="absolute inset-0 flex items-center justify-center flex-col gap-3 p-4 bg-white/5">
+                <div className="p-3 bg-white/10 rounded-full">
+                  <AlertCircle className="w-8 h-8 text-white/80" />
+                </div>
                 <p className="text-white text-center text-sm">{error}</p>
                 {retryCount < MAX_RETRIES && (
                   <p className="text-white/70 text-xs">Retrying... ({retryCount + 1}/{MAX_RETRIES})</p>
                 )}
                 {retryCount >= MAX_RETRIES && (
-                  <button
+                  <motion.button
                     onClick={() => setRetryCount(0)}
-                    className="mt-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-white text-sm transition-colors"
+                    className="mt-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-xl text-white text-sm transition-colors flex items-center gap-2"
                     aria-label="Retry loading image"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
+                    <RefreshCw className="w-4 h-4" />
                     Try Again
-                  </button>
+                  </motion.button>
                 )}
               </div>
             ) : (
@@ -290,9 +301,9 @@ const CalendarCard = ({
                   src={todayImage}
                   alt={isFlipped ? "Cat of the day" : "Dog of the day"}
                   className="w-full h-full object-cover"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.3 }}
                   onError={() => setError('Failed to load image')}
                 />
@@ -300,108 +311,149 @@ const CalendarCard = ({
             )}
 
             {/* Animal Type Badge */}
-            <div className="absolute top-2 left-2 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
-              <span className="text-white text-sm font-medium">
-                {isFlipped ? '🐱 Cat Mode' : '🐕 Dog Mode'}
+            <motion.div
+              className="absolute top-3 left-3 bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <span className="text-white text-sm font-medium flex items-center gap-1.5">
+                {isFlipped ? (
+                  <>
+                    <span className="w-2 h-2 rounded-full bg-purple-300" />
+                    Cat Mode
+                  </>
+                ) : (
+                  <>
+                    <span className="w-2 h-2 rounded-full bg-amber-300" />
+                    Dog Mode
+                  </>
+                )}
               </span>
-            </div>
+            </motion.div>
 
             {/* Breed Info Badge */}
             {breedInfo && !loading && !error && (
-              <div className="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-3 py-1.5 rounded-full">
+              <motion.div
+                className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
                 <span className="text-white text-xs font-semibold">
                   {breedInfo}
                 </span>
-              </div>
+              </motion.div>
             )}
 
             {/* Favorite Button */}
             {!loading && !error && (
-              <button
+              <motion.button
                 onClick={handleFavoriteClick}
-                className="absolute top-2 right-2 p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/40 transition-all focus:outline-none focus:ring-2 focus:ring-white/50"
+                className="absolute top-3 right-3 p-2.5 bg-white/20 backdrop-blur-md rounded-full hover:bg-white/30 transition-all focus:outline-none focus:ring-2 focus:ring-white/50 border border-white/20"
                 aria-label={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
                 title={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               >
-                <span className={`text-2xl transition-transform ${isFavorited ? 'scale-110' : ''}`}>
-                  {isFavorited ? '⭐' : '☆'}
-                </span>
-              </button>
+                <Star
+                  className={`w-5 h-5 transition-colors ${
+                    isFavorited ? 'text-yellow-400 fill-yellow-400' : 'text-white'
+                  }`}
+                />
+              </motion.button>
             )}
-          </div>
+          </motion.div>
 
           {/* Action Buttons */}
-          <div className="grid grid-cols-3 gap-2" role="group" aria-label="Card actions">
-            <button
+          <div className="grid grid-cols-3 gap-3" role="group" aria-label="Card actions">
+            <motion.button
               onClick={onJournalClick}
-              className="glass-effect p-3 rounded-custom hover:bg-white/20 transition-all text-white flex flex-col items-center gap-1 focus:outline-none focus:ring-2 focus:ring-white/50"
+              className="glass-effect p-3 rounded-xl hover:bg-white/20 transition-all text-white flex flex-col items-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-white/50"
               aria-label="Open journal"
               title="Write in your journal"
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <span className="text-2xl" aria-hidden="true">📝</span>
-              <span className="text-xs">Journal</span>
-            </button>
+              <BookOpen className="w-5 h-5" />
+              <span className="text-xs font-medium">Journal</span>
+            </motion.button>
 
-            <button
+            <motion.button
               onClick={onAiClick}
-              className="glass-effect p-3 rounded-custom hover:bg-white/20 transition-all text-white flex flex-col items-center gap-1 focus:outline-none focus:ring-2 focus:ring-white/50"
+              className="glass-effect p-3 rounded-xl hover:bg-white/20 transition-all text-white flex flex-col items-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-white/50"
               aria-label="Open AI chat"
               title="Chat with AI assistant"
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <span className="text-2xl" aria-hidden="true">✨</span>
-              <span className="text-xs">AI Chat</span>
-            </button>
+              <Sparkles className="w-5 h-5" />
+              <span className="text-xs font-medium">AI Chat</span>
+            </motion.button>
 
-            <button
+            <motion.button
               onClick={onFavoritesClick}
-              className="glass-effect p-3 rounded-custom hover:bg-white/20 transition-all text-white flex flex-col items-center gap-1 relative focus:outline-none focus:ring-2 focus:ring-white/50"
+              className="glass-effect p-3 rounded-xl hover:bg-white/20 transition-all text-white flex flex-col items-center gap-1.5 relative focus:outline-none focus:ring-2 focus:ring-white/50"
               aria-label={`Open favorites${favoriteCount > 0 ? `, ${favoriteCount} items` : ''}`}
               title="View your favorite items"
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <span className="text-2xl" aria-hidden="true">⭐</span>
-              <span className="text-xs">Favorites</span>
+              <Heart className="w-5 h-5" />
+              <span className="text-xs font-medium">Favorites</span>
               {favoriteCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center" aria-label={`${favoriteCount} favorites`}>
+                <motion.span
+                  className="absolute -top-1 -right-1 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-semibold shadow-soft"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: 'spring', stiffness: 500, damping: 20 }}
+                  aria-label={`${favoriteCount} favorites`}
+                >
                   {favoriteCount}
-                </span>
+                </motion.span>
               )}
-            </button>
+            </motion.button>
           </div>
 
           {/* Daily Content Section */}
           {dailyContent && (
             <div className="mt-4 space-y-2">
               {/* Mood of the Day */}
-              <div className="p-3 glass-effect rounded-custom">
+              <motion.div
+                className="p-3 glass-effect rounded-xl"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-2xl">{dailyContent.mood.emoji}</span>
                   <span className="text-white font-semibold text-sm">Today&apos;s Mood:</span>
                   <span className="text-white/90 text-sm">{dailyContent.mood.text}</span>
                 </div>
                 <p className="text-white/70 text-xs ml-9">{dailyContent.mood.description}</p>
-              </div>
+              </motion.div>
 
               {/* Expandable Fun Fact & Quote */}
-              <button
+              <motion.button
                 onClick={() => setShowContent(!showContent)}
-                className="w-full p-3 glass-effect rounded-custom hover:bg-white/20 transition-all text-left group"
+                className="w-full p-3 glass-effect rounded-xl hover:bg-white/20 transition-all text-left group"
                 aria-expanded={showContent}
                 aria-label="Toggle fun fact and quote"
+                whileHover={{ scale: 1.01 }}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-white font-semibold text-sm">
-                    💡 Fun Fact & Quote
+                  <span className="text-white font-semibold text-sm flex items-center gap-2">
+                    <Sparkles className="w-4 h-4" />
+                    Fun Fact & Quote
                   </span>
-                  <svg
-                    className={`w-4 h-4 text-white/70 transition-transform ${showContent ? 'rotate-180' : ''}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                  <motion.div
+                    animate={{ rotate: showContent ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
+                    <ChevronDown className="w-4 h-4 text-white/70" />
+                  </motion.div>
                 </div>
-              </button>
+              </motion.button>
 
               <AnimatePresence>
                 {showContent && (
@@ -412,12 +464,12 @@ const CalendarCard = ({
                     transition={{ duration: 0.2 }}
                     className="overflow-hidden"
                   >
-                    <div className="p-3 glass-effect rounded-custom space-y-2">
+                    <div className="p-3 glass-effect rounded-xl space-y-3">
                       <div>
                         <p className="text-white/60 text-xs font-semibold mb-1">Did you know?</p>
                         <p className="text-white/90 text-sm">{dailyContent.fact}</p>
                       </div>
-                      <div className="border-t border-white/20 pt-2">
+                      <div className="border-t border-white/20 pt-3">
                         <p className="text-white/60 text-xs font-semibold mb-1">Quote of the Day</p>
                         <p className="text-white/90 text-sm italic">&quot;{dailyContent.quote}&quot;</p>
                       </div>
@@ -430,9 +482,14 @@ const CalendarCard = ({
 
           {/* Journal Entry Preview */}
           {journalEntry && (
-            <div className="mt-4 p-3 glass-effect rounded-custom">
+            <motion.div
+              className="mt-4 p-3 glass-effect rounded-xl"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
               <p className="text-white/80 text-sm truncate">{journalEntry}</p>
-            </div>
+            </motion.div>
           )}
         </motion.div>
       </div>

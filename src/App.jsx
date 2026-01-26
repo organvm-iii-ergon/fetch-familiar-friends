@@ -1,4 +1,19 @@
 import { useState, useEffect, useCallback } from 'react';
+import { motion } from 'framer-motion';
+import {
+  Lightbulb,
+  PawPrint,
+  Activity,
+  Sun,
+  Moon,
+  Calendar,
+  CalendarDays,
+  Keyboard,
+  Settings,
+  BarChart3,
+  User,
+  LogOut,
+} from 'lucide-react';
 import CalendarCard from './components/calendar/CalendarCard';
 import ThemeSelector from './components/calendar/ThemeSelector';
 import DateNavigation from './components/calendar/DateNavigation';
@@ -16,16 +31,47 @@ import ASCIIVisualizer from './components/ASCIIVisualizer';
 import LoginModal from './components/auth/LoginModal';
 import SignupModal from './components/auth/SignupModal';
 import HealthDashboard from './components/health/HealthDashboard';
+import StoryModal from './components/modals/StoryModal';
+import SeasonPass from './components/social/SeasonPass';
+import { AchievementNotificationContainer } from './components/achievements/AchievementNotification';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { SubscriptionProvider } from './contexts/SubscriptionContext';
+import { AchievementProvider } from './contexts/AchievementContext';
 import { useNavigationShortcuts, useModalShortcuts, useThemeCycleShortcut, useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 import { useDarkMode } from './hooks/useDarkMode';
+import Button from './components/ui/Button';
+
+// Header button component for consistent styling
+const HeaderButton = ({ onClick, icon: Icon, label, title, variant = 'secondary', className = '' }) => (
+  <motion.button
+    onClick={onClick}
+    className={`
+      p-2 rounded-xl transition-all
+      ${variant === 'primary'
+        ? 'bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white shadow-soft-sm hover:shadow-soft'
+        : variant === 'accent'
+          ? 'bg-gradient-to-r from-accent-500 to-accent-600 hover:from-accent-600 hover:to-accent-700 text-white shadow-soft-sm hover:shadow-soft'
+          : variant === 'success'
+            ? 'bg-gradient-to-r from-success-500 to-success-600 hover:from-success-600 hover:to-success-700 text-white shadow-soft-sm hover:shadow-soft'
+            : 'bg-white/60 dark:bg-surface-800/60 hover:bg-white dark:hover:bg-surface-700 text-surface-700 dark:text-surface-200 shadow-soft-sm hover:shadow-soft'
+      }
+      focus:outline-none focus:ring-2 focus:ring-primary-500/50
+      ${className}
+    `}
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    aria-label={label}
+    title={title}
+  >
+    <Icon className="w-5 h-5" />
+  </motion.button>
+);
 
 function App() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [theme, setTheme] = useState('park');
   const { isDarkMode, toggleDarkMode } = useDarkMode();
-  const { user, profile, isAuthenticated, signOut, loading: authLoading } = useAuth();
+  const { user, profile, isAuthenticated, signOut } = useAuth();
 
   // Visual intro states
   const [showVisualLanding, setShowVisualLanding] = useState(false);
@@ -47,6 +93,12 @@ function App() {
 
   // Health modal state
   const [isHealthOpen, setIsHealthOpen] = useState(false);
+
+  // Story modal state
+  const [isStoryOpen, setIsStoryOpen] = useState(false);
+
+  // Season Pass modal state
+  const [isSeasonPassOpen, setIsSeasonPassOpen] = useState(false);
 
   // Data states
   const [favorites, setFavorites] = useState([]);
@@ -241,7 +293,9 @@ function App() {
     showASCIIVisualizer,
     isLoginOpen,
     isSignupOpen,
-    isHealthOpen
+    isHealthOpen,
+    isStoryOpen,
+    isSeasonPassOpen
   ];
   const anyModalOpen = modalStates.some(state => state);
 
@@ -270,6 +324,8 @@ function App() {
     'd': toggleDarkMode,
     ',': () => setIsSettingsOpen(true),
     'h': () => setIsHealthOpen(true),
+    'y': () => setIsStoryOpen(true),
+    'p': () => setIsSeasonPassOpen(true),
   }, !anyModalOpen);
 
   // Stable handler for date selection to prevent MonthCalendar re-renders
@@ -288,129 +344,139 @@ function App() {
         <ASCIIVisualizer onClose={() => setShowASCIIVisualizer(false)} />
       )}
 
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-4 transition-colors duration-200">
+      <div className="min-h-screen bg-gradient-to-br from-surface-50 to-surface-100 dark:from-surface-900 dark:to-surface-800 p-4 transition-colors duration-200">
         <div className="container mx-auto max-w-2xl">
+          {/* Header */}
           <div className="relative mb-4">
-            <h1 className="text-4xl font-bold text-center text-gray-800 dark:text-gray-100 transition-colors">
+            <motion.h1
+              className="text-4xl font-bold text-center bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
               DogTale Daily
-            </h1>
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 flex gap-2">
-              <button
-                onClick={() => setShowASCIIVisualizer(true)}
-                className="p-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white rounded-lg transition-all shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                aria-label="Visual Guide"
-                title="What is this? (Visual Guide)"
-              >
-                <span className="text-xl">💡</span>
-              </button>
-              <button
-                onClick={() => setIsSocialHubOpen(true)}
-                className="p-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-lg transition-all shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                aria-label="Social Hub"
-                title="Pet Social Hub"
-              >
-                <span className="text-xl">🐾</span>
-              </button>
-              <button
-                onClick={() => setIsHealthOpen(true)}
-                className="p-2 bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 text-white rounded-lg transition-all shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                aria-label="Health Dashboard"
-                title="Pet Health Dashboard (H)"
-              >
-                <span className="text-xl">🏥</span>
-              </button>
-              <button
-                onClick={toggleDarkMode}
-                className="p-2 bg-white/50 dark:bg-gray-700/50 hover:bg-white/70 dark:hover:bg-gray-700/70 rounded-lg transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-                title={isDarkMode ? 'Light mode (D)' : 'Dark mode (D)'}
-              >
-                <span className="text-xl">{isDarkMode ? '☀️' : '🌙'}</span>
-              </button>
-              <button
-                onClick={() => setShowMonthView(!showMonthView)}
-                className="p-2 bg-white/50 dark:bg-gray-700/50 hover:bg-white/70 dark:hover:bg-gray-700/70 rounded-lg transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                aria-label={showMonthView ? 'Show day view' : 'Show month view'}
-                title={showMonthView ? 'Show day view (M)' : 'Show month view (M)'}
-              >
-                <span className="text-xl">{showMonthView ? '📅' : '📆'}</span>
-              </button>
-              <button
-                onClick={() => setIsShortcutsOpen(true)}
-                className="p-2 bg-white/50 dark:bg-gray-700/50 hover:bg-white/70 dark:hover:bg-gray-700/70 rounded-lg transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                aria-label="Keyboard shortcuts"
-                title="Keyboard shortcuts (?)"
-              >
-                <span className="text-xl">⌨️</span>
-              </button>
-              <button
-                onClick={() => setIsSettingsOpen(true)}
-                className="p-2 bg-white/50 dark:bg-gray-700/50 hover:bg-white/70 dark:hover:bg-gray-700/70 rounded-lg transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                aria-label="Settings"
-                title="Settings (,)"
-              >
-                <span className="text-xl">⚙️</span>
-              </button>
-              <button
-                onClick={() => setIsStatsOpen(true)}
-                className="p-2 bg-white/50 dark:bg-gray-700/50 hover:bg-white/70 dark:hover:bg-gray-700/70 rounded-lg transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                aria-label="View statistics"
-                title="View your statistics (S)"
-              >
-                <span className="text-2xl">📊</span>
-              </button>
-              {/* User menu / Login button */}
-              {isAuthenticated ? (
-                <div className="relative group">
-                  <button
-                    className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-lg transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    aria-label="User menu"
-                    title={profile?.display_name || user?.email || 'Account'}
-                  >
-                    {profile?.avatar_url ? (
-                      <img
-                        src={profile.avatar_url}
-                        alt="Avatar"
-                        className="w-6 h-6 rounded-full"
-                      />
-                    ) : (
-                      <span className="text-xl">👤</span>
-                    )}
-                  </button>
-                  {/* Dropdown menu */}
-                  <div className="absolute right-0 top-full mt-1 w-48 py-1 bg-white dark:bg-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-                    <div className="px-3 py-2 border-b border-gray-200 dark:border-gray-700">
-                      <p className="text-sm font-medium text-gray-800 dark:text-gray-200 truncate">
-                        {profile?.display_name || 'Pet Parent'}
-                      </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
-                        {user?.email}
-                      </p>
-                    </div>
-                    <button
-                      onClick={signOut}
-                      className="w-full px-3 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+            </motion.h1>
+
+            {/* Header Buttons */}
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+              {/* Primary Actions */}
+              <div className="flex items-center gap-1.5 pr-2 border-r border-surface-200 dark:border-surface-700">
+                <HeaderButton
+                  onClick={() => setShowASCIIVisualizer(true)}
+                  icon={Lightbulb}
+                  label="Visual Guide"
+                  title="What is this? (Visual Guide)"
+                  variant="success"
+                />
+                <HeaderButton
+                  onClick={() => setIsSocialHubOpen(true)}
+                  icon={PawPrint}
+                  label="Social Hub"
+                  title="Pet Social Hub"
+                  variant="accent"
+                />
+                <HeaderButton
+                  onClick={() => setIsHealthOpen(true)}
+                  icon={Activity}
+                  label="Health Dashboard"
+                  title="Pet Health Dashboard (H)"
+                  variant="success"
+                />
+              </div>
+
+              {/* Secondary Actions */}
+              <div className="flex items-center gap-1.5 pl-1">
+                <HeaderButton
+                  onClick={toggleDarkMode}
+                  icon={isDarkMode ? Sun : Moon}
+                  label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                  title={isDarkMode ? 'Light mode (D)' : 'Dark mode (D)'}
+                />
+                <HeaderButton
+                  onClick={() => setShowMonthView(!showMonthView)}
+                  icon={showMonthView ? Calendar : CalendarDays}
+                  label={showMonthView ? 'Show day view' : 'Show month view'}
+                  title={showMonthView ? 'Show day view (M)' : 'Show month view (M)'}
+                />
+                <HeaderButton
+                  onClick={() => setIsShortcutsOpen(true)}
+                  icon={Keyboard}
+                  label="Keyboard shortcuts"
+                  title="Keyboard shortcuts (?)"
+                />
+                <HeaderButton
+                  onClick={() => setIsSettingsOpen(true)}
+                  icon={Settings}
+                  label="Settings"
+                  title="Settings (,)"
+                />
+                <HeaderButton
+                  onClick={() => setIsStatsOpen(true)}
+                  icon={BarChart3}
+                  label="View statistics"
+                  title="View your statistics (S)"
+                />
+
+                {/* User menu / Login button */}
+                {isAuthenticated ? (
+                  <div className="relative group">
+                    <motion.button
+                      className="p-2 bg-gradient-to-r from-accent-500 to-primary-500 hover:from-accent-600 hover:to-primary-600 text-white rounded-xl transition-all shadow-soft-sm hover:shadow-soft focus:outline-none focus:ring-2 focus:ring-accent-500/50"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      aria-label="User menu"
+                      title={profile?.display_name || user?.email || 'Account'}
                     >
-                      Sign Out
-                    </button>
+                      {profile?.avatar_url ? (
+                        <img
+                          src={profile.avatar_url}
+                          alt="Avatar"
+                          className="w-5 h-5 rounded-full"
+                        />
+                      ) : (
+                        <User className="w-5 h-5" />
+                      )}
+                    </motion.button>
+                    {/* Dropdown menu */}
+                    <div className="absolute right-0 top-full mt-2 w-48 py-1 bg-white dark:bg-surface-800 rounded-xl shadow-soft-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 border border-surface-200 dark:border-surface-700">
+                      <div className="px-3 py-2 border-b border-surface-200 dark:border-surface-700">
+                        <p className="text-sm font-medium text-surface-800 dark:text-surface-200 truncate">
+                          {profile?.display_name || 'Pet Parent'}
+                        </p>
+                        <p className="text-xs text-surface-500 dark:text-surface-400 truncate">
+                          {user?.email}
+                        </p>
+                      </div>
+                      <button
+                        onClick={signOut}
+                        className="w-full px-3 py-2 text-left text-sm text-surface-700 dark:text-surface-300 hover:bg-surface-100 dark:hover:bg-surface-700 flex items-center gap-2"
+                      >
+                        <LogOut className="w-4 h-4" />
+                        Sign Out
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ) : (
-                <button
-                  onClick={() => setIsLoginOpen(true)}
-                  className="p-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-lg transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  aria-label="Sign in"
-                  title="Sign in to sync your data"
-                >
-                  <span className="text-xl">👤</span>
-                </button>
-              )}
+                ) : (
+                  <HeaderButton
+                    onClick={() => setIsLoginOpen(true)}
+                    icon={User}
+                    label="Sign in"
+                    title="Sign in to sync your data"
+                    variant="primary"
+                  />
+                )}
+              </div>
             </div>
           </div>
 
-          <p className="text-center text-gray-600 dark:text-gray-300 mb-6 transition-colors">
-            Your daily dose of dog joy 🐾
-          </p>
+          <motion.p
+            className="text-center text-surface-600 dark:text-surface-400 mb-6 transition-colors"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            Your daily dose of pet joy
+          </motion.p>
 
           {!showMonthView && (
             <DateNavigation
@@ -523,16 +589,34 @@ function App() {
         isOpen={isHealthOpen}
         onClose={() => setIsHealthOpen(false)}
       />
+
+      {/* Story Generator */}
+      <StoryModal
+        isOpen={isStoryOpen}
+        onClose={() => setIsStoryOpen(false)}
+        journalEntries={journalEntries}
+      />
+
+      {/* Season Pass */}
+      <SeasonPass
+        isOpen={isSeasonPassOpen}
+        onClose={() => setIsSeasonPassOpen(false)}
+      />
+
+      {/* Achievement Notifications */}
+      <AchievementNotificationContainer />
     </ErrorBoundary>
   );
 }
 
-// Wrapper component that provides auth and subscription context
+// Wrapper component that provides auth, subscription, and achievement context
 function AppWithProviders() {
   return (
     <AuthProvider>
       <SubscriptionProvider>
-        <App />
+        <AchievementProvider>
+          <App />
+        </AchievementProvider>
       </SubscriptionProvider>
     </AuthProvider>
   );

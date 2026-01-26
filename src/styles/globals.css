@@ -9,10 +9,46 @@
 }
 
 @layer components {
+  /* Legacy glass effect - kept for compatibility */
   .glass-effect {
     @apply bg-white/10 backdrop-blur-lg border border-white/20;
   }
 
+  /* Modern glass with enhanced depth */
+  .glass-modern {
+    @apply bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl;
+    @apply border border-white/50 dark:border-white/10;
+    @apply shadow-soft;
+  }
+
+  .glass-modern-dark {
+    @apply bg-gray-900/80 backdrop-blur-xl;
+    @apply border border-white/10;
+    @apply shadow-soft-lg;
+  }
+
+  /* Elevated surface for cards */
+  .surface-elevated {
+    @apply bg-white dark:bg-surface-800;
+    @apply border border-surface-200/60 dark:border-surface-700/60;
+    @apply shadow-soft rounded-2xl;
+    @apply transition-all duration-200;
+  }
+
+  .surface-elevated-interactive {
+    @apply surface-elevated;
+    @apply hover:shadow-soft-md hover:-translate-y-0.5;
+    @apply active:shadow-soft-sm active:translate-y-0;
+  }
+
+  /* Flat surface variant */
+  .surface-flat {
+    @apply bg-surface-50 dark:bg-surface-900;
+    @apply border border-surface-200 dark:border-surface-800;
+    @apply rounded-xl;
+  }
+
+  /* Legacy shadows - kept for compatibility */
   .card-shadow {
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
                 0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -28,5 +64,195 @@
 
   .preserve-3d {
     transform-style: preserve-3d;
+  }
+
+  /* Skeleton loading animation */
+  .skeleton {
+    @apply relative overflow-hidden bg-surface-200 dark:bg-surface-700 rounded-lg;
+  }
+
+  .skeleton::after {
+    content: '';
+    @apply absolute inset-0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite linear;
+  }
+
+  .dark .skeleton::after {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+  }
+
+  /* Focus ring utility */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2;
+    @apply focus:ring-offset-white dark:focus:ring-offset-surface-900;
+  }
+
+  .focus-ring-inset {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-inset;
+  }
+
+  /* Hover lift effect */
+  .hover-lift {
+    @apply transition-all duration-200 ease-smooth;
+    @apply hover:-translate-y-0.5 hover:shadow-soft-md;
+    @apply active:translate-y-0 active:shadow-soft-sm;
+  }
+
+  /* Text gradient utility */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary-500 to-accent-500;
+  }
+
+  .text-gradient-warm {
+    @apply bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-orange-500 to-pink-500;
+  }
+
+  /* Button base styles */
+  .btn-base {
+    @apply inline-flex items-center justify-center gap-2;
+    @apply font-medium rounded-xl;
+    @apply transition-all duration-200 ease-smooth;
+    @apply focus-ring;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn-base;
+    @apply bg-gradient-to-r from-primary-500 to-primary-600;
+    @apply text-white shadow-soft-sm;
+    @apply hover:from-primary-600 hover:to-primary-700 hover:shadow-soft;
+    @apply active:shadow-soft-sm;
+  }
+
+  .btn-secondary {
+    @apply btn-base;
+    @apply bg-surface-100 dark:bg-surface-800;
+    @apply text-surface-700 dark:text-surface-200;
+    @apply border border-surface-200 dark:border-surface-700;
+    @apply hover:bg-surface-200 dark:hover:bg-surface-700;
+  }
+
+  .btn-ghost {
+    @apply btn-base;
+    @apply bg-transparent;
+    @apply text-surface-600 dark:text-surface-300;
+    @apply hover:bg-surface-100 dark:hover:bg-surface-800;
+  }
+
+  .btn-accent {
+    @apply btn-base;
+    @apply bg-gradient-to-r from-accent-500 to-accent-600;
+    @apply text-white shadow-soft-sm;
+    @apply hover:from-accent-600 hover:to-accent-700 hover:shadow-soft;
+  }
+
+  /* Input base styles */
+  .input-base {
+    @apply w-full px-4 py-2.5 rounded-xl;
+    @apply bg-white dark:bg-surface-800;
+    @apply border border-surface-200 dark:border-surface-700;
+    @apply text-surface-900 dark:text-surface-100;
+    @apply placeholder:text-surface-400 dark:placeholder:text-surface-500;
+    @apply transition-all duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500;
+  }
+
+  .input-error {
+    @apply border-error-500 focus:ring-error-500/30 focus:border-error-500;
+  }
+
+  /* Badge styles */
+  .badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5;
+    @apply text-xs font-medium rounded-full;
+  }
+
+  .badge-info {
+    @apply badge bg-primary-100 text-primary-700;
+    @apply dark:bg-primary-900/30 dark:text-primary-300;
+  }
+
+  .badge-success {
+    @apply badge bg-success-100 text-success-700;
+    @apply dark:bg-success-900/30 dark:text-success-300;
+  }
+
+  .badge-warning {
+    @apply badge bg-warning-100 text-warning-700;
+    @apply dark:bg-warning-900/30 dark:text-warning-300;
+  }
+
+  .badge-error {
+    @apply badge bg-error-100 text-error-700;
+    @apply dark:bg-error-900/30 dark:text-error-300;
+  }
+
+  .badge-neutral {
+    @apply badge bg-surface-100 text-surface-700;
+    @apply dark:bg-surface-800 dark:text-surface-300;
+  }
+
+  /* Tab styles */
+  .tab-pill {
+    @apply px-4 py-2 rounded-xl font-medium;
+    @apply transition-all duration-200 ease-smooth;
+    @apply text-surface-600 dark:text-surface-400;
+    @apply hover:text-surface-900 dark:hover:text-surface-100;
+    @apply hover:bg-surface-100 dark:hover:bg-surface-800;
+  }
+
+  .tab-pill-active {
+    @apply tab-pill;
+    @apply bg-white dark:bg-surface-800;
+    @apply text-primary-600 dark:text-primary-400;
+    @apply shadow-soft-sm;
+  }
+
+  /* Divider */
+  .divider {
+    @apply h-px w-full bg-surface-200 dark:bg-surface-700;
+  }
+
+  .divider-vertical {
+    @apply w-px h-full bg-surface-200 dark:bg-surface-700;
+  }
+}
+
+@layer utilities {
+  /* Smooth scrolling for lists */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Gradient text helper */
+  .gradient-text {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }

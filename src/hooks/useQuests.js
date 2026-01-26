@@ -303,7 +303,7 @@ export function useQuests() {
     }
   }, [user?.id, fetchQuests]);
 
-  // Fetch achievements
+  // Fetch achievements (using the legacy system for backward compatibility)
   const fetchAchievements = useCallback(async () => {
     if (!isOnlineMode || !user?.id) return;
 
@@ -322,34 +322,62 @@ export function useQuests() {
     }
   }, [user?.id]);
 
-  // Check and award achievements
+  // Check and award achievements (legacy - use AchievementContext for new system)
   const checkAchievements = useCallback(async (context) => {
     if (!isOnlineMode || !user?.id) return;
 
-    // Achievement definitions would be checked here
-    // This is a simplified example
-    const achievementChecks = [
-      { key: 'first_journal', condition: () => context.journalCount >= 1 },
-      { key: 'journal_master', condition: () => context.journalCount >= 100 },
-      { key: 'collector', condition: () => context.favoriteCount >= 50 },
-      { key: 'social_star', condition: () => context.friendCount >= 10 },
-    ];
+    // This function is kept for backward compatibility
+    // The new achievement system uses AchievementContext.triggerAchievementCheck()
+    //
+    // Example context structure:
+    // {
+    //   journalCount: number,
+    //   favoriteCount: number,
+    //   friendCount: number,
+    //   petCount: number,
+    //   questsCompleted: number,
+    //   battlesCompleted: number,
+    //   battlesWon: number,
+    //   gymsConquered: number,
+    //   healthRecords: number,
+    //   loginStreak: number,
+    //   virtualPetLevel: number,
+    //   breedCount: number,
+    //   locationCount: number,
+    //   reactionsGiven: number,
+    //   activitiesCreated: number,
+    //   seasonLevel: number,
+    // }
 
-    for (const check of achievementChecks) {
-      if (check.condition() && !achievements.some(a => a.achievement_key === check.key)) {
-        try {
-          await supabase.from('achievements').insert({
-            user_id: user.id,
-            achievement_key: check.key,
-          });
-        } catch {
-          // Already exists, ignore
-        }
-      }
+    // Import and use the new achievement system
+    // This is a bridge for code that still calls checkAchievements directly
+    try {
+      // The actual achievement checking is now handled by AchievementContext
+      // We just refresh the local achievements list
+      await fetchAchievements();
+    } catch (err) {
+      console.error('Error checking achievements:', err);
     }
+  }, [user?.id, fetchAchievements]);
 
-    await fetchAchievements();
-  }, [user?.id, achievements, fetchAchievements]);
+  // Get completed quests count for achievement tracking
+  const getCompletedQuestsCount = useCallback(async () => {
+    if (!isOnlineMode || !user?.id) return 0;
+
+    try {
+      const { count, error } = await supabase
+        .from('quests')
+        .select('*', { count: 'exact' })
+        .eq('user_id', user.id)
+        .not('completed_at', 'is', null);
+
+      if (error) throw error;
+      return count || 0;
+    } catch (err) {
+      console.error('Error getting completed quests count:', err);
+      return 0;
+    }
+  }, [user?.id]);
 
   // Fetch on mount
   useEffect(() => {
@@ -382,6 +410,7 @@ export function useQuests() {
     claimRewards,
     checkAchievements,
     getQuestDefinition,
+    getCompletedQuestsCount,
 
     // Clear error
     clearError: () => setError(null),

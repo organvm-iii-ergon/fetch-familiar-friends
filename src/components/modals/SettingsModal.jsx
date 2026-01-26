@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Modal from './Modal';
 import { getCacheStats, clearCache } from '../../utils/imageCache';
+import NotificationPreferences from '../settings/NotificationPreferences';
 
-const SettingsModal = ({ isOpen, onClose, settings, onSettingsChange }) => {
+const SettingsModal = ({ isOpen, onClose, settings, onSettingsChange, userId }) => {
+  const [activeTab, setActiveTab] = useState('general');
   const [localSettings, setLocalSettings] = useState(settings);
   const [cacheCleared, setCacheCleared] = useState(false);
   const [hasChanges, setHasChanges] = useState(false);
@@ -70,10 +72,36 @@ const SettingsModal = ({ isOpen, onClose, settings, onSettingsChange }) => {
 
   const cacheStats = getCacheStats();
 
+  const tabs = [
+    { id: 'general', label: 'General', icon: '⚡' },
+    { id: 'notifications', label: 'Notifications', icon: '🔔' },
+    { id: 'appearance', label: 'Appearance', icon: '🎨' },
+    { id: 'performance', label: 'Performance', icon: '🚀' },
+    { id: 'data', label: 'Data', icon: '💾' },
+  ];
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="⚙️ Settings" size="xl">
+    <Modal isOpen={isOpen} onClose={onClose} title="Settings" size="xl">
       <div className="space-y-6">
+        {/* Tab Navigation */}
+        <div className="flex flex-wrap gap-2 border-b border-gray-200 dark:border-gray-700 pb-3">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                activeTab === tab.id
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+              }`}
+            >
+              {tab.icon} {tab.label}
+            </button>
+          ))}
+        </div>
+
         {/* General Settings */}
+        {activeTab === 'general' && (
         <div>
           <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-3">
             ⚡ General
@@ -88,19 +116,6 @@ const SettingsModal = ({ isOpen, onClose, settings, onSettingsChange }) => {
                 type="checkbox"
                 checked={localSettings.autoSave}
                 onChange={(e) => handleChange('autoSave', e.target.checked)}
-                className="w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
-              />
-            </label>
-
-            <label className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors cursor-pointer">
-              <div>
-                <span className="font-medium text-gray-800 dark:text-gray-100">Browser notifications</span>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Get reminders to journal daily</p>
-              </div>
-              <input
-                type="checkbox"
-                checked={localSettings.notifications}
-                onChange={(e) => handleChange('notifications', e.target.checked)}
                 className="w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
               />
             </label>
@@ -132,11 +147,23 @@ const SettingsModal = ({ isOpen, onClose, settings, onSettingsChange }) => {
             </label>
           </div>
         </div>
+        )}
 
-        {/* Appearance Settings */}
+        {/* Notifications Settings */}
+        {activeTab === 'notifications' && (
         <div>
           <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-3">
-            🎨 Appearance
+            Notification Preferences
+          </h3>
+          <NotificationPreferences userId={userId} />
+        </div>
+        )}
+
+        {/* Appearance Settings */}
+        {activeTab === 'appearance' && (
+        <div>
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-3">
+            Appearance
           </h3>
           <div className="space-y-3">
             <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
@@ -168,11 +195,13 @@ const SettingsModal = ({ isOpen, onClose, settings, onSettingsChange }) => {
             </label>
           </div>
         </div>
+        )}
 
         {/* Performance Settings */}
+        {activeTab === 'performance' && (
         <div>
           <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-3">
-            🚀 Performance
+            Performance
           </h3>
           <div className="space-y-3">
             <label className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors cursor-pointer">
@@ -241,11 +270,13 @@ const SettingsModal = ({ isOpen, onClose, settings, onSettingsChange }) => {
             </div>
           </div>
         </div>
+        )}
 
         {/* Data Management */}
+        {activeTab === 'data' && (
         <div>
           <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-3">
-            💾 Data Management
+            Data Management
           </h3>
           <div className="space-y-3">
             <div className="p-3 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-lg">
@@ -279,6 +310,7 @@ const SettingsModal = ({ isOpen, onClose, settings, onSettingsChange }) => {
             </div>
           </div>
         </div>
+        )}
 
         {/* Action Buttons */}
         <div className="flex gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
@@ -311,7 +343,12 @@ SettingsModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   settings: PropTypes.object.isRequired,
-  onSettingsChange: PropTypes.func.isRequired
+  onSettingsChange: PropTypes.func.isRequired,
+  userId: PropTypes.string,
+};
+
+SettingsModal.defaultProps = {
+  userId: null,
 };
 
 export default SettingsModal;
