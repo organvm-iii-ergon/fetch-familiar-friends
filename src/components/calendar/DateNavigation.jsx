@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import { motion } from 'framer-motion';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const DateNavigation = ({ currentDate, onDateChange }) => {
   const goToPreviousDay = () => {
@@ -28,47 +30,54 @@ const DateNavigation = ({ currentDate, onDateChange }) => {
   };
 
   return (
-    <div className="flex items-center justify-center gap-4 mb-4" role="navigation" aria-label="Date navigation">
-      <button
+    <div className="flex items-center justify-center gap-3 mb-6" role="navigation" aria-label="Date navigation">
+      {/* Previous Day */}
+      <motion.button
         onClick={goToPreviousDay}
-        className="p-2 rounded-lg bg-white/50 hover:bg-white/70 text-gray-700 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-surface-600 dark:text-surface-300 hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+        whileHover={{ x: -2 }}
+        whileTap={{ scale: 0.98 }}
         aria-label="Go to previous day"
-        title="Previous day"
+        title="Previous day (← or H)"
       >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
+        <ChevronLeft className="w-5 h-5" />
+        <span className="text-sm font-medium hidden sm:inline">Previous</span>
+      </motion.button>
 
-      <button
+      {/* Today Button */}
+      <motion.button
         onClick={goToToday}
         disabled={isToday()}
-        className={`px-4 py-2 rounded-lg font-medium transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+        className={`px-5 py-2.5 rounded-xl font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500/50 ${
           isToday()
-            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            : 'bg-blue-500 hover:bg-blue-600 text-white'
+            ? 'bg-surface-100 dark:bg-surface-800 text-surface-400 dark:text-surface-500 cursor-not-allowed'
+            : 'bg-primary-500 hover:bg-primary-600 text-white shadow-soft-sm hover:shadow-soft'
         }`}
+        whileHover={!isToday() ? { scale: 1.02 } : {}}
+        whileTap={!isToday() ? { scale: 0.98 } : {}}
         aria-label="Go to today"
-        title="Jump to today"
+        title="Jump to today (T)"
       >
         Today
-      </button>
+      </motion.button>
 
-      <button
+      {/* Next Day */}
+      <motion.button
         onClick={goToNextDay}
         disabled={isFuture()}
-        className={`p-2 rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+        className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500/50 ${
           isFuture()
-            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            : 'bg-white/50 hover:bg-white/70 text-gray-700'
+            ? 'text-surface-300 dark:text-surface-600 cursor-not-allowed'
+            : 'text-surface-600 dark:text-surface-300 hover:bg-surface-100 dark:hover:bg-surface-800'
         }`}
+        whileHover={!isFuture() ? { x: 2 } : {}}
+        whileTap={!isFuture() ? { scale: 0.98 } : {}}
         aria-label="Go to next day"
-        title="Next day"
+        title="Next day (→ or L)"
       >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
+        <span className="text-sm font-medium hidden sm:inline">Next</span>
+        <ChevronRight className="w-5 h-5" />
+      </motion.button>
     </div>
   );
 };

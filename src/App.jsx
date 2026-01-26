@@ -1,16 +1,9 @@
 import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import {
-  Lightbulb,
-  PawPrint,
-  Activity,
   Sun,
   Moon,
-  Calendar,
-  CalendarDays,
-  Keyboard,
   Settings,
-  BarChart3,
   User,
   LogOut,
   Loader2,
@@ -54,33 +47,6 @@ import { AchievementProvider } from './contexts/AchievementContext';
 import { ReducedMotionProvider } from './contexts/ReducedMotionContext';
 import { useNavigationShortcuts, useModalShortcuts, useThemeCycleShortcut, useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 import { useDarkMode } from './hooks/useDarkMode';
-import Button from './components/ui/Button';
-
-// Header button component for consistent styling
-const HeaderButton = ({ onClick, icon: Icon, label, title, variant = 'secondary', className = '' }) => (
-  <motion.button
-    onClick={onClick}
-    className={`
-      p-2 rounded-xl transition-all
-      ${variant === 'primary'
-        ? 'bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white shadow-soft-sm hover:shadow-soft'
-        : variant === 'accent'
-          ? 'bg-gradient-to-r from-accent-500 to-accent-600 hover:from-accent-600 hover:to-accent-700 text-white shadow-soft-sm hover:shadow-soft'
-          : variant === 'success'
-            ? 'bg-gradient-to-r from-success-500 to-success-600 hover:from-success-600 hover:to-success-700 text-white shadow-soft-sm hover:shadow-soft'
-            : 'bg-white/60 dark:bg-surface-800/60 hover:bg-white dark:hover:bg-surface-700 text-surface-700 dark:text-surface-200 shadow-soft-sm hover:shadow-soft'
-      }
-      focus:outline-none focus:ring-2 focus:ring-primary-500/50
-      ${className}
-    `}
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-    aria-label={label}
-    title={title}
-  >
-    <Icon className="w-5 h-5" />
-  </motion.button>
-);
 
 function App() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -132,15 +98,16 @@ function App() {
     autoTheme: false
   });
 
+  // Refined theme palette - muted accents, subtle backgrounds
   const themes = [
-    { name: 'park', label: 'Park', icon: '🌳', gradient: 'from-lime-400 to-emerald-600' },
-    { name: 'beach', label: 'Beach', icon: '🏖️', gradient: 'from-sky-400 to-blue-600' },
-    { name: 'forest', label: 'Forest', icon: '🌲', gradient: 'from-green-500 to-green-800' },
-    { name: 'tundra', label: 'Tundra', icon: '❄️', gradient: 'from-cyan-400 to-sky-700' },
-    { name: 'sunset', label: 'Sunset', icon: '🌅', gradient: 'from-orange-400 to-pink-600' },
-    { name: 'night', label: 'Night', icon: '🌙', gradient: 'from-indigo-500 to-purple-800' },
-    { name: 'snow', label: 'Snow', icon: '🌨️', gradient: 'from-blue-100 to-cyan-300' },
-    { name: 'autumn', label: 'Autumn', icon: '🍂', gradient: 'from-yellow-600 to-red-700' }
+    { name: 'park', label: 'Park', accent: 'emerald', accentClass: 'emerald-500', bgClass: 'emerald-50', borderClass: 'emerald-200' },
+    { name: 'beach', label: 'Beach', accent: 'sky', accentClass: 'sky-500', bgClass: 'sky-50', borderClass: 'sky-200' },
+    { name: 'forest', label: 'Forest', accent: 'green', accentClass: 'green-700', bgClass: 'green-50', borderClass: 'green-200' },
+    { name: 'tundra', label: 'Tundra', accent: 'cyan', accentClass: 'cyan-600', bgClass: 'slate-50', borderClass: 'cyan-200' },
+    { name: 'sunset', label: 'Sunset', accent: 'orange', accentClass: 'orange-500', bgClass: 'amber-50', borderClass: 'orange-200' },
+    { name: 'night', label: 'Night', accent: 'indigo', accentClass: 'indigo-600', bgClass: 'slate-100', borderClass: 'indigo-200' },
+    { name: 'snow', label: 'Snow', accent: 'blue', accentClass: 'blue-400', bgClass: 'slate-50', borderClass: 'blue-200' },
+    { name: 'autumn', label: 'Autumn', accent: 'amber', accentClass: 'amber-600', bgClass: 'orange-50', borderClass: 'amber-200' }
   ];
 
   // Check if first visit and show visual landing
@@ -362,84 +329,60 @@ function App() {
       {/* Visual Landing - shown on first visit */}
       {showVisualLanding && <VisualLanding onEnter={handleEnterApp} />}
 
-      <div className="min-h-screen bg-gradient-to-br from-surface-50 to-surface-100 dark:from-surface-900 dark:to-surface-800 p-4 transition-colors duration-200">
-        <div className="container mx-auto max-w-2xl">
-          {/* Header */}
-          <div className="relative mb-4">
-            <motion.h1
-              className="text-4xl font-bold text-center bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              DogTale Daily
-            </motion.h1>
-
-            {/* Header Buttons */}
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
-              {/* Primary Actions */}
-              <div className="flex items-center gap-1.5 pr-2 border-r border-surface-200 dark:border-surface-700">
-                <HeaderButton
-                  onClick={() => setShowASCIIVisualizer(true)}
-                  icon={Lightbulb}
-                  label="Visual Guide"
-                  title="What is this? (Visual Guide)"
-                  variant="success"
-                />
-                <HeaderButton
-                  onClick={() => setIsSocialHubOpen(true)}
-                  icon={PawPrint}
-                  label="Social Hub"
-                  title="Pet Social Hub"
-                  variant="accent"
-                />
-                <HeaderButton
-                  onClick={() => setIsHealthOpen(true)}
-                  icon={Activity}
-                  label="Health Dashboard"
-                  title="Pet Health Dashboard (H)"
-                  variant="success"
-                />
+      <div className="min-h-screen bg-surface-50 dark:bg-surface-900 transition-colors duration-200">
+        <div className="container-app">
+          {/* Header - Clean and minimal */}
+          <header className="sticky top-0 z-40 -mx-4 px-4 py-4 mb-6 bg-surface-50/80 dark:bg-surface-900/80 backdrop-blur-sm border-b border-surface-200/50 dark:border-surface-800/50">
+            <div className="flex items-center justify-between">
+              {/* Logo & Subtitle */}
+              <div>
+                <motion.h1
+                  className="text-2xl font-bold text-surface-900 dark:text-white"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  DogTale Daily
+                </motion.h1>
+                <motion.p
+                  className="text-sm text-surface-500 dark:text-surface-400"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.1 }}
+                >
+                  Your daily dose of pet joy
+                </motion.p>
               </div>
 
-              {/* Secondary Actions */}
-              <div className="flex items-center gap-1.5 pl-1">
-                <HeaderButton
+              {/* Header Actions - Minimal */}
+              <div className="flex items-center gap-2">
+                <motion.button
                   onClick={toggleDarkMode}
-                  icon={isDarkMode ? Sun : Moon}
-                  label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                  className="p-2.5 rounded-xl text-surface-600 dark:text-surface-300 hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
                   title={isDarkMode ? 'Light mode (D)' : 'Dark mode (D)'}
-                />
-                <HeaderButton
-                  onClick={() => setShowMonthView(!showMonthView)}
-                  icon={showMonthView ? Calendar : CalendarDays}
-                  label={showMonthView ? 'Show day view' : 'Show month view'}
-                  title={showMonthView ? 'Show day view (M)' : 'Show month view (M)'}
-                />
-                <HeaderButton
-                  onClick={() => setIsShortcutsOpen(true)}
-                  icon={Keyboard}
-                  label="Keyboard shortcuts"
-                  title="Keyboard shortcuts (?)"
-                />
-                <HeaderButton
+                >
+                  {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                </motion.button>
+
+                <motion.button
                   onClick={() => setIsSettingsOpen(true)}
-                  icon={Settings}
-                  label="Settings"
+                  className="p-2.5 rounded-xl text-surface-600 dark:text-surface-300 hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  aria-label="Settings"
                   title="Settings (,)"
-                />
-                <HeaderButton
-                  onClick={() => setIsStatsOpen(true)}
-                  icon={BarChart3}
-                  label="View statistics"
-                  title="View your statistics (S)"
-                />
+                >
+                  <Settings className="w-5 h-5" />
+                </motion.button>
 
                 {/* User menu / Login button */}
                 {isAuthenticated ? (
                   <div className="relative group">
                     <motion.button
-                      className="p-2 bg-gradient-to-r from-accent-500 to-primary-500 hover:from-accent-600 hover:to-primary-600 text-white rounded-xl transition-all shadow-soft-sm hover:shadow-soft focus:outline-none focus:ring-2 focus:ring-accent-500/50"
+                      className="p-2 bg-primary-500 hover:bg-primary-600 text-white rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500/50"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       aria-label="User menu"
@@ -475,26 +418,20 @@ function App() {
                     </div>
                   </div>
                 ) : (
-                  <HeaderButton
+                  <motion.button
                     onClick={() => setIsLoginOpen(true)}
-                    icon={User}
-                    label="Sign in"
+                    className="p-2.5 bg-primary-500 hover:bg-primary-600 text-white rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    aria-label="Sign in"
                     title="Sign in to sync your data"
-                    variant="primary"
-                  />
+                  >
+                    <User className="w-5 h-5" />
+                  </motion.button>
                 )}
               </div>
             </div>
-          </div>
-
-          <motion.p
-            className="text-center text-surface-600 dark:text-surface-400 mb-6 transition-colors"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-          >
-            Your daily dose of pet joy
-          </motion.p>
+          </header>
 
           {!showMonthView && (
             <DateNavigation
