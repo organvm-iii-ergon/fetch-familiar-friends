@@ -234,6 +234,28 @@
 }
 
 @layer utilities {
+  /* Reduced motion support - CSS fallback */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Manual reduced motion via data attribute */
+  [data-reduced-motion="true"] *,
+  [data-reduced-motion="true"] *::before,
+  [data-reduced-motion="true"] *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
   /* Smooth scrolling for lists */
   .scroll-smooth {
     scroll-behavior: smooth;

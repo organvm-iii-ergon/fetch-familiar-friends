@@ -8,6 +8,7 @@ import {
   incrementAiUsage,
 } from '../services/aiService';
 import { supabase, isOnlineMode } from '../config/supabase';
+import { generateTemplateStory, STORY_TYPES as TEMPLATE_STORY_TYPES } from '../utils/storyTemplates';
 
 // Story types with their configurations
 export const STORY_TYPES = {
@@ -200,22 +201,55 @@ export function useStoryGeneration(options = {}) {
   }, [isAuthenticated, loadSavedStories]);
 
   /**
-   * Generate a new story
+   * Generate a new story using templates (local fallback)
    * @param {Object} petData - Pet information
    * @param {string} storyType - Type of story to generate
    * @param {Array} journalEntries - Recent journal entries for context
    */
-  const generateStory = useCallback(async (petData, storyType, journalEntries = []) => {
-    // Check feature gate
-    if (!hasFeature('storyGeneration')) {
-      setError('Story generation requires a Premium subscription');
-      return null;
+  const generateTemplateStoryLocal = useCallback((petData, storyType, journalEntries = []) => {
+    const story = generateTemplateStory(petData, storyType, journalEntries);
+    setCurrentStory(story);
+    return story;
+  }, []);
+
+  /**
+   * Generate a new story
+   * @param {Object} petData - Pet information
+   * @param {string} storyType - Type of story to generate
+   * @param {Array} journalEntries - Recent journal entries for context
+   * @param {Object} options - Generation options
+   * @param {boolean} options.useTemplates - Force template-based generation
+   */
+  const generateStory = useCallback(async (petData, storyType, journalEntries = [], options = {}) => {
+    // If templates are requested or premium feature is not available, use templates
+    if (options.useTemplates || !hasFeature('storyGeneration')) {
+      setError(null);
+      setIsGenerating(true);
+      setStreamingContent('');
+      setCurrentStory(null);
+
+      // Simulate a brief delay for better UX
+      await new Promise(resolve => setTimeout(resolve, 800));
+
+      const story = generateTemplateStoryLocal(petData, storyType, journalEntries);
+      setIsGenerating(false);
+      return story;
     }
 
-    // Check rate limit
+    // Check rate limit for AI generation
     if (!rateLimit.allowed) {
-      setError('Daily AI message limit reached. Please try again tomorrow.');
-      return null;
+      // Fall back to templates instead of showing error
+      console.info('AI rate limit reached, using template generation');
+      setError(null);
+      setIsGenerating(true);
+      setStreamingContent('');
+      setCurrentStory(null);
+
+      await new Promise(resolve => setTimeout(resolve, 800));
+
+      const story = generateTemplateStoryLocal(petData, storyType, journalEntries);
+      setIsGenerating(false);
+      return story;
     }
 
     setError(null);
@@ -277,13 +311,16 @@ export function useStoryGeneration(options = {}) {
       return story;
 
     } catch (err) {
-      console.error('Story generation error:', err);
-      setError(err.message || 'Failed to generate story');
-      return null;
+      console.error('AI Story generation error, falling back to templates:', err);
+
+      // Fall back to template-based generation on any AI error
+      const story = generateTemplateStoryLocal(petData, storyType, journalEntries);
+      setError(null); // Clear error since we have a fallback
+      return story;
     } finally {
       setIsGenerating(false);
     }
-  }, [hasFeature, rateLimit, user?.id, refreshRateLimit]);
+  }, [hasFeature, rateLimit, user?.id, refreshRateLimit, generateTemplateStoryLocal]);
 
   /**
    * Save the current story
@@ -425,7 +462,9 @@ Created with DogTale Daily`;
     // Computed
     displayContent: streamingContent || currentStory?.content || '',
     hasCurrentStory: !!currentStory || !!streamingContent,
-    canGenerate: rateLimit.allowed && !isGenerating && hasFeature('storyGeneration'),
+    canGenerate: !isGenerating, // Templates always available as fallback
+    canGenerateAI: rateLimit.allowed && !isGenerating && hasFeature('storyGeneration'),
+    isTemplateGenerated: currentStory?.isTemplateGenerated || false,
 
     // Actions
     generateStory,

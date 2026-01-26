@@ -1,87 +1,15 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase, isOnlineMode } from '../config/supabase';
-
-// Quest definitions
-const QUEST_DEFINITIONS = {
-  // Daily quests
-  daily_photo: {
-    key: 'daily_photo',
-    type: 'daily',
-    title: 'Paw-parazzi',
-    description: 'View today\'s daily pet image',
-    target: 1,
-    xp: 10,
-    icon: '📷',
-  },
-  daily_journal: {
-    key: 'daily_journal',
-    type: 'daily',
-    title: 'Pet Chronicler',
-    description: 'Write a journal entry today',
-    target: 1,
-    xp: 20,
-    icon: '📝',
-  },
-  daily_favorite: {
-    key: 'daily_favorite',
-    type: 'daily',
-    title: 'Picture Purrfect',
-    description: 'Add an image to favorites',
-    target: 1,
-    xp: 10,
-    icon: '❤️',
-  },
-  daily_social: {
-    key: 'daily_social',
-    type: 'daily',
-    title: 'Social Butterfly',
-    description: 'React to a friend\'s activity',
-    target: 1,
-    xp: 15,
-    icon: '🦋',
-  },
-  daily_virtual_pet: {
-    key: 'daily_virtual_pet',
-    type: 'daily',
-    title: 'Virtual Caretaker',
-    description: 'Feed and play with your virtual pet',
-    target: 2,
-    xp: 15,
-    icon: '🐕',
-  },
-
-  // Weekly quests
-  weekly_streak: {
-    key: 'weekly_streak',
-    type: 'weekly',
-    title: 'Dedicated Parent',
-    description: 'Maintain a 7-day streak',
-    target: 7,
-    xp: 100,
-    icon: '🔥',
-  },
-  weekly_explorer: {
-    key: 'weekly_explorer',
-    type: 'weekly',
-    title: 'Breed Explorer',
-    description: 'Learn about 5 different breeds',
-    target: 5,
-    xp: 75,
-    icon: '🔍',
-  },
-  weekly_journalist: {
-    key: 'weekly_journalist',
-    type: 'weekly',
-    title: 'Master Journalist',
-    description: 'Write 5 journal entries this week',
-    target: 5,
-    xp: 80,
-    icon: '📚',
-  },
-
-  // Seasonal/story quests are defined dynamically
-};
+import {
+  QUEST_DEFINITIONS,
+  loadQuestProgress,
+  updateQuestProgress as updateLocalQuestProgress,
+  updateStreakProgress,
+  getActiveQuests,
+  getQuestStats,
+  calculateLevelFromXp,
+} from '../utils/questProgress';
 
 /**
  * Hook for managing quests and achievements
@@ -93,6 +21,9 @@ export function useQuests() {
   const [dailyQuests, setDailyQuests] = useState([]);
   const [weeklyQuests, setWeeklyQuests] = useState([]);
   const [achievements, setAchievements] = useState([]);
+  const [questStats, setQuestStats] = useState({ totalXp: 0, completedCount: 0 });
+  const [userLevel, setUserLevel] = useState({ level: 1, xpIntoLevel: 0, xpForNextLevel: 50 });
+  const [recentlyCompleted, setRecentlyCompleted] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -101,16 +32,21 @@ export function useQuests() {
     return QUEST_DEFINITIONS[questKey] || null;
   }, []);
 
+  // Load local quests
+  const loadLocalQuests = useCallback(() => {
+    const { daily, weekly, totalXp, completedCount } = getActiveQuests();
+    setDailyQuests(daily);
+    setWeeklyQuests(weekly);
+    setQuestStats({ totalXp, completedCount });
+    setUserLevel(calculateLevelFromXp(totalXp));
+  }, []);
+
   // Fetch current quests
   const fetchQuests = useCallback(async () => {
+    // Always load local quests first
+    loadLocalQuests();
+
     if (!isOnlineMode || !user?.id) {
-      // Load from localStorage as fallback
-      const localQuests = localStorage.getItem('dogtale-quests');
-      if (localQuests) {
-        const parsed = JSON.parse(localQuests);
-        setDailyQuests(parsed.daily || []);
-        setWeeklyQuests(parsed.weekly || []);
-      }
       return;
     }
 
@@ -120,7 +56,7 @@ export function useQuests() {
     try {
       const today = new Date().toISOString().split('T')[0];
 
-      // Fetch active quests
+      // Fetch active quests from server
       const { data: quests, error: questError } = await supabase
         .from('quests')
         .select('*')
@@ -129,54 +65,53 @@ export function useQuests() {
 
       if (questError) throw questError;
 
-      // Separate by type and add definitions
-      const daily = [];
-      const weekly = [];
+      // If server has quests, merge with local (server takes precedence)
+      if (quests && quests.length > 0) {
+        const daily = [];
+        const weekly = [];
 
-      quests?.forEach(quest => {
-        const definition = getQuestDefinition(quest.quest_key);
-        const enriched = {
-          ...quest,
-          ...definition,
-          percentComplete: Math.min(100, (quest.progress / quest.target) * 100),
-          isComplete: quest.completed_at !== null,
-        };
+        quests.forEach(quest => {
+          const definition = getQuestDefinition(quest.quest_key);
+          const enriched = {
+            ...quest,
+            ...definition,
+            percentComplete: Math.min(100, (quest.progress / quest.target) * 100),
+            isComplete: quest.completed_at !== null,
+          };
 
-        if (quest.quest_type === 'daily') {
-          daily.push(enriched);
-        } else if (quest.quest_type === 'weekly') {
-          weekly.push(enriched);
-        }
-      });
-
-      // Initialize any missing daily quests
-      const missingDaily = Object.values(QUEST_DEFINITIONS)
-        .filter(q => q.type === 'daily')
-        .filter(def => !daily.some(q => q.quest_key === def.key));
-
-      for (const def of missingDaily) {
-        await initializeQuest(def.key, 'daily');
-        daily.push({
-          ...def,
-          progress: 0,
-          percentComplete: 0,
-          isComplete: false,
+          if (quest.quest_type === 'daily') {
+            daily.push(enriched);
+          } else if (quest.quest_type === 'weekly') {
+            weekly.push(enriched);
+          }
         });
+
+        // Fill in any missing quests from local definitions
+        const missingDaily = Object.values(QUEST_DEFINITIONS)
+          .filter(q => q.type === 'daily')
+          .filter(def => !daily.some(q => q.quest_key === def.key || q.key === def.key));
+
+        for (const def of missingDaily) {
+          await initializeQuest(def.key, 'daily');
+          daily.push({
+            ...def,
+            progress: 0,
+            percentComplete: 0,
+            isComplete: false,
+          });
+        }
+
+        setDailyQuests(daily);
+        setWeeklyQuests(weekly);
       }
 
-      setDailyQuests(daily);
-      setWeeklyQuests(weekly);
-
-      // Cache locally
-      localStorage.setItem('dogtale-quests', JSON.stringify({ daily, weekly }));
-
     } catch (err) {
-      console.error('Error fetching quests:', err);
-      setError(err.message);
+      console.error('Error fetching quests from server:', err);
+      // Local quests are already loaded, so just log the error
     } finally {
       setLoading(false);
     }
-  }, [user?.id, getQuestDefinition]);
+  }, [user?.id, getQuestDefinition, loadLocalQuests]);
 
   // Initialize a quest for the user
   const initializeQuest = async (questKey, questType) => {
@@ -208,21 +143,57 @@ export function useQuests() {
     }
   };
 
-  // Update quest progress
+  // Track a quest-related action (local-first approach)
+  const trackAction = useCallback((trigger, amount = 1) => {
+    // Update local progress
+    const result = updateLocalQuestProgress(trigger, amount);
+
+    // Reload quests to reflect changes
+    loadLocalQuests();
+
+    // Show completion notifications
+    if (result.completed.length > 0) {
+      setRecentlyCompleted(result.completed);
+      // Clear after 5 seconds
+      setTimeout(() => setRecentlyCompleted([]), 5000);
+    }
+
+    return result;
+  }, [loadLocalQuests]);
+
+  // Track streak progress
+  const trackStreak = useCallback((currentStreak) => {
+    const result = updateStreakProgress(currentStreak);
+    loadLocalQuests();
+
+    if (result.completed.length > 0) {
+      setRecentlyCompleted(prev => [...prev, ...result.completed]);
+      setTimeout(() => setRecentlyCompleted([]), 5000);
+    }
+
+    return result;
+  }, [loadLocalQuests]);
+
+  // Update quest progress (maintains backward compatibility)
   const updateQuestProgress = useCallback(async (questKey, incrementBy = 1) => {
-    if (!isOnlineMode || !user?.id) return;
+    // Find the trigger for this quest
+    const definition = QUEST_DEFINITIONS[questKey];
+    if (definition?.trigger) {
+      return trackAction(definition.trigger, incrementBy);
+    }
+
+    // Fallback to server-based update for quests without local triggers
+    if (!isOnlineMode || !user?.id) return { error: { message: 'Offline mode' } };
 
     try {
-      // Find the quest
       const allQuests = [...dailyQuests, ...weeklyQuests];
-      const quest = allQuests.find(q => q.quest_key === questKey);
+      const quest = allQuests.find(q => q.quest_key === questKey || q.key === questKey);
 
-      if (!quest || quest.isComplete) return;
+      if (!quest || quest.isComplete) return { completed: false };
 
       const newProgress = Math.min(quest.target, quest.progress + incrementBy);
       const isNowComplete = newProgress >= quest.target;
 
-      // Update in database
       const updateData = {
         progress: newProgress,
         ...(isNowComplete && { completed_at: new Date().toISOString() }),
@@ -239,7 +210,7 @@ export function useQuests() {
 
       // Update local state
       const updateQuestList = (quests) => quests.map(q => {
-        if (q.quest_key !== questKey) return q;
+        if (q.quest_key !== questKey && q.key !== questKey) return q;
         return {
           ...q,
           progress: newProgress,
@@ -251,9 +222,10 @@ export function useQuests() {
       setDailyQuests(updateQuestList);
       setWeeklyQuests(updateQuestList);
 
-      // If completed, award XP
       if (isNowComplete) {
         await awardXp(quest.xp);
+        setRecentlyCompleted([{ ...quest, type: quest.type }]);
+        setTimeout(() => setRecentlyCompleted([]), 5000);
         return { completed: true, xpAwarded: quest.xp };
       }
 
@@ -263,7 +235,7 @@ export function useQuests() {
       console.error('Error updating quest progress:', err);
       return { error: err };
     }
-  }, [user?.id, dailyQuests, weeklyQuests]);
+  }, [user?.id, dailyQuests, weeklyQuests, trackAction]);
 
   // Award XP to user
   const awardXp = async (xp) => {
@@ -379,23 +351,27 @@ export function useQuests() {
     }
   }, [user?.id]);
 
-  // Fetch on mount
+  // Fetch on mount - always load local quests, fetch server if authenticated
   useEffect(() => {
+    // Always load local quests first
+    loadLocalQuests();
+
     if (isAuthenticated) {
       fetchQuests();
       fetchAchievements();
     } else {
-      setDailyQuests([]);
-      setWeeklyQuests([]);
       setAchievements([]);
     }
-  }, [isAuthenticated, fetchQuests, fetchAchievements]);
+  }, [isAuthenticated, fetchQuests, fetchAchievements, loadLocalQuests]);
 
   return {
     // State
     dailyQuests,
     weeklyQuests,
     achievements,
+    questStats,
+    userLevel,
+    recentlyCompleted,
     loading,
     error,
 
@@ -403,17 +379,30 @@ export function useQuests() {
     completedDailyCount: dailyQuests.filter(q => q.isComplete).length,
     completedWeeklyCount: weeklyQuests.filter(q => q.isComplete).length,
     totalDailyXp: dailyQuests.reduce((sum, q) => sum + (q.isComplete ? q.xp : 0), 0),
+    totalXp: questStats.totalXp,
+    level: userLevel.level,
+    allQuestsComplete: dailyQuests.every(q => q.isComplete) && weeklyQuests.every(q => q.isComplete),
 
     // Actions
     fetchQuests,
     updateQuestProgress,
+    trackAction,
+    trackStreak,
     claimRewards,
     checkAchievements,
     getQuestDefinition,
     getCompletedQuestsCount,
 
-    // Clear error
+    // Convenience action trackers
+    trackViewImage: () => trackAction('view_image'),
+    trackWriteJournal: () => trackAction('write_journal'),
+    trackAddFavorite: () => trackAction('add_favorite'),
+    trackPetAction: () => trackAction('pet_action'),
+    trackNavigateDate: () => trackAction('navigate_date'),
+
+    // Clear states
     clearError: () => setError(null),
+    clearRecentlyCompleted: () => setRecentlyCompleted([]),
   };
 }
 
@@ -432,5 +421,8 @@ function getEndOfWeek() {
   date.setHours(23, 59, 59, 999);
   return date.toISOString();
 }
+
+// Re-export quest utilities for convenience
+export { QUEST_DEFINITIONS, getQuestStats, calculateLevelFromXp };
 
 export default useQuests;

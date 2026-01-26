@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import {
   Lightbulb,
@@ -13,6 +13,7 @@ import {
   BarChart3,
   User,
   LogOut,
+  Loader2,
 } from 'lucide-react';
 import CalendarCard from './components/calendar/CalendarCard';
 import ThemeSelector from './components/calendar/ThemeSelector';
@@ -21,23 +22,36 @@ import MonthCalendar from './components/calendar/MonthCalendar';
 import ErrorBoundary from './components/ErrorBoundary';
 import VisualLanding from './components/VisualLanding';
 import { dogTaleStorage } from './utils/resilientStorage';
-import JournalModal from './components/modals/JournalModal';
-import AiModal from './components/modals/AiModal';
-import FavoritesModal from './components/modals/FavoritesModal';
-import StatisticsModal from './components/modals/StatisticsModal';
-import KeyboardShortcutsModal from './components/modals/KeyboardShortcutsModal';
-import SettingsModal from './components/modals/SettingsModal';
-import SocialHub from './components/social/SocialHub';
-import ASCIIVisualizer from './components/ASCIIVisualizer';
-import LoginModal from './components/auth/LoginModal';
-import SignupModal from './components/auth/SignupModal';
-import HealthDashboard from './components/health/HealthDashboard';
-import StoryModal from './components/modals/StoryModal';
-import SeasonPass from './components/social/SeasonPass';
 import { AchievementNotificationContainer } from './components/achievements/AchievementNotification';
+
+// Lazy load modals for code splitting
+const JournalModal = lazy(() => import('./components/modals/JournalModal'));
+const AiModal = lazy(() => import('./components/modals/AiModal'));
+const FavoritesModal = lazy(() => import('./components/modals/FavoritesModal'));
+const StatisticsModal = lazy(() => import('./components/modals/StatisticsModal'));
+const KeyboardShortcutsModal = lazy(() => import('./components/modals/KeyboardShortcutsModal'));
+const SettingsModal = lazy(() => import('./components/modals/SettingsModal'));
+const SocialHub = lazy(() => import('./components/social/SocialHub'));
+const ASCIIVisualizer = lazy(() => import('./components/ASCIIVisualizer'));
+const LoginModal = lazy(() => import('./components/auth/LoginModal'));
+const SignupModal = lazy(() => import('./components/auth/SignupModal'));
+const HealthDashboard = lazy(() => import('./components/health/HealthDashboard'));
+const StoryModal = lazy(() => import('./components/modals/StoryModal'));
+const SeasonPass = lazy(() => import('./components/social/SeasonPass'));
+
+// Loading fallback for lazy-loaded components
+const ModalLoadingFallback = () => (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+    <div className="bg-white dark:bg-surface-800 rounded-2xl p-6 shadow-soft-lg flex items-center gap-3">
+      <Loader2 className="w-5 h-5 animate-spin text-primary-500" />
+      <span className="text-surface-700 dark:text-surface-300">Loading...</span>
+    </div>
+  </div>
+);
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { SubscriptionProvider } from './contexts/SubscriptionContext';
 import { AchievementProvider } from './contexts/AchievementContext';
+import { ReducedMotionProvider } from './contexts/ReducedMotionContext';
 import { useNavigationShortcuts, useModalShortcuts, useThemeCycleShortcut, useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 import { useDarkMode } from './hooks/useDarkMode';
 import Button from './components/ui/Button';
@@ -348,11 +362,6 @@ function App() {
       {/* Visual Landing - shown on first visit */}
       {showVisualLanding && <VisualLanding onEnter={handleEnterApp} />}
 
-      {/* ASCII Visualizer - can be opened anytime */}
-      {showASCIIVisualizer && (
-        <ASCIIVisualizer onClose={() => setShowASCIIVisualizer(false)} />
-      )}
-
       <div className="min-h-screen bg-gradient-to-br from-surface-50 to-surface-100 dark:from-surface-900 dark:to-surface-800 p-4 transition-colors duration-200">
         <div className="container mx-auto max-w-2xl">
           {/* Header */}
@@ -527,90 +536,118 @@ function App() {
         </div>
       </div>
 
-      {/* Modals */}
-      <JournalModal
-        isOpen={isJournalOpen}
-        onClose={() => setIsJournalOpen(false)}
-        date={currentDate}
-        initialEntry={currentJournalEntry}
-        onSave={handleSaveJournal}
-        allEntries={journalEntries}
-      />
+      {/* Lazy-loaded Modals with Suspense */}
+      <Suspense fallback={<ModalLoadingFallback />}>
+        {isJournalOpen && (
+          <JournalModal
+            isOpen={isJournalOpen}
+            onClose={() => setIsJournalOpen(false)}
+            date={currentDate}
+            initialEntry={currentJournalEntry}
+            onSave={handleSaveJournal}
+            allEntries={journalEntries}
+          />
+        )}
 
-      <AiModal
-        isOpen={isAiOpen}
-        onClose={() => setIsAiOpen(false)}
-        currentBreed={currentImage?.breed || null}
-      />
+        {isAiOpen && (
+          <AiModal
+            isOpen={isAiOpen}
+            onClose={() => setIsAiOpen(false)}
+            currentBreed={currentImage?.breed || null}
+          />
+        )}
 
-      <FavoritesModal
-        isOpen={isFavoritesOpen}
-        onClose={() => setIsFavoritesOpen(false)}
-        favorites={favorites}
-        onRemove={handleRemoveFavorite}
-        onClearAll={handleClearAllFavorites}
-      />
+        {isFavoritesOpen && (
+          <FavoritesModal
+            isOpen={isFavoritesOpen}
+            onClose={() => setIsFavoritesOpen(false)}
+            favorites={favorites}
+            onRemove={handleRemoveFavorite}
+            onClearAll={handleClearAllFavorites}
+          />
+        )}
 
-      <StatisticsModal
-        isOpen={isStatsOpen}
-        onClose={() => setIsStatsOpen(false)}
-        favorites={favorites}
-        journalEntries={journalEntries}
-      />
+        {isStatsOpen && (
+          <StatisticsModal
+            isOpen={isStatsOpen}
+            onClose={() => setIsStatsOpen(false)}
+            favorites={favorites}
+            journalEntries={journalEntries}
+          />
+        )}
 
-      <KeyboardShortcutsModal
-        isOpen={isShortcutsOpen}
-        onClose={() => setIsShortcutsOpen(false)}
-      />
+        {isShortcutsOpen && (
+          <KeyboardShortcutsModal
+            isOpen={isShortcutsOpen}
+            onClose={() => setIsShortcutsOpen(false)}
+          />
+        )}
 
-      <SettingsModal
-        isOpen={isSettingsOpen}
-        onClose={() => setIsSettingsOpen(false)}
-        settings={settings}
-        onSettingsChange={handleSettingsChange}
-      />
+        {isSettingsOpen && (
+          <SettingsModal
+            isOpen={isSettingsOpen}
+            onClose={() => setIsSettingsOpen(false)}
+            settings={settings}
+            onSettingsChange={handleSettingsChange}
+          />
+        )}
 
-      {isSocialHubOpen && (
-        <SocialHub onClose={() => setIsSocialHubOpen(false)} />
-      )}
+        {isSocialHubOpen && (
+          <SocialHub onClose={() => setIsSocialHubOpen(false)} />
+        )}
 
-      {/* Auth Modals */}
-      <LoginModal
-        isOpen={isLoginOpen}
-        onClose={() => setIsLoginOpen(false)}
-        onSwitchToSignup={() => {
-          setIsLoginOpen(false);
-          setIsSignupOpen(true);
-        }}
-      />
+        {showASCIIVisualizer && (
+          <ASCIIVisualizer onClose={() => setShowASCIIVisualizer(false)} />
+        )}
 
-      <SignupModal
-        isOpen={isSignupOpen}
-        onClose={() => setIsSignupOpen(false)}
-        onSwitchToLogin={() => {
-          setIsSignupOpen(false);
-          setIsLoginOpen(true);
-        }}
-      />
+        {/* Auth Modals */}
+        {isLoginOpen && (
+          <LoginModal
+            isOpen={isLoginOpen}
+            onClose={() => setIsLoginOpen(false)}
+            onSwitchToSignup={() => {
+              setIsLoginOpen(false);
+              setIsSignupOpen(true);
+            }}
+          />
+        )}
 
-      {/* Health Dashboard */}
-      <HealthDashboard
-        isOpen={isHealthOpen}
-        onClose={() => setIsHealthOpen(false)}
-      />
+        {isSignupOpen && (
+          <SignupModal
+            isOpen={isSignupOpen}
+            onClose={() => setIsSignupOpen(false)}
+            onSwitchToLogin={() => {
+              setIsSignupOpen(false);
+              setIsLoginOpen(true);
+            }}
+          />
+        )}
 
-      {/* Story Generator */}
-      <StoryModal
-        isOpen={isStoryOpen}
-        onClose={() => setIsStoryOpen(false)}
-        journalEntries={journalEntries}
-      />
+        {/* Health Dashboard */}
+        {isHealthOpen && (
+          <HealthDashboard
+            isOpen={isHealthOpen}
+            onClose={() => setIsHealthOpen(false)}
+          />
+        )}
 
-      {/* Season Pass */}
-      <SeasonPass
-        isOpen={isSeasonPassOpen}
-        onClose={() => setIsSeasonPassOpen(false)}
-      />
+        {/* Story Generator */}
+        {isStoryOpen && (
+          <StoryModal
+            isOpen={isStoryOpen}
+            onClose={() => setIsStoryOpen(false)}
+            journalEntries={journalEntries}
+          />
+        )}
+
+        {/* Season Pass */}
+        {isSeasonPassOpen && (
+          <SeasonPass
+            isOpen={isSeasonPassOpen}
+            onClose={() => setIsSeasonPassOpen(false)}
+          />
+        )}
+      </Suspense>
 
       {/* Achievement Notifications */}
       <AchievementNotificationContainer />
@@ -618,16 +655,18 @@ function App() {
   );
 }
 
-// Wrapper component that provides auth, subscription, and achievement context
+// Wrapper component that provides auth, subscription, achievement, and reduced motion context
 function AppWithProviders() {
   return (
-    <AuthProvider>
-      <SubscriptionProvider>
-        <AchievementProvider>
-          <App />
-        </AchievementProvider>
-      </SubscriptionProvider>
-    </AuthProvider>
+    <ReducedMotionProvider>
+      <AuthProvider>
+        <SubscriptionProvider>
+          <AchievementProvider>
+            <App />
+          </AchievementProvider>
+        </SubscriptionProvider>
+      </AuthProvider>
+    </ReducedMotionProvider>
   );
 }
 

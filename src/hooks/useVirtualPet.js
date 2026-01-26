@@ -1,22 +1,28 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase, isOnlineMode } from '../config/supabase';
+import {
+  ACTIONS,
+  MOODS,
+  PET_TYPES,
+  TIME_CONSTANTS,
+  createDefaultPet,
+  calculateDecay,
+  calculateMood,
+  canPerformAction,
+  applyAction,
+  getPetSound,
+  getMoodInfo,
+  loadPet,
+  savePet,
+  recordAction,
+  getCareTips,
+  calculateWellbeing,
+  calculateLevel,
+} from '../utils/petMechanics';
 
-// Time constants
-const STAT_DECAY_INTERVAL = 60 * 1000; // Check every minute
-const HUNGER_RATE = 0.5; // Per minute
-const ENERGY_DECAY_RATE = 0.3; // Per minute
-const HAPPINESS_DECAY_RATE = 0.2; // Per minute
-
-// Action rewards
-const ACTIONS = {
-  feed: { hunger: -30, happiness: 5, energy: 5, xp: 5 },
-  play: { happiness: 20, energy: -15, hunger: 5, xp: 10 },
-  rest: { energy: 30, happiness: -5, xp: 3 },
-  treat: { happiness: 15, hunger: -10, xp: 8 },
-  groom: { happiness: 10, xp: 5 },
-  walk: { happiness: 25, energy: -20, hunger: 10, xp: 15 },
-};
+// Re-export for convenience
+export { ACTIONS, MOODS, PET_TYPES };
 
 /**
  * Hook for managing virtual pet state
@@ -29,48 +35,33 @@ export function useVirtualPet() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [actionCooldowns, setActionCooldowns] = useState({});
+  const [lastActionResult, setLastActionResult] = useState(null);
+  const [careTips, setCareTips] = useState([]);
 
   const decayIntervalRef = useRef(null);
 
-  // Calculate stat changes based on time elapsed
-  const calculateDecay = useCallback((pet) => {
-    if (!pet) return pet;
-
-    const now = new Date();
-    const lastFed = new Date(pet.last_fed_at);
-    const lastPlayed = new Date(pet.last_played_at);
-    const lastRested = new Date(pet.last_rested_at);
-
-    // Calculate minutes since last action
-    const minutesSinceFed = (now - lastFed) / 60000;
-    const minutesSincePlayed = (now - lastPlayed) / 60000;
-    const minutesSinceRested = (now - lastRested) / 60000;
-
-    // Calculate new stats with decay
-    const newHunger = Math.min(100, pet.hunger + (minutesSinceFed * HUNGER_RATE));
-    const newHappiness = Math.max(0, pet.happiness - (minutesSincePlayed * HAPPINESS_DECAY_RATE));
-    const newEnergy = Math.max(0, pet.energy - (minutesSinceRested * ENERGY_DECAY_RATE));
-
-    return {
-      ...pet,
-      hunger: Math.round(newHunger),
-      happiness: Math.round(newHappiness),
-      energy: Math.round(newEnergy),
-      mood: calculateMood(newHappiness, newHunger, newEnergy),
-    };
+  // Update care tips when pet changes
+  const updateCareTips = useCallback((petData) => {
+    if (petData) {
+      setCareTips(getCareTips(petData));
+    }
   }, []);
 
   // Fetch virtual pet
   const fetchPet = useCallback(async () => {
+    // Always try local first
+    let localPetData = loadPet();
+
     if (!isOnlineMode || !user?.id) {
-      // Load from localStorage
-      const localPet = localStorage.getItem('dogtale-virtual-pet');
-      if (localPet) {
-        const parsed = JSON.parse(localPet);
-        setPet(calculateDecay(parsed));
+      if (localPetData) {
+        setPet(localPetData);
+        updateCareTips(localPetData);
       } else {
         // Create default pet
-        setPet(createDefaultPet());
+        const defaultPet = createDefaultPet();
+        savePet(defaultPet);
+        setPet(defaultPet);
+        updateCareTips(defaultPet);
       }
       return;
     }
@@ -85,153 +76,178 @@ export function useVirtualPet() {
         .eq('user_id', user.id)
         .single();
 
-      if (fetchError) throw fetchError;
+      if (fetchError) {
+        // If no server pet, use local or create default
+        if (localPetData) {
+          setPet(localPetData);
+          updateCareTips(localPetData);
+        } else {
+          const defaultPet = createDefaultPet();
+          savePet(defaultPet);
+          setPet(defaultPet);
+          updateCareTips(defaultPet);
+        }
+        return;
+      }
 
-      const processedPet = calculateDecay(data);
+      const processedPet = calculateDecay(data, data.pet_type);
       setPet(processedPet);
-
-      // Cache locally
-      localStorage.setItem('dogtale-virtual-pet', JSON.stringify(data));
+      savePet(processedPet);
+      updateCareTips(processedPet);
 
     } catch (err) {
       console.error('Error fetching virtual pet:', err);
-      setError(err.message);
+      // Fall back to local
+      if (localPetData) {
+        setPet(localPetData);
+        updateCareTips(localPetData);
+      }
     } finally {
       setLoading(false);
     }
-  }, [user?.id, calculateDecay]);
+  }, [user?.id, updateCareTips]);
 
-  // Save pet state
-  const savePet = useCallback(async (updates) => {
-    if (!isOnlineMode || !user?.id || !pet) return;
+  // Save pet state (local + server if available)
+  const savePetState = useCallback(async (newPet) => {
+    if (!newPet) return;
 
-    try {
-      const { error: updateError } = await supabase
-        .from('virtual_pets')
-        .update(updates)
-        .eq('user_id', user.id);
+    // Always save locally
+    savePet(newPet);
+    setPet(newPet);
+    updateCareTips(newPet);
 
-      if (updateError) throw updateError;
-
-      // Update local state
-      const newPet = { ...pet, ...updates };
-      setPet(newPet);
-      localStorage.setItem('dogtale-virtual-pet', JSON.stringify(newPet));
-
-    } catch (err) {
-      console.error('Error saving virtual pet:', err);
+    // Also sync to server if available
+    if (isOnlineMode && user?.id) {
+      try {
+        await supabase
+          .from('virtual_pets')
+          .upsert({
+            user_id: user.id,
+            ...newPet,
+          });
+      } catch (err) {
+        console.error('Error syncing pet to server:', err);
+        // Local save succeeded, so don't throw
+      }
     }
-  }, [user?.id, pet]);
+  }, [user?.id, updateCareTips]);
 
   // Perform an action on the pet
-  const performAction = useCallback(async (action) => {
+  const performAction = useCallback(async (actionKey) => {
     if (!pet) return { error: { message: 'No pet found' } };
 
-    const actionDef = ACTIONS[action];
+    const actionDef = ACTIONS[actionKey];
     if (!actionDef) return { error: { message: 'Invalid action' } };
 
     // Check cooldown
-    const cooldown = actionCooldowns[action];
+    const cooldown = actionCooldowns[actionKey];
     if (cooldown && cooldown > Date.now()) {
       const remainingSeconds = Math.ceil((cooldown - Date.now()) / 1000);
       return { error: { message: `Please wait ${remainingSeconds}s` } };
     }
 
-    // Check if pet has enough stats
-    if (action === 'play' && pet.energy < 15) {
-      return { error: { message: 'Pet is too tired to play!' } };
-    }
-    if (action === 'walk' && pet.energy < 20) {
-      return { error: { message: 'Pet is too tired for a walk!' } };
+    // Check if action can be performed
+    const canDo = canPerformAction(pet, actionKey);
+    if (!canDo.canPerform) {
+      return { error: { message: canDo.reason } };
     }
 
-    // Calculate new stats
-    const newStats = {
-      happiness: Math.max(0, Math.min(100, pet.happiness + (actionDef.happiness || 0))),
-      energy: Math.max(0, Math.min(100, pet.energy + (actionDef.energy || 0))),
-      hunger: Math.max(0, Math.min(100, pet.hunger + (actionDef.hunger || 0))),
-      experience: pet.experience + (actionDef.xp || 0),
-    };
+    // Apply the action using utility
+    const { pet: newPet, result } = applyAction(pet, actionKey);
 
-    // Check for level up
-    let leveledUp = false;
-    let newLevel = pet.level;
-    const xpForNextLevel = pet.level * 50;
-
-    if (newStats.experience >= xpForNextLevel) {
-      newLevel = pet.level + 1;
-      newStats.experience = newStats.experience - xpForNextLevel;
-      leveledUp = true;
+    if (result.error) {
+      return { error: { message: result.error } };
     }
-
-    // Update timestamps
-    const now = new Date().toISOString();
-    const updates = {
-      ...newStats,
-      level: newLevel,
-      ...(action === 'feed' && { last_fed_at: now }),
-      ...(action === 'play' || action === 'walk' && { last_played_at: now }),
-      ...(action === 'rest' && { last_rested_at: now }),
-    };
 
     // Set cooldown
-    const cooldownTime = action === 'rest' ? 30000 : 5000; // 30s for rest, 5s for others
+    const cooldownTime = actionDef.cooldown || 5000;
     setActionCooldowns(prev => ({
       ...prev,
-      [action]: Date.now() + cooldownTime,
+      [actionKey]: Date.now() + cooldownTime,
     }));
 
-    await savePet(updates);
+    // Save updated pet
+    await savePetState(newPet);
 
-    return {
-      success: true,
-      leveledUp,
-      newLevel,
-      xpGained: actionDef.xp,
-    };
-  }, [pet, actionCooldowns, savePet]);
+    // Record action to history
+    recordAction(actionKey, result.xpGained);
+
+    // Store last action result for UI feedback
+    setLastActionResult({
+      ...result,
+      sound: getPetSound(pet.pet_type),
+      timestamp: Date.now(),
+    });
+
+    // Clear result after 3 seconds
+    setTimeout(() => setLastActionResult(null), 3000);
+
+    return result;
+  }, [pet, actionCooldowns, savePetState]);
 
   // Rename pet
   const renamePet = useCallback(async (newName) => {
     if (!newName?.trim()) return { error: { message: 'Name is required' } };
+    if (!pet) return { error: { message: 'No pet found' } };
 
-    await savePet({ pet_name: newName.trim() });
+    const newPet = { ...pet, pet_name: newName.trim() };
+    await savePetState(newPet);
     return { error: null };
-  }, [savePet]);
+  }, [pet, savePetState]);
 
   // Change pet type
   const changePetType = useCallback(async (newType) => {
     if (!['dog', 'cat'].includes(newType)) {
       return { error: { message: 'Invalid pet type' } };
     }
+    if (!pet) return { error: { message: 'No pet found' } };
 
-    await savePet({ pet_type: newType });
+    const newPet = { ...pet, pet_type: newType };
+    await savePetState(newPet);
     return { error: null };
-  }, [savePet]);
+  }, [pet, savePetState]);
 
   // Update customization
   const updateCustomization = useCallback(async (customization) => {
+    if (!pet) return { error: { message: 'No pet found' } };
+
     const newCustomization = {
-      ...(pet?.customization || {}),
+      ...(pet.customization || {}),
       ...customization,
     };
 
-    await savePet({ customization: newCustomization });
+    const newPet = { ...pet, customization: newCustomization };
+    await savePetState(newPet);
     return { error: null };
-  }, [pet?.customization, savePet]);
+  }, [pet, savePetState]);
+
+  // Reset pet (create new default pet)
+  const resetPet = useCallback(async (name, type) => {
+    const newPet = createDefaultPet(name || 'Buddy', type || 'dog');
+    await savePetState(newPet);
+    return { error: null, pet: newPet };
+  }, [savePetState]);
 
   // Set up decay interval
   useEffect(() => {
     decayIntervalRef.current = setInterval(() => {
-      setPet(prev => prev ? calculateDecay(prev) : null);
-    }, STAT_DECAY_INTERVAL);
+      setPet(prev => {
+        if (!prev) return null;
+        const decayed = calculateDecay(prev, prev.pet_type);
+        // Update care tips when stats change
+        setCareTips(getCareTips(decayed));
+        // Also persist the decayed state
+        savePet(decayed);
+        return decayed;
+      });
+    }, TIME_CONSTANTS.MINUTE);
 
     return () => {
       if (decayIntervalRef.current) {
         clearInterval(decayIntervalRef.current);
       }
     };
-  }, [calculateDecay]);
+  }, []);
 
   // Fetch on mount
   useEffect(() => {
@@ -240,20 +256,40 @@ export function useVirtualPet() {
     }
   }, [isAuthenticated, fetchPet]);
 
+  // Get remaining cooldown time
+  const getCooldownRemaining = useCallback((actionKey) => {
+    const cooldown = actionCooldowns[actionKey];
+    if (!cooldown || cooldown <= Date.now()) return 0;
+    return Math.ceil((cooldown - Date.now()) / 1000);
+  }, [actionCooldowns]);
+
+  // Check if action is on cooldown
+  const isOnCooldown = useCallback((actionKey) => {
+    return getCooldownRemaining(actionKey) > 0;
+  }, [getCooldownRemaining]);
+
   return {
     // State
     pet,
     loading,
     error,
     actionCooldowns,
+    lastActionResult,
+    careTips,
 
     // Computed
     mood: pet?.mood || 'neutral',
+    moodInfo: getMoodInfo(pet?.mood || 'neutral'),
     level: pet?.level || 1,
+    levelInfo: pet ? calculateLevel(pet.experience || 0) : null,
     isHungry: (pet?.hunger || 0) > 70,
     isTired: (pet?.energy || 0) < 30,
     isSad: (pet?.happiness || 0) < 30,
-    needsAttention: (pet?.hunger || 0) > 70 || (pet?.happiness || 0) < 30,
+    isSick: (pet?.health || 100) < 30,
+    needsAttention: (pet?.hunger || 0) > 70 || (pet?.happiness || 0) < 30 || (pet?.health || 100) < 30,
+    wellbeing: pet ? calculateWellbeing(pet) : 0,
+    petType: PET_TYPES[pet?.pet_type] || PET_TYPES.dog,
+    hasPet: !!pet,
 
     // Actions
     fetchPet,
@@ -261,6 +297,7 @@ export function useVirtualPet() {
     renamePet,
     changePetType,
     updateCustomization,
+    resetPet,
 
     // Convenience actions
     feed: () => performAction('feed'),
@@ -269,36 +306,21 @@ export function useVirtualPet() {
     treat: () => performAction('treat'),
     groom: () => performAction('groom'),
     walk: () => performAction('walk'),
+    train: () => performAction('train'),
+    vet: () => performAction('vet'),
 
-    // Clear error
+    // Cooldown helpers
+    getCooldownRemaining,
+    isOnCooldown,
+
+    // Utilities
+    getSound: () => pet ? getPetSound(pet.pet_type) : '',
+    canPerform: (action) => pet ? canPerformAction(pet, action) : { canPerform: false },
+
+    // Clear states
     clearError: () => setError(null),
+    clearLastAction: () => setLastActionResult(null),
   };
-}
-
-// Helper functions
-function createDefaultPet() {
-  return {
-    pet_name: 'Buddy',
-    pet_type: 'dog',
-    happiness: 80,
-    energy: 80,
-    hunger: 20,
-    experience: 0,
-    level: 1,
-    last_fed_at: new Date().toISOString(),
-    last_played_at: new Date().toISOString(),
-    last_rested_at: new Date().toISOString(),
-    customization: {},
-    mood: 'happy',
-  };
-}
-
-function calculateMood(happiness, hunger, energy) {
-  if (happiness < 20 || hunger > 80) return 'sad';
-  if (energy < 20) return 'tired';
-  if (happiness > 80 && hunger < 30 && energy > 50) return 'excited';
-  if (happiness > 60) return 'happy';
-  return 'neutral';
 }
 
 export default useVirtualPet;

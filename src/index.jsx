@@ -2,7 +2,17 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import ErrorBoundary from './components/ErrorBoundary'
+import { registerServiceWorker } from './services/notificationService'
 import './styles/globals.css'
+
+// Register service worker for PWA support
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    registerServiceWorker().catch((error) => {
+      console.warn('Service worker registration skipped:', error);
+    });
+  });
+}
 
 // Global unhandled promise rejection handler
 window.addEventListener('unhandledrejection', (event) => {

@@ -83,14 +83,90 @@ export function AchievementProvider({ children }) {
   }, [user?.id]);
 
   /**
-   * Load achievement stats from database
+   * Load local stats from localStorage (for offline mode)
+   */
+  const loadLocalStats = useCallback(() => {
+    try {
+      // Journal entries count
+      const journalData = localStorage.getItem('dogtale-journal');
+      const journal = journalData ? JSON.parse(journalData) : {};
+      const journalCount = Object.keys(journal).length;
+
+      // Favorites count and unique breeds
+      const favoritesData = localStorage.getItem('dogtale-favorites');
+      const favorites = favoritesData ? JSON.parse(favoritesData) : [];
+      const favoriteCount = favorites.length;
+      const uniqueBreeds = new Set(favorites.map(f => f.breed).filter(Boolean));
+
+      // Pets count
+      const petsData = localStorage.getItem('dogtale-pets');
+      const pets = petsData ? JSON.parse(petsData) : [];
+      const petCount = pets.length;
+
+      // Login streak (from settings or local tracking)
+      const streakData = localStorage.getItem('dogtale-login-streak');
+      let loginStreak = 0;
+      if (streakData) {
+        const streak = JSON.parse(streakData);
+        const today = new Date().toDateString();
+        const yesterday = new Date(Date.now() - 86400000).toDateString();
+        if (streak.lastDate === today || streak.lastDate === yesterday) {
+          loginStreak = streak.count;
+        }
+      }
+
+      // Virtual pet level
+      const virtualPetData = localStorage.getItem('dogtale-virtual-pet');
+      const virtualPet = virtualPetData ? JSON.parse(virtualPetData) : null;
+
+      // Quests completed
+      const questsData = localStorage.getItem('dogtale-quests-completed');
+      const questsCompleted = questsData ? JSON.parse(questsData).length : 0;
+
+      // Memorials (from memorial storage)
+      const memorialsData = localStorage.getItem('dogtale-memorials');
+      const memorials = memorialsData ? JSON.parse(memorialsData) : [];
+
+      const stats = {
+        journal_count: journalCount,
+        favorite_count: favoriteCount,
+        breed_count: uniqueBreeds.size,
+        pet_count: petCount,
+        login_streak: loginStreak,
+        virtual_pet_level: virtualPet?.level || 0,
+        has_virtual_pet: virtualPet ? 1 : 0,
+        quests_completed: questsCompleted,
+        friend_count: 0, // Social features need backend
+        health_records: 0,
+        activities_created: 0,
+        reactions_given: 0,
+        battles_completed: 0,
+        battles_won: 0,
+        gyms_conquered: 0,
+        season_level: 0,
+        achievement_count: unlockedAchievements.length,
+      };
+
+      return stats;
+    } catch (err) {
+      console.error('Error loading local stats:', err);
+      return null;
+    }
+  }, [unlockedAchievements.length]);
+
+  /**
+   * Load achievement stats from database or local storage
    */
   const loadStats = useCallback(async () => {
+    // Always try to load local stats first for immediate display
+    const localStats = loadLocalStats();
+    if (localStats) {
+      setAchievementStats(localStats);
+      localStorage.setItem(ACHIEVEMENT_STATS_KEY, JSON.stringify(localStats));
+    }
+
+    // If offline or no user, we're done
     if (!user?.id || !isOnlineMode) {
-      const cached = localStorage.getItem(ACHIEVEMENT_STATS_KEY);
-      if (cached) {
-        setAchievementStats(JSON.parse(cached));
-      }
       return;
     }
 
@@ -185,7 +261,7 @@ export function AchievementProvider({ children }) {
     } catch (err) {
       console.error('Error loading achievement stats:', err);
     }
-  }, [user?.id, unlockedAchievements.length]);
+  }, [user?.id, unlockedAchievements.length, loadLocalStats]);
 
   /**
    * Check if an achievement should be unlocked
@@ -449,6 +525,62 @@ export function AchievementProvider({ children }) {
     };
   }, [user?.id]);
 
+  /**
+   * Update login streak (call on app load)
+   */
+  const updateLoginStreak = useCallback(() => {
+    try {
+      const today = new Date().toDateString();
+      const streakData = localStorage.getItem('dogtale-login-streak');
+      let streak = streakData ? JSON.parse(streakData) : { count: 0, lastDate: null };
+
+      if (streak.lastDate === today) {
+        // Already logged in today
+        return streak.count;
+      }
+
+      const yesterday = new Date(Date.now() - 86400000).toDateString();
+      if (streak.lastDate === yesterday) {
+        // Continuing streak
+        streak.count += 1;
+      } else {
+        // Streak broken, start new
+        streak.count = 1;
+      }
+
+      streak.lastDate = today;
+      localStorage.setItem('dogtale-login-streak', JSON.stringify(streak));
+
+      // Trigger achievement check for streak
+      triggerAchievementCheck('login_streak', streak.count);
+
+      return streak.count;
+    } catch (err) {
+      console.error('Error updating login streak:', err);
+      return 0;
+    }
+  }, [triggerAchievementCheck]);
+
+  /**
+   * Increment a local stat and trigger achievement check
+   */
+  const incrementLocalStat = useCallback((statType, amount = 1) => {
+    const newStats = { ...achievementStats };
+    newStats[statType] = (newStats[statType] || 0) + amount;
+    setAchievementStats(newStats);
+    localStorage.setItem(ACHIEVEMENT_STATS_KEY, JSON.stringify(newStats));
+
+    // Trigger achievement check
+    triggerAchievementCheck(statType, newStats[statType]);
+
+    return newStats[statType];
+  }, [achievementStats, triggerAchievementCheck]);
+
+  // Track login streak on mount
+  useEffect(() => {
+    updateLoginStreak();
+  }, [updateLoginStreak]);
+
   const value = {
     // State
     unlockedAchievements,
@@ -469,6 +601,8 @@ export function AchievementProvider({ children }) {
     loadStats,
     dismissNotification,
     clearAllNotifications,
+    updateLoginStreak,
+    incrementLocalStat,
 
     // Helpers
     getAchievementProgress,

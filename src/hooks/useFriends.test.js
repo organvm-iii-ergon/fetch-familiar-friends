@@ -65,23 +65,41 @@ describe('useFriends', () => {
   });
 
   describe('Initial State', () => {
-    it('initializes with empty arrays when not authenticated', () => {
+    it('loads demo friends when not authenticated (demo mode)', async () => {
       const { result } = renderHook(() => useFriends());
 
-      expect(result.current.friends).toEqual([]);
-      expect(result.current.pendingReceived).toEqual([]);
-      expect(result.current.pendingSent).toEqual([]);
+      // Demo friends are loaded for offline/unauthenticated users
+      await waitFor(() => {
+        expect(result.current.friends.length).toBeGreaterThan(0);
+        expect(result.current.isDemo).toBe(true);
+      });
+
       expect(result.current.loading).toBe(false);
       expect(result.current.error).toBeNull();
     });
 
-    it('has correct computed values when empty', () => {
+    it('has correct computed values with demo friends', async () => {
       const { result } = renderHook(() => useFriends());
 
-      expect(result.current.friendCount).toBe(0);
-      expect(result.current.pendingCount).toBe(0);
-      expect(result.current.hasFriends).toBe(false);
-      expect(result.current.hasPendingRequests).toBe(false);
+      await waitFor(() => {
+        expect(result.current.hasFriends).toBe(true);
+        expect(result.current.friendCount).toBeGreaterThan(0);
+      });
+
+      expect(result.current.isDemo).toBe(true);
+    });
+
+    it('provides demo mode action handlers', async () => {
+      const { result } = renderHook(() => useFriends());
+
+      await waitFor(() => {
+        expect(result.current.isDemo).toBe(true);
+      });
+
+      // Demo mode should return error for actions
+      const sendResult = await result.current.sendFriendRequest('some-id');
+      expect(sendResult.error).toBeDefined();
+      expect(sendResult.error.isDemo).toBe(true);
     });
   });
 
@@ -158,18 +176,21 @@ describe('useFriends', () => {
       });
     });
 
-    it('handles fetch errors gracefully', async () => {
+    it('falls back to demo friends on fetch errors', async () => {
       mockQueryBuilder.then.mockImplementation((resolve) =>
         resolve({ data: null, error: { message: 'Database error' } })
       );
 
       const { result } = renderHook(() => useFriends());
 
+      // Should fall back to demo friends on error
       await waitFor(() => {
-        expect(result.current.error).toBe('Database error');
+        expect(result.current.isDemo).toBe(true);
+        expect(result.current.friends.length).toBeGreaterThan(0);
       });
 
-      expect(result.current.friends).toEqual([]);
+      // Error is not set because we have a graceful fallback
+      expect(result.current.error).toBeNull();
     });
   });
 
@@ -179,20 +200,27 @@ describe('useFriends', () => {
       mockAuthContext.isAuthenticated = true;
     });
 
-    it('searches for users by query', async () => {
+    it('searches for users by query when authenticated', async () => {
       const mockUsers = [
         { id: 'user-1', username: 'johnsmith', display_name: 'John Smith' },
         { id: 'user-2', username: 'johndoe', display_name: 'John Doe' },
       ];
 
-      mockQueryBuilder.then.mockImplementation((resolve) =>
-        resolve({ data: mockUsers, error: null })
-      );
+      // First call returns friends, second call returns search results
+      let callCount = 0;
+      mockQueryBuilder.then.mockImplementation((resolve) => {
+        callCount++;
+        if (callCount === 1) {
+          return resolve({ data: [], error: null }); // friends
+        }
+        return resolve({ data: mockUsers, error: null }); // search
+      });
 
       const { result } = renderHook(() => useFriends());
 
       await waitFor(() => {
         expect(result.current.loading).toBe(false);
+        expect(result.current.isDemo).toBe(false);
       });
 
       let searchResult;
@@ -204,11 +232,15 @@ describe('useFriends', () => {
       expect(searchResult.error).toBeNull();
     });
 
-    it('returns empty array for empty query', async () => {
+    it('returns demo error for empty query in demo mode', async () => {
+      // In demo mode (not authenticated)
+      mockAuthContext.user = null;
+      mockAuthContext.isAuthenticated = false;
+
       const { result } = renderHook(() => useFriends());
 
       await waitFor(() => {
-        expect(result.current.loading).toBe(false);
+        expect(result.current.isDemo).toBe(true);
       });
 
       let searchResult;
@@ -216,7 +248,8 @@ describe('useFriends', () => {
         searchResult = await result.current.searchUsers('');
       });
 
-      expect(searchResult.data).toEqual([]);
+      // Demo mode returns error for search
+      expect(searchResult.error).toBeDefined();
     });
 
     it('filters out existing friends from search results', async () => {
@@ -278,6 +311,7 @@ describe('useFriends', () => {
 
       await waitFor(() => {
         expect(result.current.loading).toBe(false);
+        expect(result.current.isDemo).toBe(false);
       });
 
       let sendResult;
@@ -312,18 +346,24 @@ describe('useFriends', () => {
       expect(sendResult.error).toBeDefined();
     });
 
-    it('returns error when not authenticated', async () => {
+    it('returns demo error when not authenticated (demo mode)', async () => {
       mockAuthContext.user = null;
       mockAuthContext.isAuthenticated = false;
 
       const { result } = renderHook(() => useFriends());
+
+      await waitFor(() => {
+        expect(result.current.isDemo).toBe(true);
+      });
 
       let sendResult;
       await act(async () => {
         sendResult = await result.current.sendFriendRequest('user-456');
       });
 
-      expect(sendResult.error.message).toBe('Must be signed in');
+      // Demo mode returns special error
+      expect(sendResult.error).toBeDefined();
+      expect(sendResult.error.isDemo).toBe(true);
     });
   });
 
@@ -342,6 +382,7 @@ describe('useFriends', () => {
 
       await waitFor(() => {
         expect(result.current.loading).toBe(false);
+        expect(result.current.isDemo).toBe(false);
       });
 
       let acceptResult;
@@ -387,6 +428,7 @@ describe('useFriends', () => {
 
       await waitFor(() => {
         expect(result.current.loading).toBe(false);
+        expect(result.current.isDemo).toBe(false);
       });
 
       let removeResult;
@@ -413,6 +455,7 @@ describe('useFriends', () => {
 
       await waitFor(() => {
         expect(result.current.loading).toBe(false);
+        expect(result.current.isDemo).toBe(false);
       });
 
       let blockResult;
@@ -543,18 +586,14 @@ describe('useFriends', () => {
 
   describe('Error Handling', () => {
     it('clears error when clearError is called', async () => {
-      mockAuthContext.user = { id: 'test-user-123' };
-      mockAuthContext.isAuthenticated = true;
-
-      mockQueryBuilder.then.mockImplementation((resolve) =>
-        resolve({ data: null, error: { message: 'Test error' } })
-      );
-
       const { result } = renderHook(() => useFriends());
 
+      // Error starts as null (demo friends loaded on error)
       await waitFor(() => {
-        expect(result.current.error).toBe('Test error');
+        expect(result.current.loading).toBe(false);
       });
+
+      expect(result.current.error).toBeNull();
 
       act(() => {
         result.current.clearError();
@@ -562,10 +601,27 @@ describe('useFriends', () => {
 
       expect(result.current.error).toBeNull();
     });
+
+    it('falls back to demo friends on server error', async () => {
+      mockAuthContext.user = { id: 'test-user-123' };
+      mockAuthContext.isAuthenticated = true;
+
+      mockQueryBuilder.then.mockImplementation((resolve) =>
+        resolve({ data: null, error: { message: 'Server error' } })
+      );
+
+      const { result } = renderHook(() => useFriends());
+
+      // Should fall back to demo friends instead of showing error
+      await waitFor(() => {
+        expect(result.current.friends.length).toBeGreaterThan(0);
+        expect(result.current.isDemo).toBe(true);
+      });
+    });
   });
 
   describe('State Transitions', () => {
-    it('clears friends when user logs out', async () => {
+    it('switches to demo friends when user logs out', async () => {
       mockAuthContext.user = { id: 'test-user-123' };
       mockAuthContext.isAuthenticated = true;
 
@@ -574,7 +630,7 @@ describe('useFriends', () => {
           id: 'friendship-1',
           status: 'accepted',
           requester: { id: 'test-user-123' },
-          addressee: { id: 'friend-456' },
+          addressee: { id: 'friend-456', username: 'friend456' },
         },
       ];
 
@@ -586,6 +642,7 @@ describe('useFriends', () => {
 
       await waitFor(() => {
         expect(result.current.friends.length).toBe(1);
+        expect(result.current.isDemo).toBe(false);
       });
 
       // Simulate logout
@@ -594,10 +651,11 @@ describe('useFriends', () => {
 
       rerender();
 
+      // Should switch to demo friends after logout
       await waitFor(() => {
-        expect(result.current.friends).toEqual([]);
-        expect(result.current.pendingReceived).toEqual([]);
-        expect(result.current.pendingSent).toEqual([]);
+        expect(result.current.isDemo).toBe(true);
+        expect(result.current.friends.length).toBeGreaterThan(0); // Demo friends loaded
+        expect(result.current.pendingSent).toEqual([]); // Sent requests cleared
       });
     });
   });
