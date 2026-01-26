@@ -13,6 +13,10 @@ import KeyboardShortcutsModal from './components/modals/KeyboardShortcutsModal';
 import SettingsModal from './components/modals/SettingsModal';
 import SocialHub from './components/social/SocialHub';
 import ASCIIVisualizer from './components/ASCIIVisualizer';
+import LoginModal from './components/auth/LoginModal';
+import SignupModal from './components/auth/SignupModal';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { SubscriptionProvider } from './contexts/SubscriptionContext';
 import { useNavigationShortcuts, useModalShortcuts, useThemeCycleShortcut, useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 import { useDarkMode } from './hooks/useDarkMode';
 
@@ -20,6 +24,7 @@ function App() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [theme, setTheme] = useState('park');
   const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const { user, profile, isAuthenticated, signOut, loading: authLoading } = useAuth();
 
   // Visual intro states
   const [showVisualLanding, setShowVisualLanding] = useState(false);
@@ -34,6 +39,10 @@ function App() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isSocialHubOpen, setIsSocialHubOpen] = useState(false);
   const [showMonthView, setShowMonthView] = useState(false);
+
+  // Auth modal states
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isSignupOpen, setIsSignupOpen] = useState(false);
 
   // Data states
   const [favorites, setFavorites] = useState([]);
@@ -225,7 +234,9 @@ function App() {
     isShortcutsOpen,
     isSettingsOpen,
     isSocialHubOpen,
-    showASCIIVisualizer
+    showASCIIVisualizer,
+    isLoginOpen,
+    isSignupOpen
   ];
   const anyModalOpen = modalStates.some(state => state);
 
@@ -334,6 +345,52 @@ function App() {
               >
                 <span className="text-2xl">📊</span>
               </button>
+              {/* User menu / Login button */}
+              {isAuthenticated ? (
+                <div className="relative group">
+                  <button
+                    className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-lg transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    aria-label="User menu"
+                    title={profile?.display_name || user?.email || 'Account'}
+                  >
+                    {profile?.avatar_url ? (
+                      <img
+                        src={profile.avatar_url}
+                        alt="Avatar"
+                        className="w-6 h-6 rounded-full"
+                      />
+                    ) : (
+                      <span className="text-xl">👤</span>
+                    )}
+                  </button>
+                  {/* Dropdown menu */}
+                  <div className="absolute right-0 top-full mt-1 w-48 py-1 bg-white dark:bg-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                    <div className="px-3 py-2 border-b border-gray-200 dark:border-gray-700">
+                      <p className="text-sm font-medium text-gray-800 dark:text-gray-200 truncate">
+                        {profile?.display_name || 'Pet Parent'}
+                      </p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                        {user?.email}
+                      </p>
+                    </div>
+                    <button
+                      onClick={signOut}
+                      className="w-full px-3 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setIsLoginOpen(true)}
+                  className="p-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-lg transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  aria-label="Sign in"
+                  title="Sign in to sync your data"
+                >
+                  <span className="text-xl">👤</span>
+                </button>
+              )}
             </div>
           </div>
 
@@ -427,8 +484,38 @@ function App() {
       {isSocialHubOpen && (
         <SocialHub onClose={() => setIsSocialHubOpen(false)} />
       )}
+
+      {/* Auth Modals */}
+      <LoginModal
+        isOpen={isLoginOpen}
+        onClose={() => setIsLoginOpen(false)}
+        onSwitchToSignup={() => {
+          setIsLoginOpen(false);
+          setIsSignupOpen(true);
+        }}
+      />
+
+      <SignupModal
+        isOpen={isSignupOpen}
+        onClose={() => setIsSignupOpen(false)}
+        onSwitchToLogin={() => {
+          setIsSignupOpen(false);
+          setIsLoginOpen(true);
+        }}
+      />
     </ErrorBoundary>
   );
 }
 
-export default App;
+// Wrapper component that provides auth and subscription context
+function AppWithProviders() {
+  return (
+    <AuthProvider>
+      <SubscriptionProvider>
+        <App />
+      </SubscriptionProvider>
+    </AuthProvider>
+  );
+}
+
+export default AppWithProviders;
