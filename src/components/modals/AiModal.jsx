@@ -7,6 +7,14 @@ import { useAiChat } from '../../hooks/useAiChat';
 import { getBreedSpecificResponse } from '../../utils/breedKnowledge';
 import { sanitizeInput, isFamilyFriendly } from '../../utils/dataValidation';
 
+/**
+ * Generate a unique message ID
+ * @returns {string} Unique ID combining timestamp and random string
+ */
+const generateMessageId = () => {
+  return `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+};
+
 const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
   const { isAuthenticated, isOnlineMode } = useAuth();
   const { hasFeature, getRemainingQuota } = useSubscription();
@@ -14,7 +22,7 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
   // Use real AI chat hook
   const {
     messages: aiMessages,
-    isLoading,
+    isLoading: aiLoading,
     error: aiError,
     rateLimit,
     sendMessage,
@@ -25,7 +33,13 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
 
   const [inputMessage, setInputMessage] = useState('');
   const [localError, setLocalError] = useState('');
+  const [offlineMessages, setOfflineMessages] = useState([]);
+  const [offlineLoading, setOfflineLoading] = useState(false);
   const messagesEndRef = useRef(null);
+
+  // Determine if we're in offline mode
+  const isOffline = !isOnlineMode || !isAuthenticated;
+  const isLoading = isOffline ? offlineLoading : aiLoading;
   const inputRef = useRef(null);
 
   // Get welcome message
@@ -38,9 +52,25 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
 
   // Initialize with welcome message for display
   const [welcomeShown, setWelcomeShown] = useState(false);
-  const displayMessages = welcomeShown || aiMessages.length > 0
-    ? aiMessages
-    : [{ role: 'assistant', content: getWelcomeMessage() }];
+
+  // Clear offline messages when modal closes or mode changes
+  useEffect(() => {
+    if (!isOpen) {
+      setOfflineMessages([]);
+      setWelcomeShown(false);
+    }
+  }, [isOpen]);
+
+  // Compute messages to display - handle both offline and online modes
+  const baseMessages = isOffline ? offlineMessages : aiMessages;
+  const messagesWithIds = baseMessages.map((msg, index) => ({
+    ...msg,
+    id: msg.id || `legacy-${index}-${msg.role}`,
+  }));
+
+  const displayMessages = welcomeShown || messagesWithIds.length > 0
+    ? messagesWithIds
+    : [{ id: 'welcome', role: 'assistant', content: getWelcomeMessage() }];
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
@@ -121,18 +151,25 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
     } else {
       // Offline/unauthenticated fallback with simulated delay
       // Add user message immediately
-      const userMsg = { role: 'user', content: messageToSend };
-      // We'll manage this locally since hook won't work offline
+      const userMsg = {
+        id: generateMessageId(),
+        role: 'user',
+        content: messageToSend,
+      };
+      setOfflineMessages(prev => [...prev, userMsg]);
+      setOfflineLoading(true);
 
-      // For offline mode, we simulate the behavior
+      // Simulate AI response delay
       setTimeout(() => {
         const response = generateOfflineResponse(messageToSend);
-        // Since we can't use the hook in offline mode, we'd need local state
-        // For now, the hook will handle it gracefully
+        const assistantMsg = {
+          id: generateMessageId(),
+          role: 'assistant',
+          content: response,
+        };
+        setOfflineMessages(prev => [...prev, assistantMsg]);
+        setOfflineLoading(false);
       }, 500);
-
-      // Actually use the hook - it will fall back appropriately
-      await sendMessage(messageToSend);
     }
   };
 
@@ -146,6 +183,7 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
   const handleClearChat = () => {
     if (window.confirm('Clear all messages?')) {
       clearConversation();
+      setOfflineMessages([]);
       setWelcomeShown(false);
     }
   };
@@ -165,9 +203,9 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
 
   const displayError = localError || aiError;
 
-  // Add streaming content to display if present
-  const allMessages = streamingContent
-    ? [...displayMessages, { role: 'assistant', content: streamingContent, isStreaming: true }]
+  // Add streaming content to display if present (only in online mode)
+  const allMessages = streamingContent && !isOffline
+    ? [...displayMessages, { id: 'streaming', role: 'assistant', content: streamingContent, isStreaming: true }]
     : displayMessages;
 
   return (
@@ -183,9 +221,9 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
 
         {/* Messages Area */}
         <div className="flex-1 overflow-y-auto mb-4 space-y-4 p-2">
-          {allMessages.map((message, index) => (
+          {allMessages.map((message) => (
             <div
-              key={index}
+              key={message.id}
               className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               <div
@@ -232,9 +270,9 @@ const AiModal = ({ isOpen, onClose, currentBreed = null }) => {
           <div className="mb-4">
             <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Suggested questions:</p>
             <div className="flex flex-wrap gap-2">
-              {suggestedQuestions.map((question, index) => (
+              {suggestedQuestions.map((question) => (
                 <button
-                  key={index}
+                  key={question}
                   onClick={() => handleSuggestionClick(question)}
                   className="text-xs px-3 py-1 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-full transition-colors"
                 >

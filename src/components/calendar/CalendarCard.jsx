@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { RefreshCw, Star, ChevronDown, BookOpen, Sparkles, Heart, AlertCircle } from 'lucide-react';
 import { getAllDailyContent } from '../../utils/dailyContent';
 import { getCachedImage, cacheImage, preloadNearbyDates } from '../../utils/imageCache';
+import { fetchPetImage, getRateLimitStatus } from '../../services/imageApi';
 import Skeleton from '../ui/Skeleton';
 
 const CalendarCard = ({
@@ -72,83 +73,46 @@ const CalendarCard = ({
         return;
       }
 
-      // No cache or wrong type - fetch from API
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
-
+      // No cache or wrong type - fetch from API using imageApi service
       try {
-        const dogApiUrl = import.meta.env.VITE_DOG_API_URL || 'https://dog.ceo/api';
-        const catApiUrl = import.meta.env.VITE_CAT_API_URL || 'https://api.thecatapi.com/v1';
+        const result = await fetchPetImage(imageType, { useFallback: true });
 
-        const endpoint = isDog
-          ? `${dogApiUrl}/breeds/image/random`
-          : `${catApiUrl}/images/search`;
-
-        const response = await fetch(endpoint, {
-          signal: controller.signal,
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-
-        clearTimeout(timeoutId);
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        const imageUrl = isDog ? data.message : data[0]?.url;
-
-        if (!imageUrl) {
-          throw new Error('No image URL in response');
-        }
-
-        setTodayImage(imageUrl);
+        setTodayImage(result.url);
+        setBreedInfo(result.breed || null);
         setRetryCount(0); // Reset retry count on success
 
-        // Extract breed info from URL (for dogs)
-        let extractedBreed = null;
-        if (isDog && imageUrl.includes('/breeds/')) {
-          const breedMatch = imageUrl.match(/\/breeds\/([^/]+)\//);
-          if (breedMatch) {
-            const breedSlug = breedMatch[1];
-            const breedParts = breedSlug.split('-');
-            const breedName = breedParts.map(part =>
-              part.charAt(0).toUpperCase() + part.slice(1)
-            ).join(' ');
-            extractedBreed = breedName;
-            setBreedInfo(breedName);
-          } else {
-            setBreedInfo(null);
-          }
-        } else {
-          setBreedInfo(null);
+        // Show warning for fallback images
+        if (result.isFallback) {
+          setError(result.error || 'Using fallback image');
         }
 
-        // Cache the image for future use
-        cacheImage(date, imageUrl, imageType, extractedBreed);
+        // Cache the image for future use (don't cache fallbacks)
+        if (!result.isFallback) {
+          cacheImage(date, result.url, imageType, result.breed);
+        }
 
         // Notify parent about the loaded image
         if (onImageLoad) {
           onImageLoad({
-            url: imageUrl,
+            url: result.url,
             type: imageType,
-            breed: extractedBreed
+            breed: result.breed
           });
         }
       } catch (err) {
-        clearTimeout(timeoutId);
         console.error('Error fetching image:', err);
 
-        if (err.name === 'AbortError') {
+        if (err.message.includes('timed out')) {
           setError('Request timed out. Please try again.');
+        } else if (err.message.includes('Rate limited')) {
+          setError(err.message);
         } else {
           setError('Failed to load image. Please try again.');
         }
 
-        // Auto-retry logic
-        if (retryCount < MAX_RETRIES) {
+        // Auto-retry logic (only for non-rate-limit errors)
+        const rateLimitStatus = getRateLimitStatus();
+        if (!rateLimitStatus.isLimited && retryCount < MAX_RETRIES) {
           setTimeout(() => {
             setRetryCount(prev => prev + 1);
           }, 2000 * (retryCount + 1)); // Exponential backoff
@@ -176,41 +140,27 @@ const CalendarCard = ({
 
     const preloadDays = settings.preloadDays || 3;
 
-    // Create fetch function that mirrors the main fetchDailyImage logic
-    const fetchImageForDate = async (targetDate) => {
+    // Create fetch function using imageApi service
+    const fetchImageForDate = async () => {
       try {
         const isDog = !isFlipped;
-        const endpoint = isDog
-          ? 'https://dog.ceo/api/breeds/image/random'
-          : 'https://api.thecatapi.com/v1/images/search';
+        const imageType = isDog ? 'dog' : 'cat';
 
-        const response = await fetch(endpoint, {
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-
-        const data = await response.json();
-        const imageUrl = isDog ? data.message : data[0]?.url;
-
-        if (!imageUrl) throw new Error('No image URL in response');
-
-        // Extract breed info for dogs
-        let breed = null;
-        if (isDog && imageUrl.includes('/breeds/')) {
-          const breedMatch = imageUrl.match(/\/breeds\/([^/]+)\//);
-          if (breedMatch) {
-            const breedSlug = breedMatch[1];
-            const breedParts = breedSlug.split('-');
-            breed = breedParts.map(part =>
-              part.charAt(0).toUpperCase() + part.slice(1)
-            ).join(' ');
-          }
+        // Check rate limit before preloading
+        const rateLimitStatus = getRateLimitStatus();
+        if (rateLimitStatus.isLimited) {
+          return null;
         }
 
-        return { url: imageUrl, type: isDog ? 'dog' : 'cat', breed };
+        const result = await fetchPetImage(imageType, { useFallback: false });
+
+        return {
+          url: result.url,
+          type: result.type,
+          breed: result.breed
+        };
       } catch (error) {
-        console.warn(`Failed to preload image for date ${targetDate.toDateString()}:`, error);
+        console.warn('Failed to preload image:', error.message);
         return null;
       }
     };

@@ -20,6 +20,7 @@ import DateNavigation from './components/calendar/DateNavigation';
 import MonthCalendar from './components/calendar/MonthCalendar';
 import ErrorBoundary from './components/ErrorBoundary';
 import VisualLanding from './components/VisualLanding';
+import { dogTaleStorage } from './utils/resilientStorage';
 import JournalModal from './components/modals/JournalModal';
 import AiModal from './components/modals/AiModal';
 import FavoritesModal from './components/modals/FavoritesModal';
@@ -141,64 +142,72 @@ function App() {
     localStorage.setItem('dogtale-seen-landing', 'true');
   };
 
-  // Load data from localStorage on mount
+  // Load data from localStorage on mount using resilientStorage
   useEffect(() => {
     try {
-      const savedFavorites = localStorage.getItem('dogtale-favorites');
-      const savedJournalEntries = localStorage.getItem('dogtale-journal');
-      const savedTheme = localStorage.getItem('dogtale-theme');
-      const savedSettings = localStorage.getItem('dogtale-settings');
+      const favoritesResult = dogTaleStorage.load('favorites', []);
+      const journalResult = dogTaleStorage.load('journal', {});
+      const themeResult = dogTaleStorage.load('theme', 'park');
+      const settingsResult = dogTaleStorage.load('settings', null);
 
-      if (savedFavorites) {
-        setFavorites(JSON.parse(savedFavorites));
+      if (favoritesResult.data && Array.isArray(favoritesResult.data)) {
+        setFavorites(favoritesResult.data);
+        if (favoritesResult.recovered) {
+          console.info('Favorites recovered from backup');
+        }
       }
-      if (savedJournalEntries) {
-        setJournalEntries(JSON.parse(savedJournalEntries));
+
+      if (journalResult.data && typeof journalResult.data === 'object') {
+        setJournalEntries(journalResult.data);
+        if (journalResult.recovered) {
+          console.info('Journal entries recovered from backup');
+        }
       }
-      if (savedTheme) {
-        setTheme(savedTheme);
+
+      if (themeResult.data && typeof themeResult.data === 'string') {
+        setTheme(themeResult.data);
       }
-      if (savedSettings) {
-        setSettings(JSON.parse(savedSettings));
+
+      if (settingsResult.data && typeof settingsResult.data === 'object') {
+        setSettings(settingsResult.data);
+        if (settingsResult.recovered) {
+          console.info('Settings recovered from backup');
+        }
       }
     } catch (error) {
       console.error('Error loading data from localStorage:', error);
     }
   }, []);
 
+  // Save favorites to localStorage with resilientStorage
   useEffect(() => {
-    try {
-      localStorage.setItem('dogtale-favorites', JSON.stringify(favorites));
-    } catch (error) {
-      console.error('Error saving favorites to localStorage:', error);
-      // Optionally, notify the user that storage is full
+    const result = dogTaleStorage.save('favorites', favorites);
+    if (!result.success) {
+      console.error('Error saving favorites to localStorage:', result.error);
     }
   }, [favorites]);
 
-  // Save journal entries to localStorage whenever they change
+  // Save journal entries to localStorage with resilientStorage
   useEffect(() => {
-    try {
-      localStorage.setItem('dogtale-journal', JSON.stringify(journalEntries));
-    } catch (error) {
-      console.error('Error saving journal entries to localStorage:', error);
+    const result = dogTaleStorage.save('journal', journalEntries);
+    if (!result.success) {
+      console.error('Error saving journal entries to localStorage:', result.error);
     }
   }, [journalEntries]);
 
-  // Save theme to localStorage whenever it changes
+  // Save theme to localStorage with resilientStorage
   useEffect(() => {
-    try {
-      localStorage.setItem('dogtale-theme', theme);
-    } catch (error) {
-      console.error('Error saving theme to localStorage:', error);
+    const result = dogTaleStorage.save('theme', theme);
+    if (!result.success) {
+      console.error('Error saving theme to localStorage:', result.error);
     }
   }, [theme]);
 
-  // Save settings to localStorage whenever they change
+  // Save settings to localStorage with resilientStorage
   useEffect(() => {
-    try {
-      localStorage.setItem('dogtale-settings', JSON.stringify(settings));
-    } catch (error) {
-      console.error('Error saving settings to localStorage:', error);
+    const result = dogTaleStorage.save('settings', settings);
+    if (!result.success) {
+      console.error('Error saving settings to localStorage:', result.error);
     }
   }, [settings]);
 

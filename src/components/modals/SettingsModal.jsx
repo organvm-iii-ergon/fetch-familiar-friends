@@ -3,12 +3,24 @@ import PropTypes from 'prop-types';
 import Modal from './Modal';
 import { getCacheStats, clearCache } from '../../utils/imageCache';
 import NotificationPreferences from '../settings/NotificationPreferences';
+import { useStorageQuota } from '../../hooks/useStorageQuota';
 
 const SettingsModal = ({ isOpen, onClose, settings, onSettingsChange, userId }) => {
   const [activeTab, setActiveTab] = useState('general');
   const [localSettings, setLocalSettings] = useState(settings);
   const [cacheCleared, setCacheCleared] = useState(false);
   const [hasChanges, setHasChanges] = useState(false);
+
+  // Storage quota monitoring
+  const {
+    percentUsed,
+    formatted,
+    isWarning,
+    warningMessage,
+    dogTaleUsage,
+    dogTaleItemCount,
+    refresh: refreshStorageQuota,
+  } = useStorageQuota();
 
   useEffect(() => {
     setLocalSettings(settings);
@@ -279,6 +291,62 @@ const SettingsModal = ({ isOpen, onClose, settings, onSettingsChange, userId }) 
             Data Management
           </h3>
           <div className="space-y-3">
+            {/* Storage Quota Indicator */}
+            <div className={`p-3 rounded-lg border ${
+              isWarning
+                ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-200 dark:border-yellow-800'
+                : 'bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600'
+            }`}>
+              <div className="flex items-center justify-between mb-2">
+                <p className={`text-sm font-medium ${
+                  isWarning
+                    ? 'text-yellow-800 dark:text-yellow-200'
+                    : 'text-gray-800 dark:text-gray-100'
+                }`}>
+                  Storage Usage
+                </p>
+                <button
+                  onClick={refreshStorageQuota}
+                  className="text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                  title="Refresh storage info"
+                >
+                  ↻ Refresh
+                </button>
+              </div>
+              <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5 mb-2">
+                <div
+                  className={`h-2.5 rounded-full transition-all ${
+                    percentUsed >= 0.9
+                      ? 'bg-red-500'
+                      : percentUsed >= 0.7
+                        ? 'bg-yellow-500'
+                        : 'bg-green-500'
+                  }`}
+                  style={{ width: `${Math.min(100, percentUsed * 100)}%` }}
+                />
+              </div>
+              <div className="flex justify-between text-xs">
+                <span className="text-gray-600 dark:text-gray-400">
+                  {formatted.usage} used of {formatted.quota}
+                </span>
+                <span className={`font-medium ${
+                  isWarning
+                    ? 'text-yellow-700 dark:text-yellow-300'
+                    : 'text-gray-700 dark:text-gray-300'
+                }`}>
+                  {formatted.percentUsed}
+                </span>
+              </div>
+              {warningMessage && (
+                <p className="mt-2 text-xs text-yellow-700 dark:text-yellow-300">
+                  ⚠️ {warningMessage}
+                </p>
+              )}
+              <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                DogTale data: {formatted.dogTaleUsage} ({dogTaleItemCount} items)
+              </p>
+            </div>
+
             <div className="p-3 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-lg">
               <p className="text-sm text-blue-800 dark:text-blue-200 mb-2">
                 <strong>Cache Status:</strong> {cacheStats.total} images cached ({Math.round((cacheStats.total / cacheStats.maxSize) * 100)}%)

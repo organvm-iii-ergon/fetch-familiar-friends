@@ -5,6 +5,8 @@
  * and improve performance. Stores up to 50 images with 7-day expiry.
  */
 
+import { getDateKey as getDateKeyUtil } from './dateUtils';
+
 const CACHE_KEY = 'dogtale-image-cache';
 const MAX_CACHE_SIZE = 50;
 const CACHE_EXPIRY_DAYS = 7;
@@ -93,7 +95,7 @@ function clearOldestEntries(cache, count) {
  * @returns {string} - Date key (YYYY-MM-DD)
  */
 function getDateKey(date) {
-  return date.toISOString().split('T')[0];
+  return getDateKeyUtil(date);
 }
 
 /**
