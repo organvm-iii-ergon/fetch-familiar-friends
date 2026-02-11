@@ -456,7 +456,7 @@ Fetch Familiar Friends operates within the broader eight-organ creative-institut
 
 | Organ | Relationship |
 |-------|-------------|
-| **ORGAN-I (Theoria)** | The [recursive-engine](https://github.com/organvm-i-theoria/recursive-engine) provides the epistemological framework for self-referential system design that informs how this app's gamification loop references itself (achievements about achievements, quests about quests). |
+| **ORGAN-I (Theoria)** | The [recursive-engine](https://github.com/organvm-i-theoria/recursive-engine--generative-entity) provides the epistemological framework for self-referential system design that informs how this app's gamification loop references itself (achievements about achievements, quests about quests). |
 | **ORGAN-II (Poiesis)** | The [metasystem-master](https://github.com/organvm-ii-poiesis/metasystem-master) generative art system shares the same philosophy of daily creative output that drives the daily calendar ritual. |
 | **ORGAN-IV (Taxis)** | The [agentic-titan](https://github.com/organvm-iv-taxis/agentic-titan) orchestration framework may eventually govern cross-product analytics and shared user identity across ORGAN-III products. |
 | **ORGAN-V (Logos)** | The [public-process](https://github.com/organvm-v-logos/public-process) repository documents the building-in-public journey, including essays on consumer app development decisions made in this project. |
