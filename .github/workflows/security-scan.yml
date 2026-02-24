@@ -40,12 +40,18 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Run npm audit
-        run: npm audit --audit-level=moderate
-        continue-on-error: true
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Run npm audit fix
-        run: npm audit fix --dry-run
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=moderate
+
+      - name: Audit all dependencies (informational)
+        # Known: minimatch ReDoS (GHSA-3ppc-4f35-3m26) in eslint chain
+        # has no fix available in eslint 9.x. These are dev-only deps
+        # not shipped to production. Will resolve when migrating to eslint 10+.
+        run: npm audit --audit-level=critical
+        continue-on-error: true
 
   codeql:
     name: CodeQL Analysis
