@@ -76,6 +76,10 @@ npx vitest run src/utils/dailyContent.test.js
 - Conventional commits: `feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`
 - Framer Motion for animations
 
+## Deployment
+
+Live at **https://fetch-familiar-friends.netlify.app** (Netlify, `main` branch auto-deploys).
+
 <!-- ORGANVM:AUTO:START -->
 ## System Context (auto-generated — do not edit)
 
