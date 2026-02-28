@@ -67,3 +67,9 @@ coverage/
 # Temporary files
 *.tmp
 *.bak
+
+# Netlify
+.netlify
+
+# Test artifacts
+src/test/repro/
