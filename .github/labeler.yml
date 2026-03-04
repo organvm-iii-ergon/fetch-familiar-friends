@@ -1,77 +1,76 @@
-# Labeler configuration for auto-labeling PRs based on changed files
-
-# Documentation
 documentation:
-  - '**/*.md'
-  - 'docs/**/*'
-  - 'ChatPRD/**/*'
-
-# GitHub Configuration
+- changed-files:
+  - any-glob-to-any-file:
+    - '**/*.md'
+    - docs/**/*
+    - ChatPRD/**/*
 github:
-  - '.github/**/*'
-
-# CI/CD
+- changed-files:
+  - any-glob-to-any-file:
+    - .github/**/*
 ci-cd:
-  - '.github/workflows/**/*'
-
-# Dependencies
+- changed-files:
+  - any-glob-to-any-file:
+    - .github/workflows/**/*
 dependencies:
-  - 'package.json'
-  - 'package-lock.json'
-
-# Configuration
+- changed-files:
+  - any-glob-to-any-file:
+    - package.json
+    - package-lock.json
 config:
-  - '**/*.config.js'
-  - '**/*.config.cjs'
-  - '.eslintrc.cjs'
-  - 'tailwind.config.js'
-  - 'postcss.config.js'
-  - 'vite.config.js'
-
-# Components - Calendar
+- changed-files:
+  - any-glob-to-any-file:
+    - '**/*.config.js'
+    - '**/*.config.cjs'
+    - .eslintrc.cjs
+    - tailwind.config.js
+    - postcss.config.js
+    - vite.config.js
 component/calendar:
-  - 'src/components/calendar/**/*'
-
-# Components - Social
+- changed-files:
+  - any-glob-to-any-file:
+    - src/components/calendar/**/*
 component/social:
-  - 'src/components/social/**/*'
-
-# Components - Modals
+- changed-files:
+  - any-glob-to-any-file:
+    - src/components/social/**/*
 component/modals:
-  - 'src/components/modals/**/*'
-
-# Utilities
+- changed-files:
+  - any-glob-to-any-file:
+    - src/components/modals/**/*
 utilities:
-  - 'src/utils/**/*'
-
-# Hooks
+- changed-files:
+  - any-glob-to-any-file:
+    - src/utils/**/*
 hooks:
-  - 'src/hooks/**/*'
-
-# Styles
+- changed-files:
+  - any-glob-to-any-file:
+    - src/hooks/**/*
 styles:
-  - 'src/styles/**/*'
-  - '**/*.css'
-
-# Core App
+- changed-files:
+  - any-glob-to-any-file:
+    - src/styles/**/*
+    - '**/*.css'
 core:
-  - 'src/App.jsx'
-  - 'src/index.jsx'
-  - 'src/main.jsx'
-
-# Build
+- changed-files:
+  - any-glob-to-any-file:
+    - src/App.jsx
+    - src/index.jsx
+    - src/main.jsx
 build:
-  - 'dist/**/*'
-  - 'vite.config.js'
-
-# Testing
+- changed-files:
+  - any-glob-to-any-file:
+    - dist/**/*
+    - vite.config.js
 tests:
-  - '**/*.test.js'
-  - '**/*.test.jsx'
-  - '**/*.spec.js'
-  - '**/*.spec.jsx'
-
-# Security
+- changed-files:
+  - any-glob-to-any-file:
+    - '**/*.test.js'
+    - '**/*.test.jsx'
+    - '**/*.spec.js'
+    - '**/*.spec.jsx'
 security:
-  - 'SECURITY.md'
-  - '.env.example'
+- changed-files:
+  - any-glob-to-any-file:
+    - SECURITY.md
+    - .env.example

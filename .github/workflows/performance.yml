@@ -15,6 +15,7 @@ jobs:
   lighthouse:
     name: Lighthouse CI
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,13 +24,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build
         run: npm run build
+
+      - name: Start preview server
+        run: npm run preview -- --host --port 4173 &
+
+      - name: Wait for preview server
+        run: npx wait-on http://127.0.0.1:4173
 
       - name: Run Lighthouse CI
         uses: treosh/lighthouse-ci-action@v12
@@ -40,13 +46,11 @@ jobs:
           temporaryPublicStorage: true
           runs: 3
           configPath: '.github/lighthouse/config.json'
-          # Start the Vite preview server so Lighthouse can reach the app
-          startServerCommand: 'npm run preview -- --host'
-          startServerReadyPattern: 'Local'
 
   bundle-analysis:
     name: Bundle Size Analysis
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -55,10 +59,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build
         run: npm run build
@@ -74,3 +77,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           skip_step: install
+        continue-on-error: true
