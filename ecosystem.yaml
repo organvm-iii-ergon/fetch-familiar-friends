@@ -1,0 +1,11 @@
+schema_version: '1.0'
+repo: fetch-familiar-friends
+organ: III
+display_name: Social matching and community platform
+delivery:
+- platform: web_app
+  status: not_started
+revenue:
+- platform: freemium
+  status: planned
+  priority: critical
